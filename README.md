@@ -11,3 +11,8 @@
 3. User Data Storage:
   We can use Amazon Cogntio User Pools to store user data, this feature will
   take some help from iOS and Android teams to integrate.
+
+# Website Code  
+  Using Facebook's create-react-app starter kit, going to be updating this to
+  have rushme color,logo and font as well as require a username and password,
+  to be able to access the website and update fraternity information.
