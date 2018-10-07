@@ -1,0 +1,28 @@
+= =============================================== =
+*name(mandatory): 
+SLam the guy alpha
+*namekey(mandatory,length=3):
+420
+*description(mandatory):
+bunch of drunk idiots
+*chapter(mandatory):
+ALPHA
+*address(mandatory):
+1999 Burdett Avenue
+*member_count:
+69
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Chi PHi
+*namekey(mandatory,length=3):
+GID
+*description(mandatory):
+guys who use stolen silverware to eat cat food all day
+*chapter(mandatory):
+RPI
+*address(mandatory):
+911 Jacob Street
+*member_count:
+5
+= =============================================== =
