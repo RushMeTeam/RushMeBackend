@@ -1,28 +1,28 @@
 = =============================================== =
 *name(mandatory): 
-SLam the guy alpha
+Lambda Chi
 *namekey(mandatory,length=3):
-420
+LXA
 *description(mandatory):
-bunch of drunk idiots
+Cool guys
 *chapter(mandatory):
-ALPHA
+Epsilon Eta
 *address(mandatory):
 1999 Burdett Avenue
 *member_count:
-69
+50
 = =============================================== =
 = =============================================== =
 *name(mandatory): 
 Chi PHi
 *namekey(mandatory,length=3):
-GID
+CPI
 *description(mandatory):
-guys who use stolen silverware to eat cat food all day
+near union
 *chapter(mandatory):
 RPI
 *address(mandatory):
-911 Jacob Street
+near union but on the other side
 *member_count:
-5
+50
 = =============================================== =

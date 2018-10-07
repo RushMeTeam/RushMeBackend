@@ -1,0 +1,32 @@
+\\\
+*event_name(mandatory):
+Car Explosion
+*frat_name_key(mandatory,length=3):
+ZOO
+*start_time(mandatory,YYYY-MM-DDTHH:MM,24hr_time):
+2323651058432
+*duration(mandatory,HH:MM):
+02:00
+*location:
+200 Sunset Terrace
+*description:
+We break the car
+*invite_only(mandatory,yesno):
+no
+///
+\\\
+*event_name(mandatory):
+White Water Rafting
+*frat_name_key(mandatory,length=3):
+LXA
+*start_time(mandatory,YYYY-MM-DDTHH:MM,24hr_time):
+23165544981
+*duration(mandatory,HH:MM):
+02:00
+*location:
+Hudson River
+*description:
+go down the river in a boat with frat guys
+*invite_only(mandatory,yesno):
+no
+///
