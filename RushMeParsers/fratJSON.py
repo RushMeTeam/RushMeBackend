@@ -1,5 +1,4 @@
 import json
-import requests
 from geopy.geocoders import Nominatim
 
 
@@ -38,12 +37,12 @@ def parseEvents(filename):
                 jsonDict[key] = line.strip()
                 key = ''
             counter += 1
-        
+
     file.close()
     jsonObject = json.dumps(fraternityList)
     jsonReturn = json.loads(jsonObject)
     print(jsonReturn)
-    return jsonReturn    
+    return jsonReturn
 
 def parseFraternities(filename):
     file = open(filename, 'r')
@@ -78,13 +77,13 @@ def parseFraternities(filename):
                 jsonDict[key] = line.strip()
                 key = ''
             counter += 1
-        
+
     file.close()
     jsonObject = json.dumps(fraternityList)
     jsonReturn = json.loads(jsonObject)
     print(jsonReturn)
     return jsonReturn
-        
+
 
 file2 = open('output.txt', 'w')
 json.dump(parseFraternities('testJSON.txt'), file2)
