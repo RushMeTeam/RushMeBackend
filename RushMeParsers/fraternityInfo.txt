@@ -1,0 +1,370 @@
+= =============================================== =
+*name(mandatory): 
+Acacia
+*namekey(mandatory,length=3):
+ACA
+*description(mandatory):
+Since its founding in 1949, Acacia has been an active member of the Rensselaer fraternity system and has taken an active part of the Troy, NY community in which it resides. Our house is located on Sunset Terrace behind BAR-H and RAHPS. Be sure to check our rush calendar to see if there are any events you might be interested in attending. You are always welcome to come by the house for some dinner (every school night, 6:00 PM) or just to hang out. Being a part of a fraternity is a lot more than just living together in a house; it is learning to deal with different types of people, learning responsibility for your actions, having friends to help you through difficulties, and most importantly forming ties with friends that will last a lifetime. Each member of Acacia is an individual with their own style, goals, knowledge, and background. Each member of Acacia pursues their own path after graduation. But, each member of Acacia strives to live up to the Preamble to the Laws of Acacia in his own way: We, students, faculty, and alumni of various universities and colleges, do hereby adopt this Constitution; to strengthen the ties of friendship, one with another; to prepare ourselves as educated men, to take a more active part and to have a greater influence in the affairs of the community in which we may reside; and, above all, to seek the truth and knowing it, to give light to those with whom we may be associated as we travel along life's pathway.
+*chapter(mandatory):
+Rensselaer Chapter
+*address(mandatory):
+145 Sunset Terrace
+*member_count:
+21
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Alpha Chi Rho
+*namekey(mandatory,length=3):
+ACR
+*description(mandatory):
+Alpha Chi Rho is a men’s collegiate fraternity that is looking to help shape college students into men of value in our community.  This is being achieved through the guidance of our four national landmarks:
+1. Membership among those who are prepared to realize in word and deed the Brotherhood of all men.
+2. The persistence of a high and clean moral standard.
+3. The paramount duty of Brotherly love among members.
+4. Judgment by not by externals but by intrinsic worth; no one is denied embership into Alpha Chi Rho because of race, creed, or nationality. 
+For the Delta Phi Chapter of Alpha Chi Rho, the past year has been an exciting and fulfilling experience. As a house we have helped paint a local church and raised money for Relay For Life. We also held a free Jazz concert in our backyard. Neighbors and fellow students enjoyed a barbeque while listening to one of RPI's finest jazz ensembles. Overall, Alpha Chi Rho is a fraternity that helps build a man's character as well as pushes college students to reach their upmost potential.
+*chapter(mandatory):
+Delta Phi
+*address(mandatory):
+284 Pawling Ave
+*member_count:
+22
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Alpha Epsilon Pi
+*namekey(mandatory,length=3):
+AEP
+*description(mandatory):
+Alpha Epsilon Pi is a diverse fraternity with a Jewish background. Rho Pi promotes leadership, faith, academic excellence and success in all aspects of life. Our fraternity establishes brotherhood through friendship, fun, security and support. It’s about having the opportunity to mature amongst some of the greatest friends you’ll ever make. It doesn’t matter where you come from, what your major is or where you want to go in life – we’re always looking out for one another.
+*chapter(mandatory):
+Rho Pi
+*address(mandatory):
+284 Pawling Ave
+*member_count:
+54
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Alpha Phi Alpha
+*namekey(mandatory,length=3):
+APA
+*description(mandatory):
+The Untouchable Omicron Upsilon Chapter of Alpha Phi Alpha Fraternity, Inc. seated at Rensselaer Polytechnic Institute would like to personally welcome and thank you for visiting our chapter website. Alpha Phi Alpha is strongly committed to the enhancement of Rensselaer Polytechnic Institute and we are truly dedicated to uplifting our community. Since 1983, with the inception of Alpha Phi Alpha Fraternity, Incorporated here at Rensselaer, we have been steadfast in serving all. Omicron Upsilon has been an agent advocating for change, economically, politically, and socially, at Rensselaer. Through our workshops, programs, and events, we continue to be the juggernaut in providing a myriad of services that empower multicultural students and the entire community. "First of all, servants of all, we shall transcend all" is our motto and the cornerstone of our organization. Today, Omicron Upsilon stands prepared to provide the necessary tools, resources, and skills to address our community needs in order to survive on the college campus and within our local communities. May this message serve as the ambassador in our form of appreciation to you. Your continued support and contributions allow this organization to continue marching onward and upward towards the light.
+*chapter(mandatory):
+Omicron Upsilon
+*address(mandatory):
+No House
+*member_count:
+4
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Alpha Sigma Phi
+*namekey(mandatory,length=3):
+ASP
+*description(mandatory):
+Alpha Sigma Phi is a fraternity founded upon the values of Silence, Charity, Purity, Honor, and Patriotism. We hold these values closely as we strive to achieve our ultimate purpose, To Better The Man. We achieve this goal in a multitude of ways, ranging from regular brotherhood unity events, philanthropic efforts, social occasions, professional development events, and encouraging everyone to strive for leadership positions within the chapter. In this house, brothers of various majors and backgrounds come together to better themselves educationally, socially, and fraternally. The end result is not only a group of friends, but a close brotherhood and genuine bond that can only be found at 16 Belle Ave. Lastly, the best way to get to know any organization like us is to meet its members. We are always hanging around or doing something fun so come through and see what we mean.
+*chapter(mandatory):
+Beta Psi
+*address(mandatory):
+16 Belle Ave
+*member_count:
+37
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Chi Phi
+*namekey(mandatory,length=3):
+CHP
+*description(mandatory):
+The unique aspect about the Chi Phi Fraternity here at RPI is that we have a vast number of diverse interests including becoming better leaders, community service and philanthropy, and sports. The Chi Phi Fraternity is not only dedicated to bettering the lives of its members, but also the lives of others in the community through numerous community service and philanthropy events. We strive to set an example for the Greek community not only at rpi, but nationwide.
+*chapter(mandatory):
+Theta
+*address(mandatory):
+1981 15th Street
+*member_count:
+54
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Delta Kappa Epsilon
+*namekey(mandatory,length=3):
+DKE
+*description(mandatory):
+The brothers of the Psi Omega chapter of Delta Kappa Epsilon fraternity fully embody the gentleman, the scholar, and the jolly good fellow, the three pillars upon which the entire fraternity was first founded. Refounded at RPI in 2014, DKE is rapidly increasing in size, and has already taken initiative in several leadership positions on and off RPI’s campus. We currently live at 901 Peoples Avenue, Troy N.Y. 12180, which is a short walk from the academic center of campus. Our fraternity has a strong brotherhood. Together, we go on camping and hiking trips, head out to concerts and movies, play paintball, and take trips out of state to places like Montreal and Myrtle Beach. We’re also constantly doing things at the house, whether that’s grilling and building things out back on our new patio or just hanging out on our newly-renovated chapter floor. Additionally, we compete against many of the clubs and other Greek houses at RPI in intramural sports, like soccer and hockey; and if it’s not in intramural sports, we can be found in clubs all over campus or as teaching assistants for several academic courses. DKE also participates in a multitude of philanthropy events in its community. This extensive list includes holding fundraisers with other Greek organizations to raise money for charity, participating in Relay for Life, and volunteering at Albany’s Regional Food Bank. Joining a fraternity is a fully unique experience, unlike any other club or activity that can be found on RPI’s campus. In DKE, brothers have access to a variety of things to do, a support network they can draw on, and real opportunities to shape the brotherhood in ambitious and exciting ways unique to a young organization. DKE gentlemen strive to excel as leaders, scholars, and, of course, brothers in all aspects of life; but, above all else, DKE looks for the very best of men. That is what you will find within DKE.
+*chapter(mandatory):
+Psi Omega
+*address(mandatory):
+901 Peoples Ave
+*member_count:
+25
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Delta Phi
+*namekey(mandatory,length=3):
+DTP
+*description(mandatory):
+The Delta Phi has remained a small fraternity. Our small size has granted the Lambda chapter a substantial degree of local autonomy - allowing us to develop our own traditions and policies. We currently reside at 14, 15, and 16 Colvin Circle in the Rensselaer Apartment Housing Projects (RAHPs). Our bonds as friends and brothers are built upon the diversity of our majors, interests, and hobbies. We place a strong emphasis on academic achievement, and have incorporated programs to help brothers reach their academic goals. The bonds of friendship we build as active brothers carry on in the years after graduation.
+*chapter(mandatory):
+Lambda
+*address(mandatory):
+14 Colvin Circle
+*member_count:
+27
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Delta Tau Delta
+*namekey(mandatory,length=3):
+DTD
+*description(mandatory):
+Delta Tau Delta is a house with deep roots, maintaining a constant presence on campus since 1879.  Through our four pillars of Truth, Courage, Faith, and Power, many men have gone on to not only succeed at RPI academically and socially, but also built lives of excellence beyond their collegiate careers. The Upsilon chapter of Delta Tau Delta has the support of an extensive alumni network which aids in the professional development and success of the active undergraduate brothers. Delta Tau Delta is partnered with the Juvenile Diabetes Research Foundation, to raise money to assist in the advancement of treatment and research.  In addition to its ties to JDRF, Upsilon Chapter has also done work with Habitat for Humanity and other community service activities to better the capital region. Here you get more than just a house.  You will find more than a brotherhood.  You will find more than people that stand with you through the hard times. You will find more than opportunities.  At Delta Tau Delta, you will find a family.	
+*chapter(mandatory):
+Upsilon
+*address(mandatory):
+133 Sunset Terrace
+*member_count:
+27
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Lambda Chi Alpha
+*namekey(mandatory,length=3):
+LCA
+*description(mandatory):
+Lambda Chi Alpha
+Lambda Chi Alpha is a social fraternity grounded in timeless traditions and ideals. Members strive  to cultivate a supportive and comprehensive brotherhood which gives its men a developmental framework to mature and become men capable of bettering society. In 1972, Lambda Chi Alpha abolished pledging. In its place, Lambda Chi Alpha offers the Associate Members Program in which new members are treated as equals with the same rights and rules as every brother. Lambda Chi Alpha promotes equality amongst its members, which fosters a true fraternal brotherhood. If you would like to learn more about Lambda Chi Alpha – Epsilon Eta Zeta, please visit our website: lambdachiehz.com.
+*chapter(mandatory):
+Epsilon Eta Zeta
+*address(mandatory):
+200 Sunset Terrace
+*member_count:
+52
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Phi Gamma Delta
+*namekey(mandatory,length=3):
+PGD
+*description(mandatory):
+The brothers of FIJI (our letters are Phi Gamma Delta, but we go by FIJI) are a group of easygoing guys who pride ourselves on abiding by our five core values of Friendship, Knowledge, Service, Morality, and Excellence and who are active in many different parts of campus life. We have a bunch of interests ranging from intramural sports like frisbee and soccer to community service including a week of “FIJI Islander” themed fundraising events in the spring. Our house in downtown Troy is hard to miss - just look up for the big white steeple!
+*chapter(mandatory):
+Tau Nu
+*address(mandatory):
+82 3rd Street
+*member_count:
+38
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Phi Iota Alpha
+*namekey(mandatory,length=3):
+PIA
+*description(mandatory):
+Phi Iota Alpha's mission is to develop leaders and create innovative ways to unite the Latino community. Our vision is “La Unión De La Patria Latino Americana.” Our brotherhood is composed of university and professional men committed towards the empowerment of the Latin American community. We do this by providing social, cultural programs and activities geared towards the appreciation, promotion, and preservation of Latin American culture.
+*chapter(mandatory):
+Alpha
+*address(mandatory):
+No House
+*member_count:
+19
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Phi Kappa Theta
+*namekey(mandatory,length=3):
+PKT
+*description(mandatory):
+At Phi Kappa Theta, we are actively involved in enriching our college experience by exposing ourselves to a variety of people and opportunities. Although we emphasize academics, brothers also participate in intramural sports, music groups, and other campus organizations. Socially, we organize several events each year for RPI students and contribute regularly to our community. As brothers of Phi Kappa Theta, we also take great pride in the strength of our brotherhood and seek to improve our lives through a network of support and friendship. We are excited to meet new individuals who will continue to help us achieve these ideals.
+*chapter(mandatory):
+NY Sigma
+*address(mandatory):
+107 Sunset Terrace
+*member_count:
+44
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Phi Mu Delta
+*namekey(mandatory,length=3):
+PMD
+*description(mandatory):
+Phi Mu Delta was founded in 1918 on the pillars of Brotherhood, Democracy and Service. One hundred years later, those still hold true- with our brotherhood as strong as it ever has been. Among our many unique strengths is our diversity. Phi Mu Delta brings together those such as Engineers and Computer Scientists, athletes and gamers, musicians and actors. As RPI students, we work hard to excel in our classes- with our house GPA ranking in the top three of all RPI fraternities the past two semesters. At the same time, we know how to have fun. Joining Phi Mu Delta is an experience like no other: you will receive academic support and job advice from brothers who have gone through what you are, share and find new interests, gain a unique sense of independence, and share a bond of brotherhood you will seldom find anywhere else. 
+*chapter(mandatory):
+Nu Theta
+*address(mandatory):
+224 Pawling Ave
+*member_count:
+28
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Phi Sigma Kappa
+*namekey(mandatory,length=3):
+PSK
+*description(mandatory):
+Phi Sigma Kappa is a lifelong brotherhood dedicated to the betterment of the individual and the university community. Rensselaer Polytechnic Institute's Gamma Tetarton chapter is comprised of a diverse group of young men with a wide variety of backgrounds and interests. Located at 316 Congress St. the fraternity maintains the chapter property, a beautiful church, which is the basis for the chapter's nickname "Church." Members of the Gamma Tetarton chapter take the fraternities cardinal principles to heart, Brotherhood, Scholarship, and Character. Through these principles members of the chapter strive to improve upon themselves as well as the community.
+*chapter(mandatory):
+Gamma Tetarton
+*address(mandatory):
+316 Congress Street
+*member_count:
+22
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Pi Delta Psi
+*namekey(mandatory,length=3):
+PDP
+*description(mandatory):
+The mission of Pi Delta Psi Fraternity, Inc. is to maintain its Fraternal existence by instilling values that nurture and perpetuate the continual growth and development of the individual through Academic Achievement, Cultural Awareness, Righteousness, Friendship and Loyalty while fostering ethical behavior, leadership, and philanthropy. Pi Delta Psi was founded on these principles to help promote Asian Awareness amongst ourselves and throughout the community. We envisioned this to be possible by going out of the boundaries of an organization and creating a Fraternity on the basis of common goals and ideals in the form of a brotherhood. We believe that through education, we can become more knowledgeable about the different Asian cultures, overcome obstacles of racism and discrimination, therefore unifying us as a whole. This mission statement embodies the purpose of our Fraternity and is set forth as a guide that empowers each member to better himself, the Brotherhood, community, and society as a whole.
+*chapter(mandatory):
+Theta
+*address(mandatory):
+No House
+*member_count:
+3
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Pi Kappa Alpha
+*namekey(mandatory,length=3):
+PKA
+*description(mandatory):
+All men were created equal, until 1868. March 1st, 1868 the Pi Kappa Alpha fraternity, better known as PIKE was founded. Since then, it has grown to be one of the largest Greek organizations with over 220 chapters and 275,000 lifetime initiates worldwide. The Gamma Tau chapter at RPI is an organization dedicated to fostering the true ideals of brotherhood within its members. The brothers of Pi Kappa Alpha are committed to helping themselves and each other become true well rounded men for others. These values once instilled in our members allow them to contribute to society and the community in positive ways.The Alpha Males of Pi Kappa Alpha use their superior social, technical, and emotional intelligence to make life better for not only them but those lucky enough to be around them. If you want to be in a frat, look elsewhere. If you want to join a brotherhood, see you at 2228 12th St.
+*chapter(mandatory):
+Gamma Tau
+*address(mandatory):
+2228 12th Street
+*member_count:
+50
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Pi Kappa Phi
+*namekey(mandatory,length=3):
+PKP
+*description(mandatory):
+Our chapter currently has ~30 active members.  Being a smaller chapter, we are a very close-knit group that shares common interests.  We understand the benefits of being a smaller group such as more opportunity to be involved, closer relationships between brothers, and a large feeling of accomplishment.  Our house, "The Castle," has always been the largest staple of our fraternity.  We have essentially "re-branded" our name to "Castle" to give us a more distinctive identity on campus. We take pride in the maintenance and upkeep of our historical house.  The brothers love to spend time in the house, whether they live there or not.  You can always find our brothers together in the house watching a movie, enjoying a home-cooked meal, working on school work and brotherhood projects, or just relaxing and having a nice conversation.  While we are small, we are proudly diverse in our backgrounds, majors, and interests.  Although many of us have common interests, some unique interests range from rock climbing, to ultimate Frisbee, to working on project cars, to basketball, to volleyball, to building computers, to video games, to Acapella, and much more.  We encourage our brothers to get involved on campus and join clubs.  We have brothers in clubs such as Student Government, Acapella, the Quidditch Team, the Society of Animals and Wildlife, and more.  We have always been involved in intramural sports and are encouraging each other to try different sports and become more involved. Community service is one of the most important things we do as a fraternity. Being the only national fraternity with its very own national philanthropy, which we raise money for every year through our annual haunted house, we take pride in serving our community in anyway we can.  We also understand the importance of academics.  We have recently made academics a huge focal point of our house, and we hold each other accountable and assist each other through weekly study sessions and our mentor system.  This upcoming academic year is very important for our recruitment.  About one third of our current active members will be graduating by the end of the Spring 2019 semester, so it's crucial we get our recruitment numbers up these next 2 semesters.  The brothers understand the importance of this year, and are very motivated to put in the effort to recruit as many people as we can. 
+*chapter(mandatory):
+Alpha Tau
+*address(mandatory):
+49 2nd Street
+*member_count:
+29
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Pi Lambda Phi
+*namekey(mandatory,length=3):
+PLP
+*description(mandatory):
+The chapter of Pi Lambda Phi at Rensselaer Polytechnic Institute is the New York Kappa Tau chapter. Kappa Tau received an official charter as a chapter of Pi Lambda Phi in 1954. Nowadays, the brothers of Pi Lambda Phi continue to unite the entirety of our brotherhood for not four years, but a lifetime. Around campus, brothers’ academic interests span across all majors available at RPI, as well as their non-academic interests spanning across many clubs and sports. Many brothers enjoy spending time lifting and playing basketball at the Armory. Located on Pawling Avenue, our house neighbors a large field that we spend time playing football on, and right on the property we have a volleyball court and a basketball hoop. Overall, we are a group of best friends that like to relax and have fun, while also pushing each other to get the most out of RPI.
+*chapter(mandatory):
+NY Kappa Tau
+*address(mandatory):
+300 Pawling Ave
+*member_count:
+42
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Psi Upsilon
+*namekey(mandatory,length=3):
+PUS
+*description(mandatory):
+Psi Upsilon is a small co-ed fraternity located next to BARH at 2140 Burdett Avenue. Currently, we have 20 active brothers and we focus on building strong friendships and being true to yourself. Our friendship and brotherhood are unlike any other. As a co-ed fraternity, Psi Upsilon boasts a wide variety of interests among its brothers (everyone is a "brother" regardless of gender). These interests range from board games to anime to arts and music, with each brother having unique interests that we accept wholeheartedly. While Psi-U has the history and ritual of a fraternity, we focus on individual interactions between brothers. We foster friendly and cordial relationships between all of our members, creating a group that is easy to talk to and fun to hang out with. This camaraderie allows us to provide friendly, but effective support to any brother that needs or requests it. Our fraternity provides a family away from home. We work together and play together, having a good time while we support each other as we make our way through college.
+*chapter(mandatory):
+Epsilon Iota
+*address(mandatory):
+2140 Burdett Ave
+*member_count:
+29
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Sigma Alpha Epsilon
+*namekey(mandatory,length=3):
+SAE
+*description(mandatory):
+Thinking of going Greek? Check out ΣΑΕ! Our house is focused on building a strong brotherhood that will make your college experience. We’re all about making the most of your time here socially and academically. Our house is a 19th century mansion located about a mile off campus, and is always accessible via the bus, or any brother. We are heavily involved with the RPI community through philanthropy events, fundraisers, and helping out with events on campus, as well as the community of Troy through community service events, community enrichment events, and many more. Academics always come first but that doesn’t mean you can’t have any fun, we like to take full advantage of that whether it be through parties, social mixers with sororities, or just a solid time with the boys, there’s never a boring moment here at ΣΑΕ. On a national level, ΣΑΕ is North America’s largest social fraternity with more than 331,000 initiated members and 15,000 undergrads in 317 chapters.
+*chapter(mandatory):
+NY Epsilon
+*address(mandatory):
+12 Myrtle Ave
+*member_count:
+38
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Sigma Chi
+*namekey(mandatory,length=3):
+SMC
+*description(mandatory):
+Sigma Chi is one of the oldest and largest fraternal organizations in North America. Since our founding at Miami of Ohio University in 1855, we have initiated more than 300,000 brothers throughout the US and Canada. Today, Sigma Chi boasts of more than 240 undergraduate chapters and nearly 150 alumni chapters, making us one of the strongest and most ubiquitous support networks in the world. Sigma Chis everywhere value the ideals of true friendship, justice, and learning. Our chapter, Delta Psi, was installed on December 2, 1950. We support academic excellence, community involvement, values-based leadership development, social involvement, and lifelong growth of character. The whole brotherhood is engaged within the RPI community with philanthropy, social, community service and sporting events. Individually our brothers are involved within varsity athletics, student government, and various other clubs while still enjoying the values of Sigma Chi, brotherhood, and social life that the Delta Psi chapter has to offer. “Men join fraternities; leaders of men join Sigma Chi." - John Wayne
+*chapter(mandatory):
+Delta Psi
+*address(mandatory):
+58 Pinewoods Ave
+*member_count:
+81
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Sigma Phi Epsilon
+*namekey(mandatory,length=3):
+SPE
+*description(mandatory):
+Virtue, Diligence, and Brotherly Love. These Cardinal Principles truly define and embody what Sigma Phi Epsilon is all about. SigEp was founded in 1901 at Richmond University under the pretense that “This Fraternity will be different” and came to Rensselaer in 1938. SigEp strives to create an experience for young men that will transcend life at college and will push for a brighter future. In 2015, SigEp on a national basis voted to abolish the pledging system and replaced it with the Balanced Man Program. This model ameliorates the transition from high school to the real world as it creates an environment where there is constant growth. Along with their values, The New York Delta Chapter of SigEp pushes towards servicing and giving back to the community. Every Friday during the school year they host “Bacon, Egg and Cheese” to raise money for Big Brothers Big Sisters, and recently they teamed up with Alpha Gamma Delta and Sole Survivors to host Sexual Assault Awareness Week, a full week of events highlighting the need to speak up and bring awareness to sexual assault. Throughout the years, SigEp has endeavored to transform boys into true Balanced Men that continue to uphold these values and make a difference in the world.
+*chapter(mandatory):
+NY Delta
+*address(mandatory):
+2005 15th Street
+*member_count:
+32
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Tau Epsilon Phi
+*namekey(mandatory,length=3):
+TEP
+*description(mandatory):
+We, the brothers of the Epsilon Iota chapter of Tau Epsilon Phi, are excited to take part in RPI's 2017 Fall Rush. Our brotherhood collectively strives to uphold the ideals of Friendship, Chivalry and Service in every aspect of our professional and personal lives, and we hope to recruit men whom we feel show a similar commitment to and appreciation for these ideals in their own lives as well. We welcome anyone who is interested in rushing or learning more about our brotherhood or campus Greek life to join us at the TEP house during rush. To get to know the people that make up Tau Epsilon Phi, visit our chapter site at tepei.org or come on by!
+*chapter(mandatory):
+Epsilon Iota
+*address(mandatory):
+1991 15th Street
+*member_count:
+16
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Theta Xi
+*namekey(mandatory,length=3):
+TTX
+*description(mandatory):
+Zoo possesses a culture of excellence in both academics and social environments. We strive to succeed in our majors, and always provide help to brothers who need it. We are deeply involved in other campus activities as well, including engineering honors societies and club sports teams. We host several philanthropic events throughout the year as a way to show our appreciation for the campus and surrounding community. One of our signature events is “Dog Days of Finals” where students are invited to pet service dogs to relieve stress. We also do an annual cleanup of the Oakwood Cemetery, and last year hosted a fundraising event with Five Guys Burgers. Our most important attribute however, is how close we all are with each other. We all share a deep love for this house and each other. On any random afternoon, you can find several of our brothers kicking back in the formal room. If the weather is nice outside, chances are some guys are “Lazy Landing” on our front lawn, soaking up the sun. More often than not, most of us end up eating dinner together after a long day of classes. And of course, we all look forward to our year end camping trip on Lake George. We believe that few houses can form such special bonds as ours. This house for most of us is more than that, it’s a home.
+*chapter(mandatory):
+Alpha
+*address(mandatory):
+1490 Sage Ave
+*member_count:
+37
+= =============================================== =
+= =============================================== =
+*name(mandatory): 
+Zeta Psi
+*namekey(mandatory,length=3):
+ZTP
+*description(mandatory):
+The Pi chapter of Zeta Psi is a fraternal organization dedicated to forging academic excellence and life long bonds of brotherhood. We are like minded individuals who pride ourselves on our strong bond between all the brothers and our strong academic performances. Zeta Psi turns members into remarkable gentlemen who can set a strong example in today's society. 
+*chapter(mandatory):
+Pi
+*address(mandatory):
+25 Belle Ave
+*member_count:
+30
+= =============================================== =

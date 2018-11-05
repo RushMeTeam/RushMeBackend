@@ -1,4 +1,0 @@
-[{"namekey": "LXA", "member_count": "50", "name": "Lambda Chi", "coordinates": [-73.6719566, 42.7315567], "description": "Cool guys", "address": "1999 Burdett Avenue", "chapter": "Epsilon Eta"}, {"namekey": "CPI", "member_count": "50", "name": "Chi PHi", "description": "near union", "address": "near union but on the other side", "chapter": "RPI"}]
-
-
-[{"start_time": "2323651058432", "location": "200 Sunset Terrace", "coordinates": [-73.6669142893056, 42.730577], "duration": "02:00", "invite_only": "no", "frat_name_key": "ZOO", "description": "We break the car", "event_name": "Car Explosion"}, {"start_time": "23165544981", "location": "Hudson River", "coordinates": [-73.5842089, 43.1832537], "duration": "02:00", "invite_only": "no", "frat_name_key": "LXA", "description": "go down the river in a boat with frat guys", "event_name": "White Water Rafting"}]

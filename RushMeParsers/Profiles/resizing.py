@@ -12,14 +12,22 @@ outfileSemi = os.path.splitext(infile)[0] + 'semi.jpg'
 
 try:
     im = Image.open(infile)
-    im = im.resize(smallSize,Image.ANTIALIAS)
+    width, height = im.size
+    ratio = width/480
+    width = 480
+    height = height/ratio
+    im = im.resize([int(width), int(height)],Image.ANTIALIAS)
     im.save(outfileSmall, "JPEG")
 except IOError:
     print ('cannot create thumbnail for ', infile)
 
 try:
     im = Image.open(infile)
-    im = im.resize(semiSize,Image.ANTIALIAS)
+    width, height = im.size
+    ratio = width/1080
+    width = 1080
+    height = height/ratio
+    im = im.resize([int(width), int(height)],Image.ANTIALIAS)
     im.save(outfileSemi, "JPEG")
 except IOError:
     print ('cannot create thumbnail for ', infile)
