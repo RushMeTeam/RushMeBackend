@@ -14,6 +14,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  min-height: 100vh;
 }
 
 .App-link {
@@ -22,14 +23,17 @@
 
 p {
     font-family: "Amazon Ember";
+    color : white ;
 }
 
 h1 {
   font-family: "Amazon Ember";
+  color: white;
 }
 
 body {
   background-color: #29abe2ff;
+  vertical-align: middle;
 }
 
 @keyframes App-logo-spin {
