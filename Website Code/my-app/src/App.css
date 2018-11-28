@@ -31,6 +31,12 @@ h1 {
   color: white;
 }
 
+h3 {
+  font-family: "Amazon Ember";
+  color: black;
+  background-color: white;
+}
+
 body {
   background-color: #29abe2ff;
   vertical-align: middle;
