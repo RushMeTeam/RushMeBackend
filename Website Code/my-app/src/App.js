@@ -29,7 +29,12 @@ class App extends Component {
         uname : '',
         page : 'password',
         selectedFraternity : 'NONE',
-        fratData : [{}]
+        fratData : [{}],
+        newAddress : '',
+        newChapter : '',
+        newCoordinates : '',
+        newDescription : '',
+        newMemberCount : ''
     };
 
 
@@ -41,6 +46,16 @@ class App extends Component {
     this.getFraternityObject = this.getFraternityObject.bind(this);
     this.updateNewCoordinates = this.updateNewCoordinates.bind(this);
     this.handleFratUpdateSubmit = this.handleFratUpdateSubmit.bind(this);
+    this.handleAddressSubmit = this.handleAddressSubmit.bind(this);
+    this.handleChapterSubmit = this.handleChapterSubmit.bind(this);
+    this.handleCoordinatesSubmit = this.handleCoordinatesSubmit.bind(this);
+    this.handleDescriptionSubmit = this.handleCoordinatesSubmit.bind(this);
+    this.handleMemberCountSubmit = this.handleMemberCountSubmit.bind(this);
+    this.updateNewAddress = this.updateNewAddress.bind(this);
+    this.updateNewChapter = this.updateNewChapter.bind(this);
+    this.updateNewCoordinates = this.updateNewCoordinates.bind(this);
+    this.updateNewDescription = this.updateNewDescription.bind(this);
+    this.updateNewMemberCount = this.updateNewMemberCount.bind(this);
     this.getFraternityData();
   }
   readTextFile(file)
@@ -131,8 +146,49 @@ class App extends Component {
     return desiredFraternityInfo;
   }
   
-  handleFratUpdateSubmit() {
-    
+  handleFratUpdateSubmit(field, value) {
+    //TODO: Implement
+    console.log("FIELD: " + field + "\nVALUE: " + value);
+  }
+  
+  handleAddressSubmit() {
+    this.handleFratUpdateSubmit('address', this.state.newAddress);
+  }
+  
+  handleChapterSubmit() {
+    this.handleFratUpdateSubmit('chapter', this.state.newChapter);
+  }
+  
+  handleCoordinatesSubmit() {
+    this.handleFratUpdateSubmit('coordinates', this.state.newCoordinates);
+  }
+  
+  handleDescriptionSubmit() {
+    this.handleFratUpdateSubmit('description', this.state.newDescription);
+  }
+  
+  handleMemberCountSubmit() {
+    this.handleFratUpdateSubmit('member_count', this.state.newMemberCount);
+  }
+  
+  updateNewAddress(event) {
+    this.setState({newAddress : event.target.value});
+  }
+  
+  updateNewChapter(event) {
+    this.setState({newChapter : event.target.value});
+  }
+  
+  updateNewCoordinates(event) {
+    this.setState({newCoordinates : event.target.value});
+  }
+  
+  updateNewDescription(event) {
+    this.setState({newDescription : event.target.value});
+  }
+  
+  updateNewMemberCount(event) {
+    this.setState({newMemberCount : event.target.value});
   }
   
   render() {
@@ -179,36 +235,36 @@ class App extends Component {
         <h3>
           Current Chapter(Alpha Chapter of LCA for example):
         </h3>
-        <form onSubmit={this.handleCoordinatesSubmit}>
+        <form onSubmit={this.handleChapterSubmit}>
           <label>
-            <input type="text" value={data.chapter}  onChange={this.updateNewCoordinates}></input><br/>
+            <input type="text" value={data.chapter}  onChange={this.updateNewChapter}></input><br/>
             <input type="submit" value="Submit " />
           </label>
         </form>
         <h3>
           Current Member Count:
         </h3>
-        <form onSubmit={this.handleCoordinatesSubmit}>
+        <form onSubmit={this.handleMemberCountSubmit}>
           <label>
-            <input type="text" value={data.member_count}  onChange={this.updateNewCoordinates}></input><br/>
+            <input type="text" value={data.member_count}  onChange={this.updateNewMemberCount}></input><br/>
             <input type="submit" value="Submit " />
           </label>
         </form>
         <h3>
           Current Address:
         </h3>
-        <form onSubmit={this.handleCoordinatesSubmit}>
+        <form onSubmit={this.handleAddressSubmit}>
           <label>
-            <input type="text" value={data.address}  onChange={this.updateNewCoordinates}></input><br/>
+            <input type="text" value={data.address}  onChange={this.updateNewAddress}></input><br/>
             <input type="submit" value="Submit " />
           </label>
         </form>
         <h3>
           Current Description: 
         </h3>
-        <form onSubmit={this.handleCoordinatesSubmit}>
+        <form onSubmit={this.handleDescriptionSubmit}>
           <label>
-            <textarea name="text" rows="10" cols="150" wrap="soft" value={data.description} onChange={this.updateNewCoordinates}> </textarea> <br/>
+            <textarea name="text" rows="10" cols="150" wrap="soft" value={data.description} onChange={this.updateNewDescription}> </textarea> <br/>
             <input type="submit" value="Submit " />
           </label>
         </form>
