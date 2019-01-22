@@ -17,10 +17,11 @@ RushMe has been implemented successfully at Rensselaer Polytechnic Institute. Th
 3. User Trends Storage:
   RushMe is exploring use of Amazon Cogntio User Pools to store user data, though integration will be challenging.
 
-
-# Contribute to RushMe
-The team welcomes contributions to RushMe. To contribute fork the repository, make (and document!) some changes and submit a pull request for us to look over. Approved changes will be included in the next release.
-
-#### Contact Us
+# Contact Us
 Regarding development or privacy concerns, [Adam Kuniholm](kuniha@rpi.edu).
 To learn more about RPI's Interfraternity Council, [the Vice President of RPI IFC](ifc.rpi.recruitment@gmail.com)
+
+#### Contribute to RushMe
+The team welcomes contributions to RushMe. To contribute fork the repository, make (and document!) some changes and submit a pull request for us to look over. Approved changes will be included in the next release.
+
+
