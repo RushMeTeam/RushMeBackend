@@ -1,0 +1,24 @@
+{
+  "name": "rushmeadmin",
+  "version": "1.0.0",
+  "description": "Administrative portal for the RushMe application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RushMeTeam/RushMeBackend.git"
+  },
+  "author": "RushMeBackend",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RushMeTeam/RushMeBackend/issues"
+  },
+  "homepage": "https://github.com/RushMeTeam/RushMeBackend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  }
+}
