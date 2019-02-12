@@ -8,8 +8,12 @@ var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/partials/start.html',
-        controller: 'StartCtrl'
+        templateUrl: 'views/partials/example.html',
+        controller: 'ExampleCtrl'
+    })
+    .when('/sorry', {
+        templateUrl: 'views/partials/sorry.html',
+        //controller: 'SorryCtrl'
     })
     /*
     Replace templateURL with the path to the partial file

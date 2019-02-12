@@ -12,6 +12,7 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/ico" href="resources/images/favicon.ico">
 
 		<!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -19,10 +20,29 @@
 		<!-- Font Awesome for icons -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
+		<!-- Font Awesome for icons -->
+		<link rel="stylesheet" href="../resources/css/style.css">
+
 		<title>RushMe Administrative Portal</title>
 	</head>
 
 	<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-1">
+      <div class="container-fluid">
+        <div class="row w-100">
+          <div class="col"></div>
+          <div class="col text-center">
+                <a class="navbar-brand py-0" href="/#!/">
+                  <img src="https://rushme.app/logo.png" width="48px" height="48px" alt="RushMe Logo">
+                </a>
+          </div>
+          <div class="col text-right my-auto px-0">
+            <button onclick="location.href = 'https://auth.rushme.app/';" type="button" class="btn rm-btn">Sign in</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
 		<div ng-view></div>
 
 		<!-- AngularJS -->
@@ -44,6 +64,6 @@
 		<script src="../app.js"></script>
     
 		<!-- Start Controller (IN PRODUCTION CREATE A MINIFIED FILE USING GULP OR GRUNT) -->
-		<script src="../controllers/start.controller.js"></script>
+		<script src="../controllers/example.controller.js"></script>
 	</body>
 </html>
