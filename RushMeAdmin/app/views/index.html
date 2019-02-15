@@ -27,30 +27,30 @@
 	</head>
 
 	<body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-1">
-      <div class="container-fluid">
-        <div class="row w-100">
-          <div class="col"></div>
-          <div class="col text-center">
-                <a class="navbar-brand py-0" href="/#!/">
-                  <img src="https://rushme.app/logo.png" width="48px" height="48px" alt="RushMe Logo">
-                </a>
-          </div>
-          <div class="col text-right my-auto px-0">
-            <button onclick="location.href = 'https://auth.rushme.app/';" type="button" class="btn rm-btn">Sign in</button>
-          </div>
-        </div>
-      </div>
-    </nav>
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-1">
+			<div class="container-fluid">
+				<div class="row w-100">
+					<div class="col"></div>
+					<div class="col text-center">
+								<a class="navbar-brand py-0" href="/#!/">
+									<img src="https://rushme.app/logo.png" width="48px" height="48px" alt="RushMe Logo">
+								</a>
+					</div>
+					<div class="col text-right my-auto px-0">
+						<button onclick="location.href = 'login';" type="button" class="btn rm-btn">Sign in</button>
+					</div>
+				</div>
+			</div>
+		</nav>
 
 		<div ng-view></div>
 
 		<!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js" integrity="sha384-hCMFP3Nn0tEtZ0JR8Q1zD+BQJl9O5azx7drYB19+ZR1rehXE+vgT2RUJkvu3Hrqx" crossorigin="anonymous"></script>
-    
+
 		<!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+
     <!-- Popper for Bootstrap -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 
@@ -62,8 +62,8 @@
 
 		<!-- AngularJS Application -->
 		<script src="../app.js"></script>
-    
+
 		<!-- Start Controller (IN PRODUCTION CREATE A MINIFIED FILE USING GULP OR GRUNT) -->
-		<script src="../controllers/example.controller.js"></script>
+		<script src="../controllers/layout.controller.js"></script>
 	</body>
 </html>

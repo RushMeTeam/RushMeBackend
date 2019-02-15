@@ -1,0 +1,64 @@
+<!-- <div ng-include="'views/partials/bye.html'"></div> -->
+<h2 class="rm-section-header">Fraternities</h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Code</th>
+        <th scope="col"># of events</th>
+        <th scope="col">Primary Contact</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td><span class="badge rm-badge published">PUBLISHED</span></td>
+        <td>Resnsselaer Polytechnic Society of Engineers</td>
+        <td>RSE</td>
+        <td>21</td>
+        <td><a href="mailto:manidk@rpi.edu">Kelta Manidman</a></td>
+        <td>
+          <button type="button" class="btn btn-secondary">Edit</button>
+          <button type="button" class="btn btn-secondary">Add Event</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
+        <td>Acacia</td>
+        <td>ACA</td>
+        <td>25</td>
+        <td><a href="mailto:indhal@rpi.edu">Larry Indhal</a></td>
+        <td>
+          <button type="button" class="btn btn-secondary">Edit</button>
+          <button type="button" class="btn btn-secondary">Add Event</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".fratDetail">Fraternity Detail</button>
+
+<div class="modal fade fratDetail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Fraternity Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div ng-include="'views/partials/frat-detail.html'"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

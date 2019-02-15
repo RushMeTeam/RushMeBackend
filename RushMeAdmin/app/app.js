@@ -8,13 +8,18 @@ var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/partials/example.html',
-        controller: 'ExampleCtrl'
+        templateUrl: 'views/partials/layout.html',
+        controller: 'LayoutCtrl'
     })
-    .when('/sorry', {
-        templateUrl: 'views/partials/sorry.html',
-        //controller: 'SorryCtrl'
+    .when('/bye', {
+      templateUrl: 'views/partials/bye.html',
     })
+    .when('/error', {
+      templateUrl: 'views/partials/error.html',
+    })
+    // .when('/login', {
+    //   templateURL: "https://auth.rushme.app/login?response_type=code&client_id=4o9r7dvj3kiislsbh4cbhkf42&redirect_uri=https://rushme.app/"
+    // })
     /*
     Replace templateURL with the path to the partial file
     .when('/XXXXXX', {
@@ -25,6 +30,17 @@ app.config(function ($routeProvider, $locationProvider) {
     .otherwise({
         redirectTo: "/"
     });
+});
+
+app.config(function($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+  // Allow same origin resource loads.
+  'self',
+  // Allow loading from our assets domain.  Notice the difference between * and **.
+  'https://auth.rushme.app/**'
+  ]);
+  $sceDelegateProvider.resourceUrlBlacklist([
+  ]);
 });
 
 angular.element(function() {
