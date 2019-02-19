@@ -4,12 +4,19 @@
 // Initial Declarations
 var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 
+const poolData = {
+    UserPoolId : "us-east-1_hp56TBp7o",
+    ClientId : "4o9r7dvj3kiislsbh4cbhkf42"
+};
+// var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+
+const poolRegion = "us-east-1";
 // The View Configuration (pseudo-URL work)
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/partials/layout.html',
-        controller: 'LayoutCtrl'
+        templateUrl: 'views/partials/home.html',
     })
     .when('/bye', {
       templateUrl: 'views/partials/bye.html',
@@ -17,8 +24,26 @@ app.config(function ($routeProvider, $locationProvider) {
     .when('/error', {
       templateUrl: 'views/partials/error.html',
     })
+    .when('/dashboard', {
+      templateUrl: 'views/partials/portal.html',
+
+    })
     // .when('/login', {
-    //   templateURL: "https://auth.rushme.app/login?response_type=code&client_id=4o9r7dvj3kiislsbh4cbhkf42&redirect_uri=https://rushme.app/"
+    //   // redirectTo:
+    //   // controller: 'LoginCtrl'
+    // })
+    .when('/logout', {
+      redirectTo:"/bye"
+    })
+    // .when('/portal', {
+    //   // var user = userPool.getCurrentUser();
+    //   // user.signOut()
+    //   templateUrl: 'views/partials/portal.html',
+    //   controller: 'PortalCtrl'
+    //
+    // })
+    // .when('/portal/:userid', function(req, res) {
+    //
     // })
     /*
     Replace templateURL with the path to the partial file
@@ -29,7 +54,7 @@ app.config(function ($routeProvider, $locationProvider) {
     */
     .otherwise({
         redirectTo: "/"
-    });
+    })
 });
 
 app.config(function($sceDelegateProvider) {
