@@ -4,57 +4,41 @@
 // Initial Declarations
 var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 
-const poolData = {
-    UserPoolId : "us-east-1_hp56TBp7o",
-    ClientId : "4o9r7dvj3kiislsbh4cbhkf42"
-};
-// var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
-
-const poolRegion = "us-east-1";
 // The View Configuration (pseudo-URL work)
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/partials/home.html',
+        templateUrl: '../views/partials/bye.html'
+    })
+    .when('/in/*', {
+      redirectTo: '/in/dashboard'
     })
     .when('/bye', {
-      templateUrl: 'views/partials/bye.html',
+      templateUrl: '../views/partials/bye.html'
     })
-    .when('/error', {
-      templateUrl: 'views/partials/error.html',
-    })
-    .when('/dashboard', {
-      templateUrl: 'views/partials/portal.html',
-
-    })
-    // .when('/login', {
-    //   // redirectTo:
-    //   // controller: 'LoginCtrl'
+    // /*
+    // Replace templateURL with the path to the partial file
+    // .when('/XXXXXX', {
+    //     templateUrl: 'views/partials/XXXXXX.html',
+    //     controller: 'XXXXXXCtrl'
     // })
-    .when('/logout', {
-      redirectTo:"/bye"
-    })
-    // .when('/portal', {
-    //   // var user = userPool.getCurrentUser();
-    //   // user.signOut()
-    //   templateUrl: 'views/partials/portal.html',
-    //   controller: 'PortalCtrl'
-    //
-    // })
-    // .when('/portal/:userid', function(req, res) {
-    //
-    // })
-    /*
-    Replace templateURL with the path to the partial file
-    .when('/XXXXXX', {
-        templateUrl: 'views/partials/XXXXXX.html',
-        controller: 'XXXXXXCtrl'
-    })
-    */
     .otherwise({
         redirectTo: "/"
     })
+});
+
+app.controller("DashboardCtrl", function($scope, $http, $cookies) {
+   $http({
+       method: "GET",
+       url: "/in/dashboard",
+   }).then(
+       function success(response) {
+           //Authenticated. Do something with the response.
+       },
+       function error(err) {
+           console.error(err);
+       }
+   );
 });
 
 app.config(function($sceDelegateProvider) {

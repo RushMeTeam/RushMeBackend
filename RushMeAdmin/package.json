@@ -17,19 +17,18 @@
   },
   "homepage": "https://github.com/RushMeTeam/RushMeBackend#readme",
   "dependencies": {
-    "amazon-cognito-identity-js": "^3.0.7",
-    "aws-sdk": "^2.403.0",
     "body-parser": "^1.18.3",
-    "cognito-express": "^2.0.14",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "jwk-to-pem": "^2.0.1",
     "morgan": "^1.9.1",
     "node-fetch": "^2.3.0",
+    "passport": "^0.4.0",
+    "passport-oauth2-cognito": "^0.1.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
     "json-loader": "^0.5.7",
-    "webpack": "^4.29.4"
+    "webpack": "^4.29.5"
   }
 }
