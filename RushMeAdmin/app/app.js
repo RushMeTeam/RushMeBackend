@@ -8,10 +8,11 @@ var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: '../views/partials/bye.html'
+        templateUrl: '../views/partials/dashboard.html'
     })
     .when('/in/*', {
-      redirectTo: '/in/dashboard'
+      //redirectTo: '/in/dashboard'
+      redirectTo: '../view/partials/dashboard.html'
     })
     .when('/bye', {
       templateUrl: '../views/partials/bye.html'
@@ -25,20 +26,6 @@ app.config(function ($routeProvider, $locationProvider) {
     .otherwise({
         redirectTo: "/"
     })
-});
-
-app.controller("DashboardCtrl", function($scope, $http, $cookies) {
-   $http({
-       method: "GET",
-       url: "/in/dashboard",
-   }).then(
-       function success(response) {
-           //Authenticated. Do something with the response.
-       },
-       function error(err) {
-           console.error(err);
-       }
-   );
 });
 
 app.config(function($sceDelegateProvider) {
