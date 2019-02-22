@@ -10,59 +10,99 @@ var express    = require('express'),
     path       = require('path'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
+    request = require('request'),
+    jwt = require('jsonwebtoken'),
+    jwkToPem = require('jwk-to-pem'),
     AWS = require('aws-sdk'),
+    session = require('express-session'),
     authenticatedRoute = express.Router();
+
+var sessionOptions = {
+  secret: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
+  cookie: {},
+  resave: true,
+  saveUninitialized: false
+}
+app.use(session(sessionOptions));
+
+const options = {
+  callbackURL: 'https://127.0.0.1/in/success',
+  clientDomain: 'https://auth.rushme.app',
+  clientID: '4o9r7dvj3kiislsbh4cbhkf42',
+  poolID : 'us-east-1_hp56TBp7o',
+  clientSecret: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
+  region: 'us-east-1'
+};
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
+var pems;
+getPEMs();
 
-var user = null;
-const options = {
-  callbackURL: 'https://127.0.0.1/',
-  clientDomain: 'https://auth.rushme.app',
-  clientID: '4o9r7dvj3kiislsbh4cbhkf42',
-  clientSecret: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
-  region: 'us-east-1'
-};
-passport.use(new OAuth2CognitoStrategy(options, verify));
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
-
-
-
-function verify(accessToken, refreshToken, profile, done) {
-  if (profile) {
-    user = profile;
-    return done(null, user);
-  } else {
-    return done(null, false);
-  }
+function getPEMs() {
+    request({
+      url: `https://cognito-idp.${options.region}.amazonaws.com/${options.poolID}/.well-known/jwks.json`,
+      json: true
+    }, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+          pems = {};
+          var keys = body['keys'];
+          for(var i = 0; i < keys.length; i++) {
+              //Convert each key to PEM
+              var key_id = keys[i].kid;
+              var modulus = keys[i].n;
+              var exponent = keys[i].e;
+              var key_type = keys[i].kty;
+              var jwk = { kty: key_type, n: modulus, e: exponent};
+              var pem = jwkToPem(jwk);
+              pems[key_id] = pem;
+          }
+          //Now continue with validating the token
+      } else {
+          //Unable to download JWKs, fail the call
+          console.log("Couldn't get PEMs");
+      }
+    });
 }
+
+passport.use(new OAuth2CognitoStrategy(options,
+  function (accessToken, refreshToken, profile, done) {
+    if (!pems) {
+      //Download the JWKs and save it as PEM
+      done(null, null);
+    } 
+    var decodedJwt = jwt.decode(accessToken, {complete: true});
+    var kid = decodedJwt.header.kid;
+    var pem = pems[kid];
+    const payload = jwt.verify(accessToken, pem);
+    const groups = payload['cognito:groups'] || [];
+    done(null, { groups: groups, accessToken: accessToken }); // Keep accessToken for passing to API calls
+  }));
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
+
 app.get('/login', passport.authenticate('oauth2-cognito'));
+app.get('/in/success', passport.authenticate('oauth2-cognito'),
+  (req,res) => res.redirect('/')
+);
 
 app.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  // Invalidates the login token
+  res.redirect(`https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/`)
 });
 
-// app.get('/test', function(req, res){
-//   passport
-//
-// });
-
-function validateAuth(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  } else {
-    res.redirect('/login');
-  }
+function validateAuth(req, res, next) {
+    if (req.user) { next();
+    } else        { res.redirect('/login');
+    }
 }
 
 app.get('/test', validateAuth, function(req, res) {
     res.status(200).send("TEST");
-    // res.json(req.user);
 });
 
 AWS.config.loadFromPath('./config.json');
@@ -102,7 +142,7 @@ app.get('/isAppAvail', function(req,res){
 // Error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.status(500).send('Something bad happened!');
+  res.status(500).send('Uh oh! Something bad happened!');
 });
 
 // Listen on port 80
@@ -112,8 +152,3 @@ var httpsServer = https.createServer({
   cert: fs.readFileSync('server.cert')
 }, app).listen(httpPort);
 console.log('Server running on port %s', httpPort);
-
-//
-// app.get('/in/', passport.authenticate('oauth2-cognito'));
-// app.get('/in/dashboard',passport.authenticate('oauth2-cognito'),
-// (req,res) => res.sendFile(__dirname +'/app/views/index.html'));
