@@ -17,22 +17,36 @@ var express    = require('express'),
     session = require('express-session'),
     authenticatedRoute = express.Router();
 
-var sessionOptions = {
-  secret: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
-  cookie: {},
-  resave: true,
-  saveUninitialized: false
-}
-app.use(session(sessionOptions));
+function validateAuth(req, res, next) {
+      if (req.isAuthenticated()) { next(); } 
+      else                       { res.redirect('/login'); }
+  }
+
+const CONSTANTS = {
+  SUCCESS_CALLBACK_URL: 'https://127.0.0.1/in/success',
+  CLIENT_DOMAIN: 'https://auth.rushme.app',
+  CLIENT_ID: '4o9r7dvj3kiislsbh4cbhkf42',
+  COG_POOL_ID : 'us-east-1_hp56TBp7o',
+  CLIENT_SECRET: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
+  REGION: 'us-east-1'
+};
 
 const options = {
-  callbackURL: 'https://127.0.0.1/in/success',
-  clientDomain: 'https://auth.rushme.app',
-  clientID: '4o9r7dvj3kiislsbh4cbhkf42',
-  poolID : 'us-east-1_hp56TBp7o',
-  clientSecret: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
-  region: 'us-east-1'
+  callbackURL: CONSTANTS.SUCCESS_CALLBACK_URL,
+  clientDomain: CONSTANTS.CLIENT_DOMAIN,
+  clientID: CONSTANTS.CLIENT_ID,
+  poolID : CONSTANTS.COG_POOL_ID,
+  clientSecret: CONSTANTS.CLIENT_SECRET,
+  region: CONSTANTS.REGION
 };
+
+
+app.use(session({
+  secret: options.clientSecret, 
+  saveUninitialized: false,
+  resave: true, 
+  cookie: {}
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,10 +83,10 @@ function getPEMs() {
 
 passport.use(new OAuth2CognitoStrategy(options,
   function (accessToken, refreshToken, profile, done) {
-    if (!pems) {
-      //Download the JWKs and save it as PEM
+    //Download the JWKs and save it as PEM
+    if (!pems) { 
       done(null, null);
-    } 
+    }
     var decodedJwt = jwt.decode(accessToken, {complete: true});
     var kid = decodedJwt.header.kid;
     var pem = pems[kid];
@@ -84,7 +98,7 @@ passport.use(new OAuth2CognitoStrategy(options,
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-app.get('/login', passport.authenticate('oauth2-cognito'));
+app.get('/login', passport.authenticate('oauth2-cognito', {failureFlash:true}));
 app.get('/in/success', passport.authenticate('oauth2-cognito'),
   (req,res) => res.redirect('/')
 );
@@ -95,15 +109,6 @@ app.get('/logout', function(req, res){
   res.redirect(`https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/`)
 });
 
-function validateAuth(req, res, next) {
-    if (req.user) { next();
-    } else        { res.redirect('/login');
-    }
-}
-
-app.get('/test', validateAuth, function(req, res) {
-    res.status(200).send("TEST");
-});
 
 AWS.config.loadFromPath('./config.json');
 AWS.config.apiVersions = {
@@ -130,9 +135,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // This will send the index page when the root directory is accessed
-app.get('/', validateAuth, function (req, res) {
+app.get('/', function (req, res) {
+  res.sendFile(__dirname +'/app/views/partials/home.html');
+});
+
+app.use('/in/*', validateAuth, function(req, res, next) {
   res.sendFile(__dirname +'/app/views/index.html');
 });
+
+
 
 // Sanity check to ensure the API is up
 app.get('/isAppAvail', function(req,res){
