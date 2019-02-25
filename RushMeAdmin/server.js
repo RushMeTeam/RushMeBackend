@@ -108,7 +108,7 @@ app.get('/in/success', passport.authenticate('oauth2-cognito'),
 app.get('/dashboard', validateAuth, function (req, res) {
   res.sendFile(__dirname +'/app/views/index.html');
 });
-const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/`;
+const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/#!/bye`;
 
 app.get('/logout', function(req, res){
   req.logout();
@@ -117,6 +117,10 @@ app.get('/logout', function(req, res){
 });
 app.get('/', function (req, res) {
   res.sendFile(__dirname +'/app/views/homepage.html');
+});
+
+app.get('/bye', function(req, res) {
+  res.redirect('/#!/bye')
 });
 
 AWS.config.loadFromPath('./config.json');
