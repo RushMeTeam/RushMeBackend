@@ -2,17 +2,12 @@
 // Description: Handler for routing and presentation related to the page views of this single-page application
 
 // Initial Declarations
-var app = angular.module('RushMeAdminControllers', ['ngRoute']);
+var app = angular.module('RushMePublicControllers', ['ngRoute']);
 
-// The View Configuration (pseudo-URL work)
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: '../views/partials/dashboard.html'
-    })
-    .when('/in/*', {
-      //redirectTo: '/in/dashboard'
-      redirectTo: '../view/partials/dashboard.html'
+        templateUrl: '../views/partials/home.html'
     })
     .when('/bye', {
       templateUrl: '../views/partials/bye.html'
@@ -28,6 +23,8 @@ app.config(function ($routeProvider, $locationProvider) {
     })
 });
 
+
+
 app.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
   // Allow same origin resource loads.
@@ -40,5 +37,5 @@ app.config(function($sceDelegateProvider) {
 });
 
 angular.element(function() {
-    angular.bootstrap(document, ['RushMeAdminControllers']);
+  angular.bootstrap(document, ['RushMePublicControllers']);
 });

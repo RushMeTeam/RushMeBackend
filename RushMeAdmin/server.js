@@ -18,8 +18,10 @@ var express    = require('express'),
     authenticatedRoute = express.Router();
 
 function validateAuth(req, res, next) {
-      if (req.isAuthenticated()) { next(); } 
-      else                       { res.redirect('/login'); }
+      
+      if (req.isAuthenticated()) { next(); }
+      else                       { 
+        res.redirect('/#!/bye'); }
   }
 
 const CONSTANTS = {
@@ -42,9 +44,9 @@ const options = {
 
 
 app.use(session({
-  secret: options.clientSecret, 
+  secret: options.clientSecret,
   saveUninitialized: false,
-  resave: true, 
+  resave: true,
   cookie: {}
 }));
 
@@ -53,8 +55,6 @@ app.use(passport.session());
 
 const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
 var pems;
-getPEMs();
-
 function getPEMs() {
     request({
       url: `https://cognito-idp.${options.region}.amazonaws.com/${options.poolID}/.well-known/jwks.json`,
@@ -73,6 +73,8 @@ function getPEMs() {
               var pem = jwkToPem(jwk);
               pems[key_id] = pem;
           }
+          console.log("Got PEMs");
+
           //Now continue with validating the token
       } else {
           //Unable to download JWKs, fail the call
@@ -80,12 +82,13 @@ function getPEMs() {
       }
     });
 }
-
+getPEMs();
 passport.use(new OAuth2CognitoStrategy(options,
   function (accessToken, refreshToken, profile, done) {
+    console.log("Validating user");
     //Download the JWKs and save it as PEM
-    if (!pems) { 
-      done(null, null);
+    if (!pems) {
+      getPEMs();
     }
     var decodedJwt = jwt.decode(accessToken, {complete: true});
     var kid = decodedJwt.header.kid;
@@ -98,17 +101,23 @@ passport.use(new OAuth2CognitoStrategy(options,
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-app.get('/login', passport.authenticate('oauth2-cognito', {failureFlash:true}));
-app.get('/in/success', passport.authenticate('oauth2-cognito'),
-  (req,res) => res.redirect('/')
+app.get('/login', passport.authenticate('oauth2-cognito'));
+app.get('/in/success', passport.authenticate('oauth2-cognito'), 
+  (req,res) => res.redirect('/dashboard')
 );
+app.get('/dashboard', validateAuth, function (req, res) {
+  res.sendFile(__dirname +'/app/views/index.html');
+});
+const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/`;
 
 app.get('/logout', function(req, res){
   req.logout();
   // Invalidates the login token
-  res.redirect(`https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/`)
+  res.redirect(logoutRedirect)
 });
-
+app.get('/', function (req, res) {
+  res.sendFile(__dirname +'/app/views/homepage.html');
+});
 
 AWS.config.loadFromPath('./config.json');
 AWS.config.apiVersions = {
@@ -133,17 +142,6 @@ app.use(express.static(path.join(__dirname, 'app')));
 // Body-parser is used to parse post requests. 'extended' will allow nested objects
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// This will send the index page when the root directory is accessed
-app.get('/', function (req, res) {
-  res.sendFile(__dirname +'/app/views/partials/home.html');
-});
-
-app.use('/in/*', validateAuth, function(req, res, next) {
-  res.sendFile(__dirname +'/app/views/index.html');
-});
-
-
 
 // Sanity check to ensure the API is up
 app.get('/isAppAvail', function(req,res){
