@@ -12,41 +12,56 @@
       <div class="modal-body">
           <form class="inline">
 
-            <div class="form-row">
-              <div class="col">
-                <div class="form-group">
-                        <label  id="code" class="col-form-label">Code</label>
-                        <input type="text" class="form-control" id="code" placeholder="ACA" required>
-                      </div>
+
+            <div class="form-group row">
+              <div class="form-group col-md-2">
+                <label  id="code" class="col-sm-2 col-form-label">Code</label>
               </div>
               <div class="col">
                 <div class="form-group">
-                        <label id="members" class="col-form-label">Members</label>
-                        <input type="text" class="form-control" id="members" required>
+                        <input type="text" class="form-control-plaintext" id="code"  required readonly placeholder="ACA">
                 </div>
               </div>
             </div>
 
-            <div class="form-group">
-                <label  class="col-form-label">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="110 8th St Troy NY" required>
-            </div>
-
-            <div class="form-group">
-              <label id="description" class="col-form-label">Description</label>
-              <textarea class="form-control" id="description" placeholder="Come meet our house and see what Greek Life has to offer!" required></textarea>
-            </div>
 
 
-            <div class="form-row">
-              <div class="col-md-6">
+            <div class="form-group row">
+              <div class="form-group col-md-2">
+                <label id="contact" class="col-sm-2 col-form-label">Contact</label>
+              </div>
+              <div class="form-group col-md-7">
                 <div class="form-group">
-                  <label id="contact" class="col-form-label">Contact</label>
                   <input type="email" class="form-control" id="contact" placeholder="person@email.com" required>
                 </div>
-                 <button type="button" class="btn btn-primary">Reset Password</button>
+              </div>
+              <div class="col">
+                <div class="form-group col">
+                  <button type="button" class="btn btn-primary">Reset Password</button>
+                </div>
               </div>
             </div>
+
+
+
+            <div class="form-group row">
+              <div class="form-group col-md-2">
+                <label  class="col-sm-2 col-form-label">Address</label>
+              </div>
+              <div class="form-group col">  
+                <input type="text" class="form-control" id="address" placeholder="110 8th St Troy NY" required>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="form-group col-md-2">
+                <label id="description" class="col-sm-2 col-form-label">Description</label>
+              </div>
+              <div class="form-group col">
+                <textarea class="form-control" id="description" placeholder="Come meet our house and see what Greek Life has to offer!" required></textarea>
+              </div>
+            </div>
+
 
           
           </form>
