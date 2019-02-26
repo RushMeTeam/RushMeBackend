@@ -13,6 +13,18 @@
       </tr>
     </thead>
     <tbody>
+      <tr ng-repeat="frat in fraternaties">
+        <td><span class="badge rm-badge published">PUBLISHED (Hardcoded Not in DynamoDB yet)</span></td>
+        <td>{{frat.name}}</td>
+        <td>{{frat.namekey}}</td>
+        <td>21 (Hardcoded)</td>
+        <td><a href="mailto:manidk@rpi.edu">Kelta Manidman (Hardcoded)</a></td>
+        <td>
+          <button type="button" class="btn btn-secondary">Edit</button>
+          <button type="button" class="btn btn-secondary">Add Event</button>
+        </td>
+      </tr>
+      <!--
       <tr>
         <td><span class="badge rm-badge published">PUBLISHED</span></td>
         <td>Resnsselaer Polytechnic Society of Engineers</td>
@@ -35,6 +47,7 @@
           <button type="button" class="btn btn-secondary">Add Event</button>
         </td>
       </tr>
+      -->
     </tbody>
   </table>
 </div>

@@ -35,32 +35,45 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr ng-repeat="event in events">
         <!-- <th scope="row"></th> -->
-        <td><span class="badge rm-badge published">PUBLISHED</span></td>
-        <td>Tau Epsilon Phi</td>
+        <td><span class="badge rm-badge published">PUBLISHED (HARDCODED)</span></td>
+        <td>{{event.FraternityID}}</td>
 
-        <td>Taco Bell Tuesday</td>
-        <td>5:00 PM</td>
+        <td>{{event.event_name}}</td>
+        <td>{{event.start_time}}</td>
         <!-- <td>Taco Bell near HVCC</td> -->
         <!-- <td>
           <button type="button" class="btn btn-secondary">Edit</button>
         </td> -->
       </tr>
+      <!--
       <tr>
-        <!-- <th scope="row"></th> -->
+        <!-- <th scope="row"></th>
+        <td><span class="badge rm-badge published">PUBLISHED</span></td>
+        <td>Tau Epsilon Phi</td>
+
+        <td>Taco Bell Tuesday</td>
+        <td>5:00 PM</td>
+        <!-- <td>Taco Bell near HVCC</td> 
+        <!-- <td>
+          <button type="button" class="btn btn-secondary">Edit</button>
+        </td>
+      </tr>
+      <tr>
+        <!-- <th scope="row"></th>
         <td><span class="badge rm-badge unpublished">PUBLISHED</span></td>
         <td>Tau Epsilon Phi</td>
         <td>Taco Bell Tuesday</td>
         <td>5:00 PM</td>
 
-        <!-- <td>Taco Bell near HVCC</td> -->
+        <!-- <td>Taco Bell near HVCC</td>
         <!-- <td>
-          <!-- <button type="button" class="btn btn-secondary">Edit</button> -->
-          <!-- <i class="material-icons">edit</i> -->
-         <!-- </td> -->
+          <!-- <button type="button" class="btn btn-secondary">Edit</button> 
+          <!-- <i class="material-icons">edit</i> 
+         <!-- </td> 
       </tr>
-
+      -->
     </tbody>
   </table>
 </div>

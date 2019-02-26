@@ -1,5 +1,5 @@
 // File: app.js
-// Description: Handler for routing and presentation related to the page views of this single-page application
+// Description: Handler for routing and presentation related to the public page views of this single-page application
 
 // Initial Declarations
 var app = angular.module('RushMePublicControllers', ['ngRoute']);
@@ -7,30 +7,28 @@ var app = angular.module('RushMePublicControllers', ['ngRoute']);
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: '../views/partials/home.html'
+      templateUrl: '/views/partials/home.html'
     })
     .when('/bye', {
-      templateUrl: '../views/partials/bye.html'
+      templateUrl: '/views/partials/bye.html'
     })
     // /*
     // Replace templateURL with the path to the partial file
     // .when('/XXXXXX', {
-    //     templateUrl: 'views/partials/XXXXXX.html',
-    //     controller: 'XXXXXXCtrl'
+    //   templateUrl: 'views/partials/XXXXXX.html',
+    //   controller: 'XXXXXXCtrl'
     // })
     .otherwise({
-        redirectTo: "/"
+      redirectTo: "/"
     })
 });
 
-
-
 app.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
-  // Allow same origin resource loads.
-  'self',
-  // Allow loading from our assets domain.  Notice the difference between * and **.
-  'https://auth.rushme.app/**'
+    // Allow same origin resource loads.
+    'self',
+    // Allow loading from our assets domain.  Notice the difference between * and **.
+    'https://auth.rushme.app/**'
   ]);
   $sceDelegateProvider.resourceUrlBlacklist([
   ]);
