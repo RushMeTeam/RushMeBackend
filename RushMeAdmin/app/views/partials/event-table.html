@@ -37,7 +37,8 @@
     <tbody>
       <tr ng-repeat="event in events">
         <!-- <th scope="row"></th> -->
-        <td><span class="badge rm-badge published">PUBLISHED (HARDCODED)</span></td>
+        <td ng-if="event.published"><span class="badge rm-badge published">PUBLISHED</span></td>
+        <td ng-if="!event.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
         <td>{{event.FraternityID}}</td>
 
         <td>{{event.event_name}}</td>
