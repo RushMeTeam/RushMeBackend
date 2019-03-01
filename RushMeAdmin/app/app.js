@@ -12,7 +12,15 @@ app.config(function ($routeProvider, $locationProvider) {
     .when('/bye', {
       templateUrl: '/views/partials/bye.html'
     })
-
+<<<<<<< HEAD
+    .when('/privacy', {
+      templateUrl: '/views/partials/privacy.html'
+    })
+=======
+    // .when('/fraternities', {
+    //   templateUrl: '/views/partials/fraternities.html'
+    // })
+>>>>>>> c11e4ebe0d7a401d43ec42b261fa8a26cc7db04e
     // /*
     // Replace templateURL with the path to the partial file
     // .when('/XXXXXX', {
