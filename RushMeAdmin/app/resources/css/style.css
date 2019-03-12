@@ -18,6 +18,11 @@ a {
   color: #ffffff;
   vertical-align:baseline;
 }
+
+body{
+  padding-top: 20px;
+}
+
 .table {
   text-align: center;
   vertical-align: baseline;

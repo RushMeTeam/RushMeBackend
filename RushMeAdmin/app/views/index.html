@@ -27,25 +27,10 @@
 	<link rel="stylesheet" href="../resources/css/style.css">
 
 	<title>RushMe</title>
-	<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-1">
-		<div class="container-fluid">
-			<div class="row w-100">
-				<div class="col"></div>
-				<div class="col text-center">
-					<a class="navbar-brand py-0" href="/#!/">
-						<img src="https://rushme.app/logo.png" width="48px" height="48px" alt="RushMe Logo">
-					</a>
-				</div>
-				<div class="col text-right my-auto px-0">
-					<button onclick="location.href = 'logout';" type="button" class="btn rm-btn">Sign out</button>
-				</div>
-			</div>
-		</div>
-	</nav>
 </head>
 
 <body>
-
+	<div ng-include="'/views/partials/banner.html'"></div>
 	<div ng-view></div>
 
 	<!-- AngularJS -->
