@@ -41,4 +41,3 @@ angular.element(function() {
   angular.bootstrap(document, ['RushMePublicControllers']);
 });
 
-require('dotenv').config();

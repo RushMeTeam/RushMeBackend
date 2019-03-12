@@ -17,6 +17,9 @@ var express    = require('express'),
     session    = require('express-session'),
     authenticatedRoute = express.Router();
 
+// require('dotenv').config();
+
+
 const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
 
 /* Move site constants into an environmental file in the future. */
@@ -47,6 +50,9 @@ app.use(session({
   resave: true,
   cookie: {}
 }));
+
+app.use(express.static('resources/**'));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
