@@ -1,6 +1,7 @@
 nav {
-  background-image: linear-gradient(220deg, #1a4276, #25a7df, #25a7df);
+  background-image: linear-gradient(220deg, #25a7df, #25a7df, #25a7df);
 }
+
 #rm-message-subtitle {
   color: gray;
   font-family: Lucida;
@@ -14,28 +15,30 @@ nav {
   padding-bottom: 1%;
 }
 a {
-  color: #25a7df;
+  color: #ffffff;
+  vertical-align:baseline;
 }
+
+body{
+  padding-top: 20px;
+}
+
 .table {
   text-align: center;
   vertical-align: baseline;
-
 }
 th {
   text-transform: uppercase;
-  font-weight: 450;
+  font-weight: 400;
 }
-
 td {
   font-size: 1.3em;
   font-weight:300;
   font-family: sans-serif;
 }
-
 .rm-badge {
   border-radius: 0px;
 }
-
 .rm-badge.published {
   background-color: #25a7df;
   color: white;
@@ -50,7 +53,7 @@ td {
 .carousel-lbl h3 {
   color:#25a7df;
   font: Helvetica;
-  font-weight:250;
+  font-weight:200;
 }
 .carousel-control-prev-icon {
   background-color: #25a7df;
@@ -58,16 +61,12 @@ td {
 .carousel-control-next-icon {
   background-color: #25a7df;
 }
-
-
-
 #rm-message-header {
   padding-top: 5%;
   color: #082c45;
   font-family: Futura;
   font-weight: 100;
 }
-
 .rm-btn {
   color: white;
   opacity: 0.4;
@@ -77,8 +76,11 @@ td {
   cursor: pointer;
   font-size: 1.25em;
 }
-
 .rm-btn:hover {
   opacity: 1;
   color: white;
+}
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
 }
