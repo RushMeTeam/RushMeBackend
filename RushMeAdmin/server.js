@@ -17,32 +17,20 @@ var express    = require('express'),
     session    = require('express-session'),
     authenticatedRoute = express.Router();
 
-// require('dotenv').config();
-
+require('dotenv').load();
 
 const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
 
-/* Move site constants into an environmental file in the future. */
-const CONSTANTS = {
-  SUCCESS_CALLBACK_URL: 'https://rushme.app/in/success',
-  LOGOUT_REDIRECT_URL: 'https://rushme.app/#!/bye',
-  CLIENT_DOMAIN: 'https://auth.rushme.app',
-  CLIENT_ID: '4o9r7dvj3kiislsbh4cbhkf42',
-  COG_POOL_ID : 'us-east-1_hp56TBp7o',
-  CLIENT_SECRET: 'flcof5vnpr7m37q4dqm6muk9dl9spblugmdn1abkesjg5mo2k32',
-  REGION: 'us-east-1'
-};
-
 const options = {
-  callbackURL: CONSTANTS.SUCCESS_CALLBACK_URL,
-  clientDomain: CONSTANTS.CLIENT_DOMAIN,
-  clientID: CONSTANTS.CLIENT_ID,
-  poolID : CONSTANTS.COG_POOL_ID,
-  clientSecret: CONSTANTS.CLIENT_SECRET,
-  region: CONSTANTS.REGION
+  callbackURL: process.env.SUCCESS_CALLBACK_URL,
+  clientDomain: process.env.CLIENT_DOMAIN,
+  clientID: process.env.CLIENT_ID,
+  poolID : process.env.COG_POOL_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  region: process.env.REGION
 };
 
-const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=${CONSTANTS.LOGOUT_REDIRECT_URL}`;
+const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=${process.env.LOGOUT_REDIRECT_URL}`;
 
 app.use(session({
   secret: options.clientSecret,
@@ -50,9 +38,6 @@ app.use(session({
   resave: true,
   cookie: {}
 }));
-
-app.use(express.static('resources/**'));
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -65,6 +50,7 @@ app.use(morgan('combined'));
 
 // Setting the static content directory where everything will be accessed from
 app.use(express.static(path.join(__dirname, 'app')));
+app.use(express.static('resources/**'));
 
 // Body-parser is used to parse post requests. 'extended' will allow nested objects
 app.use(bodyParser.json());
