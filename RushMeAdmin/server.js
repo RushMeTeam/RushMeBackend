@@ -5,7 +5,7 @@
 var express    = require('express'),
     app        = express(),
     fs         = require('fs'),
-    https      = require('https'),
+    http       = require('http'),
     morgan     = require('morgan'),
     path       = require('path'),
     bodyParser = require('body-parser'),
@@ -21,7 +21,8 @@ const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
 
 /* Move site constants into an environmental file in the future. */
 const CONSTANTS = {
-  SUCCESS_CALLBACK_URL: 'https://127.0.0.1/in/success',
+  SUCCESS_CALLBACK_URL: 'https://rushme.app/in/success',
+  LOGOUT_REDIRECT_URL: 'https://rushme.app/#!/bye',
   CLIENT_DOMAIN: 'https://auth.rushme.app',
   CLIENT_ID: '4o9r7dvj3kiislsbh4cbhkf42',
   COG_POOL_ID : 'us-east-1_hp56TBp7o',
@@ -38,7 +39,7 @@ const options = {
   region: CONSTANTS.REGION
 };
 
-const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=https://127.0.0.1/#!/bye`;
+const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=${CONSTANTS.LOGOUT_REDIRECT_URL}`;
 
 app.use(session({
   secret: options.clientSecret,
@@ -204,10 +205,7 @@ app.use(function(err, req, res, next){
   res.status(500).send('Uh oh! Something bad happened!');
 });
 
-// Listen on port 80
-var httpsPort = 443;
-var httpsServer = https.createServer({
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-}, app).listen(httpsPort);
-console.log('Server running on port %s', httpsPort);
+
+var httpPort = process.env.PORT || 80;
+var httpServer = http.createServer(app);
+httpServer.listen(httpPort);
