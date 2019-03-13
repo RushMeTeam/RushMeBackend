@@ -1,6 +1,7 @@
-// File: dashboard.js
-// Description: Handler for routing and presentation related to the private page views of this single-page application
-
+/*
+    File: portal.js
+    Description: Handler for routing and presentation related to the private page views of this single-page application
+*/
 // Initial Declarations
 var app = angular.module('RushMeAdminControllers', ['ngRoute']);
 

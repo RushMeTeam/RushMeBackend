@@ -133,11 +133,11 @@ function validateAPI(req, res, next){
 }
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname +'/app/views/homepage.html');
+  res.sendFile(__dirname +'/app/views/public.html');
 });
 
 app.get('/dashboard/', validateAuth, function (req, res) {
-  res.sendFile(__dirname +'/app/views/index.html');
+  res.sendFile(__dirname +'/app/views/portal.html');
 });
 
 app.get('/logout', function(req, res){

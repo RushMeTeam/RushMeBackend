@@ -1,5 +1,7 @@
-// File: app.js
-// Description: Handler for routing and presentation related to the public page views of this single-page application
+/*
+    File: public.js
+    Description: Handler for routing and presentation related to the public page views of this single-page application
+*/
 
 // Initial Declarations
 var app = angular.module('RushMePublicControllers', ['ngRoute']);
