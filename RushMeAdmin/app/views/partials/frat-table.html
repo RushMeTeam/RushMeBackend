@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="frat in fraternaties">
+      <tr ng-repeat="frat in fraternities">
         <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td>
         <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
         <td>{{frat.name}}</td>
@@ -21,42 +21,19 @@
         <td>21 (Hardcoded)</td>
         <td><a ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
         <td>
-          <button type="button" class="btn btn-secondary">Edit</button>
-          <button type="button" class="btn btn-secondary">Add Event</button>
+          <button type="button" class="btn btn-secondary" ng-click="open()">Edit</button>
+          <button type="button" class="btn btn-secondary">Add event</button>
         </td>
       </tr>
-      <!--
-      <tr>
-        <td><span class="badge rm-badge published">PUBLISHED</span></td>
-        <td>Resnsselaer Polytechnic Society of Engineers</td>
-        <td>RSE</td>
-        <td>21</td>
-        <td><a href="mailto:manidk@rpi.edu">Kelta Manidman</a></td>
-        <td>
-          <button type="button" class="btn btn-secondary">Edit</button>
-          <button type="button" class="btn btn-secondary">Add Event</button>
-        </td>
-      </tr>
-      <tr>
-        <td><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
-        <td>Acacia</td>
-        <td>ACA</td>
-        <td>25</td>
-        <td><a href="mailto:indhal@rpi.edu">Larry Indhal</a></td>
-        <td>
-          <button type="button" class="btn btn-secondary">Edit</button>
-          <button type="button" class="btn btn-secondary">Add Event</button>
-        </td>
-      </tr>
-      -->
     </tbody>
   </table>
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".fratDetail">Fraternity Detail</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fratDetail">Fraternity Detail</button>
 
-<div class="modal fade fratDetail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-       <div ng-include="'views/partials/frat-detail.html'"></div>
-
+<div id="fratDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+       <div ng-include="'/views/partials/frat-detail.html'"></div>
 </div>
+
+

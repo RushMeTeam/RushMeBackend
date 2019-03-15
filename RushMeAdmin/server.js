@@ -147,6 +147,7 @@ app.get('/logout', function(req, res){
 });
 
 // This endpoint is left here for a sanity check when working with the DynamoDB
+
 var db = new AWS.DynamoDB();
 app.get('/in/tables', validateAPI, function(req, res) {
   db.listTables(function(err, data) {
@@ -155,9 +156,9 @@ app.get('/in/tables', validateAPI, function(req, res) {
   });
 });
 
-//Endpoint to get all the fraternaties from the DynamoDB
+//Endpoint to get all the fraternities from the DynamoDB
 var documentClient = new AWS.DynamoDB.DocumentClient();
-app.get('/in/fraternaties', validateAPI, function(req, res) {
+app.get('/in/fraternities', validateAPI, function(req, res) {
   var params = {
     TableName: 'FraternityInfo'
   };
@@ -171,7 +172,7 @@ app.get('/in/fraternaties', validateAPI, function(req, res) {
   });
 });
 
-//Endpoint to get all the fraternaties from the DynamoDB
+//Endpoint to get all the fraternities from the DynamoDB
 app.get('/in/events', validateAPI, function(req, res) {
   var params = {
     TableName: 'EventInfo'
