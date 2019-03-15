@@ -147,7 +147,6 @@ app.get('/logout', function(req, res){
 });
 
 // This endpoint is left here for a sanity check when working with the DynamoDB
-
 var db = new AWS.DynamoDB();
 app.get('/in/tables', validateAPI, function(req, res) {
   db.listTables(function(err, data) {
@@ -183,6 +182,37 @@ app.get('/in/events', validateAPI, function(req, res) {
       res.status(500).send(err);
     } else {
       res.status(200).send(data.Items);
+    }
+  });
+});
+
+//Endpoint to get all the fraternities from the DynamoDB
+app.post('/in/events/:namekey', validateAPI, function(req, res) {
+  if(req.params.namekey != req.body.namekey){
+    res.status(500).send("MISMATCHED namekeys!");
+  }
+  
+  // TODO: VALIDATE!!! Ensure they have the permissions.
+  var params = {
+    TableName: 'FraternityInfo',
+    Key:{
+      "namekey": req.params.namekey,
+    },
+    UpdateExpression: "set #frat_name = :n, description = :d",
+    ExpressionAttributeNames: {
+      "#frat_name": "name"
+    },
+    ExpressionAttributeValues:{
+      ":d":req.body.description,
+      ":n":req.body.name
+    }
+  };
+
+  documentClient.update(params, function(err, data) {
+    if (err){  
+      res.status(500).send(err);
+    } else {    
+      res.status(200);
     }
   });
 });
