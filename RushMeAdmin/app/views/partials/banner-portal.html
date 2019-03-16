@@ -8,9 +8,11 @@
 	});
 </script> -->
 <div class="navbar-fixed-top fixed-top banner-portal px-5">
-	<div class="row px-5 py-1">
-		<div class="col-4 align-self-center">
-			<button class="btn btn-link-light org-btn" data-toggle="modal" data-target="#fratDetail">Organization</button>
+	<div class="row py-1">
+		<div class="col-4  align-self-center">
+			<button class="btn btn-lg btn-link-light org-btn" data-toggle="modal" data-target="#orgDetail">
+				IFC
+			</button>
 		</div>
 		<div class="col text-center align-self-center">
 			<a class="center-block" href="#">
@@ -18,20 +20,21 @@
 			</a>
 		</div>
 		<div class="col-4 text-right align-self-center">
-				<div class="btn-group">
-						<button type="button" class="btn btn-link-light dropdown-toggle rm-dropdown" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false">
-							Username
-						</button>
-						<div class="dropdown-menu dropdown-menu-left">
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div>
-					</div>
-			<a href="/logout" class="btn btn-lg btn-link-light sign-out" data-toggle="tooltip" data-placement="bottom" title="Sign out">
+			<div class="btn-group">
+				<button type="button" class="btn btn-link-light dropdown-toggle rm-dropdown" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					Tom Jones
+				</button>
+				<div class="dropdown-menu dropdown-menu-left">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Separated link</a>
+				</div>
+			</div>
+			<a href="/logout" class="btn btn-lg btn-link-light sign-out" data-toggle="tooltip" data-placement="bottom"
+				title="Sign out">
 				<i class="material-icons "></i>
 			</a>
 		</div>
@@ -42,22 +45,51 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="eventDetailLabel">ACR Rush Committee</h5>
+				<h5 class="modal-title" id="eventDetailLabel">Organization Settings</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body px-5">
+					<h3>Committee Members</h3>
 				<form>
 					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Name:</label>
-						<input type="text" class="form-control" id="recipient-name"
-							ng-model="fraternities[selected].name">
-					</div>
-					<div class="form-group">
-						<label for="message-text" class="col-form-label">Description:</label>
-						<textarea class="form-control" id="message-text"
-							ng-model="fraternities[selected].description"></textarea>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th scope="col">Name</th>
+										<th scope="col">Email</th>
+										<th scope="col">Remove</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											Nathan Shrieber
+										</td>
+										<td>
+											shrieb@rpi.edu
+										</td>
+										<td>
+											<button type="button" class="btn btn-outline" data-toggle="modal">
+												<i class="material-icons" style="color:red;">clear</i>
+											</button>
+										</td>
+										
+									</tr>
+									<tr>
+										<td colspan="3">
+												<button type="button" class="btn btn-outline" data-toggle="modal">
+														<i class="material-icons">add</i>Add Member
+													  </button>
+										</td>
+										
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</form>
 			</div>

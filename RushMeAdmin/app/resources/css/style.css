@@ -14,14 +14,21 @@
 .sign-in .material-icons::before{
   content:"lock_outline"; 
   color:#8accec;
+  transition: 0.3s;
+  font-size: 33px;
+
 }
 .sign-in:hover .material-icons::before {
   content:"lock_open"; 
+
   color:#25a7df;
 }
 .sign-out .material-icons::before{
   content:"lock_open"; 
   color:#8accec;
+  font-size: 33px;
+
+  transition: 0.3s;
 }
 .sign-out:hover .material-icons::before {
   content:"lock_outline"; 
@@ -37,11 +44,13 @@
   vertical-align: middle;
 }
 .material-icons {
-  font-size: 33px;
+  vertical-align: middle;
+}
+.table > tbody > tr > td {
   vertical-align: middle;
 }
 .banner {
-  transition: 0.2s;
+  transition: 0.3s;
   background-color: white;
   /* border-radius: 2px;
   box-shadow: 0px 1px 10px #999; */
@@ -60,15 +69,20 @@
 }
 .rm-section-header {
   color: #25a7df;
-  font-weight: 200;
-  padding-top: 5%;
-  padding-bottom: 1%;
+  font-weight: 300;
+}
+a {
+  text-decoration: none;
+  color: #25a7df;
 }
 
 body {
-  padding-top: 50px;
+  padding-top: 60px;
 }
+tr {
+  vertical-align: middle;
 
+}
 th {
   text-transform: uppercase;
   font-weight: 400;
@@ -76,6 +90,8 @@ th {
 td {
   font-size: 1.3em;
   font-weight:300;
+  vertical-align: middle;
+
   justify-content: center;
   font-family: sans-serif;
 }

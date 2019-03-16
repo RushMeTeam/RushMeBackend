@@ -4,7 +4,7 @@
   </div>
   <div class="col-4 text-right justify-content-end">
     <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#fratDetail">
-        Add Event<i class="material-icons">add</i>
+        Add Fraternity<i class="material-icons">add</i>
     </button>
   </div>
 </div>
@@ -22,13 +22,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr  ng-repeat="frat in fraternities">
+      <tr ng-repeat="frat in fraternities">
         <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td>
         <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
         <td>{{frat.name}}</td>
         <td>{{frat.namekey}}</td>
         <td>21 (Hardcoded)</td>
-        <td><a ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
+        <td><a style="text-decoration: none;" ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
         <td>
           <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#fratDetail"
             ng-click="editFrat($index);">
