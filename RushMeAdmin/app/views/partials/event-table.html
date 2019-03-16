@@ -23,10 +23,12 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
+
         <th scope="col">Status</th>
         <th scope="col">Fraternity</th>
         <th scope="col">Title</th>
         <th scope="col">Time</th>
+        <th></th>
         <!-- <th scope="col">Location</th> -->
         <!-- <th scope="col"></th> -->
       </tr>
@@ -40,6 +42,12 @@
 
         <td>{{event.event_name}}</td>
         <td>{{event.start_time}}</td>
+        <td>
+          <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#eventDetail"
+            ng-click="editEvent($index);">
+            <i class="material-icons">mode_edit</i>
+          </button>
+        </td>
         <!-- <td>Taco Bell near HVCC</td> -->
         <!-- <td>
           <button type="button" class="btn btn-secondary">Edit</button>
@@ -76,8 +84,8 @@
   </table>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".eventDetail">Event Detail</button>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".eventDetail">Event Detail</button> -->
 
 <div class="modal fade eventDetail" tabindex="-1" role="dialog" aria-labelledby="eventDetailLabel" aria-hidden="true">
-        <div ng-include="'/views/partials/event-detail.html'"></div>
+  <div ng-include="'/views/partials/event-detail.html'"></div>
 </div>

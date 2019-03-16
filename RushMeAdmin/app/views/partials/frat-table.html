@@ -1,4 +1,14 @@
-<h2 class="rm-section-header">Fraternities</h2>
+<div class="row py-1 justify-content-between align-items-end">
+  <div class="col-4">
+    <h2 class="rm-section-header">Fraternities</h2>
+  </div>
+  <div class="col-4 text-right justify-content-end">
+    <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#fratDetail">
+        Add Event<i class="material-icons">add</i>
+    </button>
+  </div>
+</div>
+
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <thead>
@@ -12,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="frat in fraternities">
+      <tr  ng-repeat="frat in fraternities">
         <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td>
         <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
         <td>{{frat.name}}</td>
@@ -20,8 +30,10 @@
         <td>21 (Hardcoded)</td>
         <td><a ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
         <td>
-          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#fratDetail" ng-click="editFrat($index);">Edit</button>
-          <button type="button" class="btn btn-secondary">Add event</button>
+          <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#fratDetail"
+            ng-click="editFrat($index);">
+            <i class="material-icons">mode_edit</i>
+          </button>
         </td>
       </tr>
     </tbody>

@@ -1,7 +1,58 @@
-nav {
-  background-image: linear-gradient(220deg, #25a7df, #25a7df, #25a7df);
+/* nav {
+  /* background-image: linear-gradient(220deg, #25a7df, #25a7df, #25a7df); */
+/* } */
+.rm-dropdown {
+  color:white;
 }
-
+.rm-dropdown:hover {
+  color:white;
+}
+.tooltip.bottom .tooltip-arrow {
+  background-color:white;
+  color: #25a7df;
+}
+.sign-in .material-icons::before{
+  content:"lock_outline"; 
+  color:#8accec;
+}
+.sign-in:hover .material-icons::before {
+  content:"lock_open"; 
+  color:#25a7df;
+}
+.sign-out .material-icons::before{
+  content:"lock_open"; 
+  color:#8accec;
+}
+.sign-out:hover .material-icons::before {
+  content:"lock_outline"; 
+  color:#ffffff;
+} 
+.org-btn {
+  color: white;
+}
+.org-btn:hover {
+  color: white;
+}
+.material-icons, .icon-text {
+  vertical-align: middle;
+}
+.material-icons {
+  font-size: 33px;
+  vertical-align: middle;
+}
+.banner {
+  transition: 0.2s;
+  background-color: white;
+  /* border-radius: 2px;
+  box-shadow: 0px 1px 10px #999; */
+}
+.banner-portal {
+  transition: 0.2s;
+  background-color: #25a7df;
+}
+.table-responsive {
+  vertical-align: middle;
+}
 #rm-message-subtitle {
   color: gray;
   font-family: Lucida;
@@ -10,23 +61,14 @@ nav {
 .rm-section-header {
   color: #25a7df;
   font-weight: 200;
-  padding-left: 5%;
   padding-top: 5%;
   padding-bottom: 1%;
 }
-a {
-  color: #ffffff;
-  
+
+body {
+  padding-top: 50px;
 }
 
-body{
-  padding-top: 20px;
-}
-
-.table {
-  text-align: center;
-  vertical-align: baseline;
-}
 th {
   text-transform: uppercase;
   font-weight: 400;
@@ -34,7 +76,11 @@ th {
 td {
   font-size: 1.3em;
   font-weight:300;
+  justify-content: center;
   font-family: sans-serif;
+}
+.table-responsive {
+  text-align: center;
 }
 .rm-badge {
   border-radius: 0px;
@@ -79,8 +125,4 @@ td {
 .rm-btn:hover {
   opacity: 1;
   color: white;
-}
-.navbar-fixed-top {
-  top: 0;
-  border-width: 0 0 1px;
 }
