@@ -15,13 +15,16 @@ var express    = require('express'),
     jwkToPem   = require('jwk-to-pem'),
     AWS        = require('aws-sdk'),
     session    = require('express-session'),
+    AmazonCognitoIdentity = require('amazon-cognito-identity-js'),
     authenticatedRoute = express.Router();
+
+
 
 require('dotenv').load();
 
 const OAuth2CognitoStrategy = require('passport-oauth2-cognito');
 
-const options = {
+const CONSTANTS = {
   callbackURL: process.env.SUCCESS_CALLBACK_URL,
   clientDomain: process.env.CLIENT_DOMAIN,
   clientID: process.env.CLIENT_ID,
@@ -30,10 +33,10 @@ const options = {
   region: process.env.REGION
 };
 
-const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${options.clientID}&redirect_uri=${process.env.LOGOUT_REDIRECT_URL}`;
+const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${CONSTANTS.clientID}&redirect_uri=${process.env.LOGOUT_REDIRECT_URL}`;
 
 app.use(session({
-  secret: options.clientSecret,
+  secret: CONSTANTS.clientSecret,
   saveUninitialized: false,
   resave: true,
   cookie: {}
@@ -57,7 +60,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // AWS Configuration
-AWS.config.loadFromPath('./config.json');
 AWS.config.apiVersions = {
   dynamodb: 'latest'
 }
@@ -65,7 +67,7 @@ AWS.config.apiVersions = {
 function getPEMs(done) {
   var pems;
   request({
-    url: `https://cognito-idp.${options.region}.amazonaws.com/${options.poolID}/.well-known/jwks.json`,
+    url: `https://cognito-idp.${CONSTANTS.region}.amazonaws.com/${CONSTANTS.poolID}/.well-known/jwks.json`,
     json: true
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
@@ -92,7 +94,7 @@ function getPEMs(done) {
   });
 }
 
-passport.use(new OAuth2CognitoStrategy(options,
+passport.use(new OAuth2CognitoStrategy(CONSTANTS,
   function (accessToken, refreshToken, profile, done) {
     //Download the JWKs and save it as PEM
     getPEMs(function(err, pems){
@@ -106,6 +108,7 @@ passport.use(new OAuth2CognitoStrategy(options,
       var pem = pems[kid];
       const payload = jwt.verify(accessToken, pem);
       const groups = payload['cognito:groups'] || [];
+      
       done(null, { groups: groups, accessToken: accessToken }); // Keep accessToken for passing to API calls
     });
   }));
@@ -119,10 +122,10 @@ function validateAuth(req, res, next) {
   if (req.isAuthenticated()) { 
     next();
   } else { 
-    //This was redirecting to /bye but I think it should redirect to index. Change this back if you disagree.
     res.redirect('/');
   }
 }
+var cognitoIdentityProvider = new AWS.CognitoIdentityServiceProvider();
 
 function validateAPI(req, res, next){
   if (req.isAuthenticated()) { 
@@ -146,6 +149,9 @@ app.get('/logout', function(req, res){
   res.redirect(logoutRedirect)
 });
 
+/*
+    DynamoDB
+*/
 // This endpoint is left here for a sanity check when working with the DynamoDB
 var db = new AWS.DynamoDB();
 app.get('/in/tables', validateAPI, function(req, res) {
@@ -171,7 +177,7 @@ app.get('/in/fraternities', validateAPI, function(req, res) {
   });
 });
 
-//Endpoint to get all the fraternities from the DynamoDB
+//Endpoint to get all the events from the DynamoDB
 app.get('/in/events', validateAPI, function(req, res) {
   var params = {
     TableName: 'EventInfo'
@@ -186,12 +192,11 @@ app.get('/in/events', validateAPI, function(req, res) {
   });
 });
 
-//Endpoint to get all the fraternities from the DynamoDB
+//Endpoint to get a fraternity from the DynamoDB
 app.post('/in/events/:namekey', validateAPI, function(req, res) {
   if(req.params.namekey != req.body.namekey){
     res.status(500).send("MISMATCHED namekeys!");
   }
-  
   // TODO: VALIDATE!!! Ensure they have the permissions.
   var params = {
     TableName: 'FraternityInfo',
@@ -217,6 +222,64 @@ app.post('/in/events/:namekey', validateAPI, function(req, res) {
   });
 });
 
+
+/*
+    Cognito User Management
+*/
+
+// Sign up a user
+app.post('/in/users/signup/:email/:permission', validateAPI, 
+  function(req, res) {
+// TODO: Allow signup
+});
+
+// Remove user permission
+app.post('/in/users/:email/removepermssions', validateAPI,
+function(req, res) {
+// TODO: Allow remove user permission
+});
+
+// Add user permission
+app.post('/in/users/:email/addpermission/:permission', validateAPI, 
+function(req, res) {
+// TODO: Allow add user permission
+});
+
+// function isUserInGroup(req, group, done) {
+//   cognitoIdentityProvider.getUser({
+//     AccessToken: req.user.accessToken
+//   }, function(err, data) {
+//     if (err) return done(null,null); // an error occurred
+//     else     return done(null, {group: req.user.group});
+//   });
+// }
+
+app.get('/in/users/current', validateAPI,
+    function(req, res){
+        cognitoIdentityProvider.getUser({
+          AccessToken: req.user.accessToken
+        }, function(err, data) {
+          if (err) res.status(500).send(err); // an error occurred
+          else     res.status(200).json(data); // successful response
+        });
+});
+
+// Get user by email
+app.get('/in/users/:email', validateAPI,
+function(req, res){
+  cognitoIdentityProvider.listUsers({
+    UserPoolId: CONSTANTS.poolID, /* required */
+  AttributesToGet: [], // get all items
+  Filter: 'email = \"' + req.params.email + "\"",
+  Limit: 0,
+  }, function(err, data) {
+    if (err) res.status(500).send(err);
+    else res.status(200).json(data);
+  })
+});
+
+
+
 // Sanity check to ensure the API is up
 app.get('/isAppAvail', function(req,res){
   res.status(200).send("SUCCESS");
@@ -227,7 +290,6 @@ app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500).send('Uh oh! Something bad happened!');
 });
-
 
 var httpPort = process.env.PORT || 80;
 var httpServer = http.createServer(app);

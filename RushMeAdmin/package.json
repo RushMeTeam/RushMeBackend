@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RushMeTeam/RushMeBackend#readme",
   "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.9",
     "aws-sdk": "^2.407.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
