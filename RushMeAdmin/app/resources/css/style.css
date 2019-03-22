@@ -3,6 +3,7 @@
 /* } */
 .rm-dropdown {
   color:white;
+  font-weight : 200;
 }
 .rm-dropdown:hover {
   color:white;
@@ -36,6 +37,7 @@
 } 
 .org-btn {
   color: white;
+  font-weight : 200;
 }
 .org-btn:hover {
   color: white;

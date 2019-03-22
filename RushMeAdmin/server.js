@@ -176,6 +176,20 @@ app.get('/in/fraternities', validateAPI, function(req, res) {
     }
   });
 });
+app.get('/in/fraternities/:namekey', validateAPI, function(req, res) {
+  var params = {
+    TableName: 'FraternityInfo',
+    NameKey: req.params.namekey
+  };
+  
+  documentClient.scan(params, function(err, data) {
+    if (err){
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data.Items);
+    }
+  });
+});
 
 //Endpoint to get all the events from the DynamoDB
 app.get('/in/events', validateAPI, function(req, res) {
@@ -259,13 +273,57 @@ app.get('/in/users/current', validateAPI,
         cognitoIdentityProvider.getUser({
           AccessToken: req.user.accessToken
         }, function(err, data) {
+          var user = {};
+          var attrs = data.UserAttributes;
+          for (var i = 0; i < attrs.length; i++) {
+            if (attrs[i].Name == "email") {
+              user.email = attrs[i].Value
+            }
+          }
           if (err) res.status(500).send(err); // an error occurred
-          else     res.status(200).json(data); // successful response
+          else     res.status(200).json(user); // successful response
         });
 });
+app.get('/in/users/current/groups', validateAPI, 
+function(req, res){
+  res.status(200).json(req.user.groups);
+});
+app.get('/in/users/current/committee/', validateAPI,
+function(req, res) {
+  cognitoIdentityProvider.listUsersInGroup({
+    GroupName: req.user.groups[0], /* required */
+    UserPoolId: CONSTANTS.poolID /* required */
+  }, function(err, data) {
+    var users = [];
+    var i = 0;
+    for (var i = 0; i < data.Users.length; i++){
+      var u = {};
+      var attrs = data.Users[i].Attributes;
+      for (var j = 0; j < attrs.length; j++) {
+        if (attrs[j].Name = "email") {
+          u.email = attrs[j].Value
+        }
+      }
+      users.push(u);
+    }
+    if (err) console.log(err, err.stack); // an error occurred
+    else     res.status(200).json(users);  // successful response
+  });
+});
+
+app.get('/in/users/by/:group', validateAPI, 
+function(req, res) {
+  cognitoIdentityProvider.listUsersInGroup({
+    GroupName: req.user.groups[0], /* required */
+    UserPoolId: CONSTANTS.poolID /* required */
+  }, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else     res.status(200).json(data);  // successful response
+  });
+})
 
 // Get user by email
-app.get('/in/users/:email', validateAPI,
+app.get('/in/users/by/:email', validateAPI,
 function(req, res){
   cognitoIdentityProvider.listUsers({
     UserPoolId: CONSTANTS.poolID, /* required */
@@ -289,6 +347,7 @@ app.get('/isAppAvail', function(req,res){
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500).send('Uh oh! Something bad happened!');
+  
 });
 
 var httpPort = process.env.PORT || 80;

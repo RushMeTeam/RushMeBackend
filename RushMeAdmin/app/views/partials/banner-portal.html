@@ -7,11 +7,11 @@
 		}
 	});
 </script> -->
-<div class="navbar-fixed-top fixed-top banner-portal px-5">
+<div ng-controller="BannerCtrl" class="navbar-fixed-top fixed-top banner-portal px-5">
 	<div class="row py-1">
 		<div class="col-4  align-self-center">
 			<button class="btn btn-lg btn-link-light org-btn" data-toggle="modal" data-target="#orgDetail">
-				IFC
+				{{display_group}}
 			</button>
 		</div>
 		<div class="col text-center align-self-center">
@@ -20,19 +20,9 @@
 			</a>
 		</div>
 		<div class="col-4 text-right align-self-center">
-			<div class="btn-group">
-				<button type="button" class="btn btn-link-light dropdown-toggle rm-dropdown" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					Tom Jones
-				</button>
-				<div class="dropdown-menu dropdown-menu-left">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-				</div>
-			</div>
+			<button type="button" class="btn btn-link-light rm-dropdown" aria-haspopup="true" aria-expanded="false">
+				{{email}}
+			</button>
 			<a href="/logout" class="btn btn-lg btn-link-light sign-out" data-toggle="tooltip" data-placement="bottom"
 				title="Sign out">
 				<i class="material-icons "></i>
@@ -41,7 +31,8 @@
 	</div>
 </div>
 
-<div id="orgDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div ng-controller="BannerCtrl" id="orgDetail" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="basicModal" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -51,7 +42,7 @@
 				</button>
 			</div>
 			<div class="modal-body px-5">
-					<h3>Committee Members</h3>
+				<h3>Committee Members</h3>
 				<form>
 					<div class="form-group">
 						<div class="table-responsive">
@@ -64,27 +55,35 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>
-											Nathan Shrieber
+									<tr ng-repeat="member in committee">
+										<td ng-if="member.email==email">
+											<b>Me</b>
 										</td>
-										<td>
-											shrieb@rpi.edu
+										<td ng-if="member.email==email">
+											<b>{{member.email}}</b>
 										</td>
-										<td>
+										<td ng-if="member.email==email">
+												<i class="material-icons" style="color:gray;">clear</i>
+										</td>
+										<td ng-if="member.email!=email">
+											<i>None</i>
+										</td>
+										<td ng-if="member.email!=email">
+											{{member.email}}
+										</td>
+										<td ng-if="member.email!=email">
 											<button type="button" class="btn btn-outline" data-toggle="modal">
 												<i class="material-icons" style="color:red;">clear</i>
 											</button>
 										</td>
-										
 									</tr>
 									<tr>
 										<td colspan="3">
-												<button type="button" class="btn btn-outline" data-toggle="modal">
-														<i class="material-icons">add</i>Add Member
-													  </button>
+											<button type="button" class="btn btn-outline" data-toggle="modal">
+												<i class="material-icons">add</i>Add Member
+											</button>
 										</td>
-										
+
 									</tr>
 
 								</tbody>
