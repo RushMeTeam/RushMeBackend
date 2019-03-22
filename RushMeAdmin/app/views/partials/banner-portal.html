@@ -47,7 +47,7 @@
 				<form>
 					<div class="form-group">
 						<div class="table-responsive">
-							<table class="table table-bordered order-list table-hover">
+							<table class="table table-bordered order-list">
 								<thead>
 									<tr>
 										<th scope="col">Name</th>
@@ -58,19 +58,22 @@
 								<tbody>
 									<tr ng-repeat="member in committee">
 										<td ng-if="member.email==email">
-											<b>Me</b>
+												<input type="text" class="form-control text-center no-border"
+												value="Me" disabled></input> 
 										</td>
 										<td ng-if="member.email==email">
-											<b>{{member.email}}</b>
+												<input type="text" class="form-control text-center no-border"
+												value="{{member.email}}" disabled></input> 
 										</td>
 										<td ng-if="member.email==email">
 											<i class="material-icons" style="color:gray;">clear</i>
 										</td>
 										<td ng-if="member.email!=email">
-											<i>None</i>
-										</td>
+											<input type="text" class="form-control text-center no-border"
+												value="None"></input> </td>
 										<td ng-if="member.email!=email">
-											{{member.email}}
+											<input type="text" class="form-control text-center no-border"
+												value="{{member.email}}"></input>
 										</td>
 										<td ng-if="member.email!=email">
 											<button type="button" class="btn btn-outline" data-toggle="modal">

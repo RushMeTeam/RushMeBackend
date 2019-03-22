@@ -6,6 +6,14 @@ input[type="text"] {
   -webkit-box-sizing:border-box;
   -moz-box-sizing: border-box;
 }
+input[type="text"]:hover {
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+}
+input[type="text"]:disabled {
+  background: white;
+}
 
 .no-border {
   border: 0;
