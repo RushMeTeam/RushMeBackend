@@ -83,7 +83,7 @@
           <div class="form-group row">
             <div class="col-lg-10">
               <label for="recipient-name" class="col-form-label">Name:</label>
-              <input type="text" class="form-control" id="recipient-name" ng-model="fraternities[selected].name" placeholder="Alpha Beta Gamma" required>
+              <input type="text" pattern="[A-Z a-z]{3,40}" class="form-control" id="recipient-name" ng-model="fraternities[selected].name" placeholder="Alpha Beta Gamma" required>
               <div class="invalid-feedback">
                 Please enter a Fraternity name.
               </div>
@@ -91,7 +91,7 @@
             
             <div class="col-lg-2" >
               <label for="frat-code" class="col-form-label">3 Letter Code:</label>
-              <input type="text" class="form-control" id="frat-code"  placeholder="ABG" required>
+              <input type="text" pattern="[A-Z]{3}" maxlength="3" class="form-control" id="frat-code"  placeholder="ABG" required>
               <div class="invalid-feedback">
                 Please enter a valid code.
               </div>
@@ -105,7 +105,7 @@
                 <input type="text" class="form-control" id="contact-name"  placeholder="Name" >
               </div>
               <div class="col-6">
-                <input type="text" class="form-control" id="contact-email"  placeholder="tjones@mail.com" required>
+                <input type="email" class="form-control" id="contact-email"  placeholder="tjones@mail.com" required>
                 <div class="invalid-feedback">
                   Please enter a valid email.
                 </div>
