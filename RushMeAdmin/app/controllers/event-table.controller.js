@@ -3,7 +3,7 @@
 
  angular.module('RushMeAdminControllers').controller('EventTableCtrl', ['$scope', '$http', function ($scope, $http) {  	
   $scope.events = [];
-  
+
   $http.get("/in/events/").then(
     function(res){
       $scope.events = res.data;
