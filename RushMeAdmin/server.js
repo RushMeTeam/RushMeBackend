@@ -1,5 +1,3 @@
-// File: start.controller.js
-// Description: Express server currently used to just serve the static Angular content
 "use strict";
 
 var express = require('express'),
@@ -429,19 +427,11 @@ function(req, res) {
       }
       if (err) console.log(err, err.stack); // an error occurred
       else res.status(200).json(users);  // successful response
-    };
+    }});
   });
 
-app.get('/in/users/by/:group', validateAPI,
-  function (req, res) {
-    cognitoIdentityProvider.listUsersInGroup({
-      GroupName: req.user.groups[0], /* required */
-      UserPoolId: CONSTANTS.poolID /* required */
-    }, function (err, data) {
-      if (err) console.log(err, err.stack); // an error occurred
-      else res.status(200).json(data);  // successful response
-    });
-  })
+
+
 
 // Get user by email
 app.get('/in/users/by/:email', validateAPI,
