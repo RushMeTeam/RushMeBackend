@@ -70,15 +70,23 @@
 										<td ng-if="member.email==email">
 											<i class="material-icons" style="color:gray;">clear</i>
 										</td>
-										<td ng-if="member.email!=email">
+										<td ng-if="member.email!=email && !toDelete.includes(member)">
 											<input type="text" class="form-control text-center no-border"
 												value="None" ng-click="editFrat($index)"></input> </td>
-										<td ng-if="member.email!=email">
+										<td ng-if="member.email!=email && !toDelete.includes(member)">
 											<input type="text" class="form-control text-center no-border"
 												value="{{member.email}}" ng-click="editFrat($index)"></input>
 										</td>
+										
+										<td ng-if="member.email!=email && toDelete.includes(member)">
+											<input type="text" class="form-control text-center no-border"
+												value=""disabled></input><strike>{{member.username}}</strike> </td>
+										<td ng-if="member.email!=email && toDelete.includes(member)">
+											<input type="text" class="form-control text-center no-border"
+												value=""><strike>{{member.email}}</strike></input>
+										</td>
 										<td ng-if="member.email!=email">
-											<button type="button" class="btn btn-outline" data-toggle="modal" ng-click='deleteUser(index)'>
+											<button type="button" class="btn btn-outline" data-toggle="modal" ng-click='deleteUser($index)'>
 												<i class="material-icons" style="color:red;">clear</i>
 											</button>
 										</td>
@@ -87,8 +95,7 @@
 								<tfoot>
 									<tr>
 										<td colspan="3">
-											<button type="button" class="btn btn-outline" data-toggle="modal"
-												id="addrow" style="width:100%;">
+											<button type="button" class="btn btn-outline" ng-click="addRow()" style="width:100%;">
 												<i class="material-icons">add</i>Add Member
 											</button>
 										</td>
