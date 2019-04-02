@@ -126,7 +126,7 @@ td {
   color: white;
 }
 .rm-badge.unpublished {
-  background-color: var(--light);
+  background-color: let(--light);
   color: gray;
 }
 .carousel {

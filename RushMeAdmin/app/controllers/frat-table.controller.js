@@ -22,4 +22,5 @@
     $http.post('/in/events/' + $scope.fraternities[$scope.selected].namekey, $scope.fraternities[$scope.selected]);
   }
   
+  
 }]);

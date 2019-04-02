@@ -3,7 +3,7 @@
     Description: Handler for routing and presentation related to the private page views of this single-page application
 */
 // Initial Declarations
-var app = angular.module('RushMeAdminControllers', ['ngRoute']);
+let app = angular.module('RushMeAdminControllers', ['ngRoute']);
 
 // The View Configuration (pseudo-URL work)
 app.config(function ($routeProvider, $locationProvider) {

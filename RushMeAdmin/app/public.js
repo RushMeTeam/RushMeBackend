@@ -4,7 +4,7 @@
 */
 
 // Initial Declarations
-var app = angular.module('RushMePublicControllers', ['ngRoute']);
+let app = angular.module('RushMePublicControllers', ['ngRoute']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
