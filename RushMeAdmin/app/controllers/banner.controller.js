@@ -1,5 +1,5 @@
-// File: frat-table.controller.js	
-// Description: frat-table controller that will handle all logic for the frat-table.html page	
+// File: frat-table.controller.js
+// Description: frat-table controller that will handle all logic for the frat-table.html page
 
 angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$http', function ($scope, $http) {
   $scope.email;
@@ -20,7 +20,7 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       } else {
         $scope.display_group = "No Group";
       }
-      
+
       // If the connection between the car and the grandfather
       // could be stronger
     },
@@ -60,7 +60,7 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
     $scope.committee.forEach(member => {
       $http.post('/in/users/signup/Contrubutor/IFC/' + member.email );
     });
-  
+
   };
   $scope.deleteUser = function(index) {
     let user = $scope.committee[index];
@@ -86,14 +86,8 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       // Delete
       $scope.toDelete.push($scope.committee[index]);
       // $scope.committee[index].username.strike();
-    }
-*/
+    } */
 
-  }
-  //http://localhost/in/users/signup/kuniha@rpi.edu/Community/IFC
-  $scope.signup = function (email, scope, group) {
-    $http.post('/in/users.signup/' + email + '/' + scope + '/' + group);
-  };
 }]);
 
 $(document).ready(function () {

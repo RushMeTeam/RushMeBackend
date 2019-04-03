@@ -1,5 +1,3 @@
-// File: start.controller.js
-// Description: Express server currently used to just serve the static Angular content
 "use strict";
 
 var express = require('express'),
@@ -257,23 +255,23 @@ app.post('/in/users/signup/:scope/:group/:email', validateAPI,
           Value: req.params.email
         },
         {
-          Name: 'custom:scope', /* required */
+          Name: 'scope', /* required */
           Value: req.params.scope || 'TODO'
         },
         {
-          Name: 'custom:role', /* required */
+          Name: 'role', /* required */
           Value: 'TODO'
         },
         {
-          Name: 'custom:group', /* required */
+          Name: 'group', /* required */
           Value: req.params.group || 'ZZZ'
         }
         /* more items */
       ]
     };
-    cognitoIdentityProvider.adminCreateUser(params, function (err, data) {
+    cognitoIdentityProvider.adminCreateUser(params, function(err, data) {
       if (err) res.status(500).send(err.stack); // an error occurred
-      else res.status(200).send(data);      // successful response
+      else     res.status(200).send(data);      // successful response
     });
   });
 
@@ -411,38 +409,30 @@ app.get('/in/users/current/groups', validateAPI,
     res.status(200).json(req.user.groups);
   });
 app.get('/in/users/current/committee/', validateAPI,
-  function (req, res) {
-    cognitoIdentityProvider.listUsersInGroup({
-      GroupName: req.user.groups[0], /* required */
-      UserPoolId: CONSTANTS.poolID /* required */
-    }, function (err, data) {
-      let users = [];
-      let i = 0;
-      for (let i = 0; i < data.Users.length; i++) {
-        let u = {};
-        let attrs = data.Users[i].Attributes;
-        for (let j = 0; j < attrs.length; j++) {
-          if (attrs[j].Name = "email") {
-            u.email = attrs[j].Value
-          }
+
+function(req, res) {
+  cognitoIdentityProvider.listUsersInGroup({
+    GroupName: req.user.groups[0], /* required */
+    UserPoolId: CONSTANTS.poolID /* required */
+  }, function(err, data) {
+    var users = [];
+    var i = 0;
+    for (var i = 0; data.Users.length != null && i < data.Users.length; i++){
+      var u = {};
+      var attrs = data.Users[i].Attributes;
+      for (var j = 0; j < attrs.length; j++) {
+        if (attrs[j].Name = "email") {
+          u.email = attrs[j].Value
         }
         users.push(u);
       }
       if (err) console.log(err, err.stack); // an error occurred
       else res.status(200).json(users);  // successful response
-    });
+    }});
   });
 
-app.get('/in/users/by/:group', validateAPI,
-  function (req, res) {
-    cognitoIdentityProvider.listUsersInGroup({
-      GroupName: req.user.groups[0], /* required */
-      UserPoolId: CONSTANTS.poolID /* required */
-    }, function (err, data) {
-      if (err) console.log(err, err.stack); // an error occurred
-      else res.status(200).json(data);  // successful response
-    });
-  })
+
+
 
 // Get user by email
 app.get('/in/users/by/:email', validateAPI,
