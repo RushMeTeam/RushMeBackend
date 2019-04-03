@@ -75,6 +75,7 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       $scope.deleted.push($scope.committee[index]);
       // $scope.committee[index].username.strike();
     }
+  }
     /*
     console.log("Want to delete user at row " + (index+1));
     if (!("email" in $scope.committee[index])) {

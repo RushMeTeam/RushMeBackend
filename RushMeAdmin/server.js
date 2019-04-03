@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 var express = require('express'),
   app = express(),
@@ -270,8 +270,8 @@ app.post('/in/users/signup/:scope/:group/:email', validateAPI,
       ]
     };
     cognitoIdentityProvider.adminCreateUser(params, function(err, data) {
-      if (err) res.status(500).send(err.stack); // an error occurred
-      else     res.status(200).send(data);      // successful response
+      if (err) res.send(err.stack); // an error occurred
+      else     res.send(data);      // successful response
     });
   });
 
@@ -386,6 +386,7 @@ app.get('/in/users/current', validateAPI,
       if (tErr) {
         console.log(tErr);
         res.status(500).send(tErr);
+        return;
       }
       cognitoIdentityProvider.adminGetUser({
         UserPoolId: CONSTANTS.poolID,
@@ -409,12 +410,14 @@ app.get('/in/users/current/groups', validateAPI,
     res.status(200).json(req.user.groups);
   });
 app.get('/in/users/current/committee/', validateAPI,
-
 function(req, res) {
   cognitoIdentityProvider.listUsersInGroup({
     GroupName: req.user.groups[0], /* required */
     UserPoolId: CONSTANTS.poolID /* required */
   }, function(err, data) {
+    if (err) {
+      res.send(err.stack); // an error occurred
+    }
     var users = [];
     var i = 0;
     for (var i = 0; data.Users.length != null && i < data.Users.length; i++){
@@ -424,11 +427,13 @@ function(req, res) {
         if (attrs[j].Name = "email") {
           u.email = attrs[j].Value
         }
-        users.push(u);
       }
-      if (err) console.log(err, err.stack); // an error occurred
-      else res.status(200).json(users);  // successful response
-    }});
+      users.push(u);
+
+    }
+    res.json(users);  // successful response
+
+  });
   });
 
 

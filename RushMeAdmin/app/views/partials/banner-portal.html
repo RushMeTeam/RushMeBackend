@@ -75,7 +75,7 @@
 										<td ng-if="member.email!=email && !deleted.includes(member)">
 											<input ng-model="member.username" ng-change="editUser($index)" type="text" class="form-control text-center no-border"
 												value="{{member.username}}"></input> </td>
-										<td ng-if="member.email!=email && !delete.includes(member)">
+										<td ng-if="member.email!=email && !deleted.includes(member)">
 											<input ng-model="member.email" ng-change="editUser($index)" type="email" class="form-control text-center no-border"
 												value="{{member.email}}" required></input>
 										</td>
