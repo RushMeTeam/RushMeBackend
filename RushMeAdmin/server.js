@@ -243,6 +243,7 @@ app.post('/in/events/:namekey', validateAPI, function (req, res) {
 app.post('/in/users/signup/:scope/:group/:email', validateAPI,
   function (req, res) {
     // TODO: Allow signup
+    console.log("SIGNUP: " + req.params.scope + " " + req.params.group + " " + req.params.email);
     let params = {
       UserPoolId: CONSTANTS.UserPoolId, /* required */
       Username: req.params.email, /* required */

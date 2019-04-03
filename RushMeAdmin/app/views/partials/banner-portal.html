@@ -70,18 +70,20 @@
 										<td ng-if="member.email==email">
 											<i class="material-icons" style="color:gray;">clear</i>
 										</td>
-										<td ng-if="member.email!=email && !toDelete.includes(member)">
-											<input type="text" class="form-control text-center no-border"
-												value="None" ng-click="editFrat($index)"></input> </td>
-										<td ng-if="member.email!=email && !toDelete.includes(member)">
-											<input type="text" class="form-control text-center no-border"
-												value="{{member.email}}" ng-click="editFrat($index)"></input>
+										
+
+										<td ng-if="member.email!=email && !deleted.includes(member)">
+											<input ng-model="member.username" ng-change="editUser($index)" type="text" class="form-control text-center no-border"
+												value="{{member.username}}"></input> </td>
+										<td ng-if="member.email!=email && !delete.includes(member)">
+											<input ng-model="member.email" ng-change="editUser($index)" type="email" class="form-control text-center no-border"
+												value="{{member.email}}" required></input>
 										</td>
 										
-										<td ng-if="member.email!=email && toDelete.includes(member)">
+										<td ng-if="member.email!=email && deleted.includes(member)">
 											<input type="text" class="form-control text-center no-border"
-												value=""disabled></input><strike>{{member.username}}</strike> </td>
-										<td ng-if="member.email!=email && toDelete.includes(member)">
+												value="" disabled></input><strike>{{member.username}}</strike> </td>
+										<td ng-if="member.email!=email && deleted.includes(member)">
 											<input type="text" class="form-control text-center no-border"
 												value=""><strike>{{member.email}}</strike></input>
 										</td>
