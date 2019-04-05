@@ -77,11 +77,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="needs-validation was-validated">
+        <form class="needs-validation">
           <div class="form-group row">
             <div class="col-lg-10">
               <label for="recipient-name" class="col-form-label">Name:</label>
-              <input type="text" class="form-control" id="recipient-name" ng-model="newFrat.name" placeholder="Alpha Beta Gamma" required>
+              <input type="text" pattern="[A-Z a-z]{3,40}" class="form-control" id="recipient-name" ng-model="newFrat.name" placeholder="Alpha Beta Gamma" required>
               <div class="invalid-feedback">
                 Please enter a Fraternity name.
               </div>
@@ -89,7 +89,7 @@
             
             <div class="col-lg-2" >
               <label for="frat-code" class="col-form-label">3 Letter Code:</label>
-              <input type="text" class="form-control" id="frat-code" ng-model="newFrat.namekey" placeholder="ABG" required>
+              <input type="text" pattern="[A-Z]{3}" maxlength="3" class="form-control" id="frat-code" ng-model="newFrat.namekey" placeholder="ABG" required>
               <div class="invalid-feedback">
                 Please enter a valid code.
               </div>
@@ -103,7 +103,7 @@
                 <input type="text" class="form-control" id="contact-name" ng-model="newFrat.contact.name" placeholder="Name" >
               </div>
               <div class="col-6">
-                <input type="text" class="form-control" id="contact-email" ng-model="newFrat.contact.email" placeholder="tjones@mail.com" required>
+                <input type="email" class="form-control" id="contact-email" ng-model="newFrat.contact.email" placeholder="tjones@mail.com" required>
                 <div class="invalid-feedback">
                   Please enter a valid email.
                 </div>
@@ -128,7 +128,6 @@
               Check box to publish.
             </div>
           </div>
-
         </form>
       </div>
       <div class="modal-footer">

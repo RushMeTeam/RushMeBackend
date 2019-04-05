@@ -5,8 +5,6 @@
   $scope.events = [];
   $scope.editting = false;
   $scope.selected = -1;
-  $scope.timeZone = { timeZone: 'America/New_York' };
-  $scope.timeDifference = new Date().getTimezoneOffset();
   
   $http.get("/in/events/").then(
     function(res){

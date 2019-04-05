@@ -26,4 +26,5 @@
     $scope.newFrat = {};
   }
   
+  
 }]);
