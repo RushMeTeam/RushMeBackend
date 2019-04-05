@@ -1,35 +1,35 @@
 <div class="row py-1 align-items-end">
-    <div class="col-4">
-      <h2 class="rm-section-header">Events</h2>
-    </div>
-    <div class="col-4 text-center justify-content-center">
-        <!-- <div id="carouselExampleControls" class="carousel slide" data-interval="0">
-            <div class="carousel-inner">
-              <div class="carousel-item active carousel-lbl">
-                Tuesday October 18 2019
-              </div>
-              <div class="carousel-item carousel-lbl">
-                Wednesday October 19 2019
-              </div>
-              <div class="carousel-item carousel-lbl">
-                Thursday October 20 2019
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-          </div> -->
-    </div>
-    <div class="col-4 text-right justify-content-end">
-      <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newEvent">
-            Add Event<i class="material-icons">add</i>
-          </button>
-    </div> 
+  <div class="col-4">
+    <h2 class="rm-section-header">Events</h2>
   </div>
+  <div class="col-4 text-center justify-content-center">
+      <!-- <div id="carouselExampleControls" class="carousel slide" data-interval="0">
+          <div class="carousel-inner">
+            <div class="carousel-item active carousel-lbl">
+              Tuesday October 18 2019
+            </div>
+            <div class="carousel-item carousel-lbl">
+              Wednesday October 19 2019
+            </div>
+            <div class="carousel-item carousel-lbl">
+              Thursday October 20 2019
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </a>
+        </div> -->
+  </div>
+  <div class="col-4 text-right justify-content-end">
+    <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newEvent">
+          Add Event<i class="material-icons">add</i>
+        </button>
+  </div> 
+</div>
 
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
@@ -51,9 +51,8 @@
         <td ng-if="event.published"><span class="badge rm-badge published">PUBLISHED</span></td>
         <td ng-if="!event.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
         <td>{{event.FraternityID}}</td>
-
         <td>{{event.event_name}}</td>
-        <td>{{event.start_time}}</td>
+        <td>{{event.starts.toLocaleString()}} - {{event.ends.toLocaleTimeString()}}</td>
         <td>
           <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#eventDetail"
             ng-click="editEvent($index);">
@@ -98,7 +97,7 @@
 
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".eventDetail">Event Detail</button> -->
 
-<div id='eventDetail' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div id='eventDetail' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" ng-if="editting">
   <!-- <div ng-include="'views/partials/bye.html'"></div> -->
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
@@ -112,7 +111,7 @@
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="IFC Meet the Greeks" required>
+            <input type="text" class="form-control" id="recipient-name" ng-model="events[selected].event_name" required>
           </div>
 
 
@@ -121,13 +120,13 @@
           <div class="col">
               <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Date</label>
-                <input type="datetime-local" class="form-control" id="recipient-name" value="" required>
+                <input type="datetime-local" class="form-control" ng-model="events[selected].starts" required>
               </div>
           </div>
           <div class="col">
               <div class="form-group">
                   <label for="recipient-name" class="col-form-label">End Time</label>
-                  <input type="time" class="form-control" id="recipient-name" value="16:00:00" required>
+                  <input type="datetime-local" class="form-control" ng-model="events[selected].ends" required>
               </div>
           </div>
         </div>
@@ -135,17 +134,15 @@
 
         <div class="form-group">
             <label for="message-text" class="col-form-label">Description</label>
-            <textarea class="form-control" id="message-text" placeholder="Come meet our house and see what Greek Life has to offer!"></textarea>
+            <textarea class="form-control" id="message-text" ng-model="events[selected].description"></textarea>
           </div>
 
         <div class="form-group">
             <label for="recipient-name" class="col-form-label">Location</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Union Horseshoe" required>
+            <input type="text" class="form-control" id="recipient-name" ng-model="events[selected].location" required>
           </div>
 
-
-
-
+<!--
            <div class="form-row">
             <div class="col">
               <div class="form-group">
@@ -160,16 +157,14 @@
                     </div>
             </div>
           </div>
-
-
-
+-->
 
         </form>
       </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger">Delete</button>
       <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditEvent()">Save</button>
 
     </div>
   </div>
@@ -224,12 +219,12 @@
         </div>
 
          
-          
+        <!--
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Address</label>
           <input type="text" class="form-control" id="recipient-name" placeholder="110 8th St Troy NY">
         </div>
-          
+        -->
 
 
 

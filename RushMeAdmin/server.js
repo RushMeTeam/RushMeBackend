@@ -207,7 +207,7 @@ app.get('/in/events', validateAPI, function(req, res) {
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.post('/in/events/:namekey', validateAPI, function(req, res) {
+app.post('/in/fraternities/:namekey', validateAPI, function(req, res) {
   if(req.params.namekey != req.body.namekey){
     res.status(500).send("MISMATCHED namekeys!");
   }
@@ -217,13 +217,59 @@ app.post('/in/events/:namekey', validateAPI, function(req, res) {
     Key:{
       "namekey": req.params.namekey,
     },
-    UpdateExpression: "set #frat_name = :n, description = :d",
+    UpdateExpression: "set #name = :n, #description = :d, #address = :a, #contact = :c",
     ExpressionAttributeNames: {
-      "#frat_name": "name"
+      "#name": "name",
+      "#description": "description",
+      "#address": "address",
+      "#contact": "contact"
     },
     ExpressionAttributeValues:{
+      ":n":req.body.name,
       ":d":req.body.description,
-      ":n":req.body.name
+      ":a":req.body.address,
+      ":c":req.body.contact
+    }
+  };
+
+  documentClient.update(params, function(err, data) {
+    if (err){  
+    console.log(err);
+      res.status(500).send(err);
+    } else {    
+      res.status(200);
+    }
+  });
+});
+
+//Endpoint to get a fraternity from the DynamoDB
+app.post('/in/events/:eventID', validateAPI, function(req, res) {
+  if(req.params.eventID != req.body.EventID){
+    res.status(500).send("MISMATCHED EventID!");
+  }
+  
+  // TODO: VALIDATE!!! Ensure they have the permissions.
+  var params = {
+    TableName: 'EventInfo',
+    Key:{
+      "EventID": req.params.eventID,
+      // CHANGE THIS TO THE FRAT FROM THE PERSONS PERMISSIONS!!!
+      "FraternityID": req.body.FraternityID
+    },
+    UpdateExpression: "set #event_name = :en, #description = :d, #location = :l, #starts = :s, #ends = :e",
+    ExpressionAttributeNames: {
+      "#event_name": "event_name",
+      "#description": "description",
+      "#location": "location",
+      "#starts": "starts",
+      "#ends": "ends"
+    },
+    ExpressionAttributeValues:{
+      ":en":req.body.event_name,
+      ":d":req.body.description,
+      ":l":req.body.location,
+      ":s":req.body.starts,
+      ":e":req.body.ends
     }
   };
 
@@ -353,3 +399,5 @@ app.use(function(err, req, res, next){
 var httpPort = process.env.PORT || 80;
 var httpServer = http.createServer(app);
 httpServer.listen(httpPort);
+
+console.log("Server started on port " + httpPort);
