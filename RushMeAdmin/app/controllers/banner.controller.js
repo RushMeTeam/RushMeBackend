@@ -46,21 +46,21 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
     $http.post('/in/users/' + $scope.username + '/setgroup/IFC');
   }
   $scope.editUser = function(index) {
+    let isMember = index > $scope.size;
     let user = $scope.committee[index];
-    let isMember = !(user in $scope.added);
     if (isMember) {
       console.log("Edit made on row " + (index+1) + ": " + $scope.committee[index].email + " " + $scope.committee[index].username);
-      let user = $scope.committee[index];
     } else {
       $scope.added[index] = user;
     }
   }
   $scope.saveEditCommittee = function () {
-    console.log("Submission attempted");
-    $scope.committee.forEach(member => {
-      $http.post('/in/users/signup/Contrubutor/IFC/' + member.email );
-    });
-
+    for (let i = $scope.size; i < $scope.committee.length; i++) {
+    // for (var m in $scope.added) {
+      let m = $scope.committee[i];
+      console.log("Adding " + m);
+      $http.post('/in/users/signup/Community/Contributor/' + m.email );
+    }
   };
   $scope.deleteUser = function(index) {
     let user = $scope.committee[index];
@@ -91,22 +91,22 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
 
 }]);
 
-$(document).ready(function () {
-  let counter = 0;
-  $("#addrow").on("click", function () {
-    let newRow = $("<tr>");
-    let cols = "";
-    let editFrat = 'ng-click="editFrat($index)';
-    cols += '<td><input id="name' + counter + '" type="text" class="form-control text-center no-border" placeholder="Name"/></td>';
-    cols += '<td><input id="email' + counter + '" type="text" class="form-control text-center no-border" placeholder="Email"/></td>';
-    cols += '<td><button id="delete' + counter + '" class="userDelBtn btn btn-md btn-link-danger "><i class="material-icons" style="color:red;">remove</i></button></td>';
+// $(document).ready(function () {
+//   let counter = 0;
+//   $("#addrow").on("click", function () {
+//     let newRow = $("<tr>");
+//     let cols = "";
+//     let editFrat = 'ng-click="editFrat($index)';
+//     cols += '<td><input id="name' + counter + '" type="text" class="form-control text-center no-border" placeholder="Name"/></td>';
+//     cols += '<td><input id="email' + counter + '" type="text" class="form-control text-center no-border" placeholder="Email"/></td>';
+//     cols += '<td><button id="delete' + counter + '" class="userDelBtn btn btn-md btn-link-danger "><i class="material-icons" style="color:red;">remove</i></button></td>';
 
-    newRow.append(cols);
-    $("table.order-list").append(newRow);
-    counter++;
-  });
-  $("table.order-list").on("click", ".userDelBtn", function (event) {
-    $(this).closest("tr").remove();
-    counter -= 1
-  });
-});
+//     newRow.append(cols);
+//     $("table.order-list").append(newRow);
+//     counter++;
+//   });
+//   $("table.order-list").on("click", ".userDelBtn", function (event) {
+//     $(this).closest("tr").remove();
+//     counter -= 1
+//   });
+// });

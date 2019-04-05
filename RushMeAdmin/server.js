@@ -238,41 +238,85 @@ app.post('/in/events/:namekey', validateAPI, function (req, res) {
 */
 
 // Sign up a user
-app.post('/in/users/signup/:scope/:group/:email', validateAPI,
-  function (req, res) {
+app.post('/in/users/signup/:scope/:role/:email', validateAPI,
+  function (req, res, next) {
     // TODO: Allow signup
-    console.log("SIGNUP: " + req.params.scope + " " + req.params.group + " " + req.params.email);
+    console.log("SIGNUP: Scope" + req.params.scope + " Role" + req.params.role + " " + req.params.email);
     let params = {
-      UserPoolId: CONSTANTS.UserPoolId, /* required */
+      UserPoolId: CONSTANTS.poolID, /* required */
       Username: req.params.email, /* required */
-      DesiredDeliveryMediums: [
-        EMAIL
-      ],
-      MessageAction: RESEND | SUPPRESS,
+      DesiredDeliveryMediums: ["EMAIL"],
       UserAttributes: [
-        {
-          Name: 'email',
-          Value: req.params.email
-        },
-        {
-          Name: 'scope', /* required */
-          Value: req.params.scope || 'TODO'
-        },
-        {
-          Name: 'role', /* required */
-          Value: 'TODO'
-        },
-        {
-          Name: 'group', /* required */
-          Value: req.params.group || 'ZZZ'
-        }
-        /* more items */
+        { Name: 'email', Value: req.params.email },
+        { Name: 'custom:scope', Value: req.params.scope },
+        { Name: 'custom:role', Value: req.params.role }
+        // { Name: 'custom:group', Value: req.params.group || 'ZZZ' }
       ]
     };
-    cognitoIdentityProvider.adminCreateUser(params, function(err, data) {
-      if (err) res.send(err.stack); // an error occurred
-      else     res.send(data);      // successful response
+    cognitoIdentityProvider.adminCreateUser(params, function (err, user) {
+      console.log("Create user");
+      if (err) {
+        console.log(JSON.stringify(err));
+        res.status(500).json(err);
+        return;
+      }//console.log(err.stack); // an error occurred
+      console.log(JSON.stringify(user));
+      let params = {
+        GroupName: req.params.scope, /* required */
+        UserPoolId: CONSTANTS.poolID, /* required */
+        Username: user.User.Username /* required */
+      };
+      cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+        console.log("Add user to group #1");
+        if (err) {
+          console.log(JSON.stringify(err));
+          res.status(500).json(err);
+          return;
+        }// an error occurred
+        console.log(JSON.stringify(data));
+
+        // else     next();           // successful response
+        let params = {
+          GroupName: req.params.role, /* required */
+          UserPoolId: CONSTANTS.poolID, /* required */
+          Username: user.User.Username
+        };
+        cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+          console.log("Add user to group #2");
+          if (err) {
+            console.log(JSON.stringify(err));
+            res.status(500).json(err) // an error occurred
+            return;
+          }
+          else {
+            console.log(JSON.stringify(data));
+            res.status(200).json(data);           // successful response
+          }
+        });
+      });
+
     });
+  }, function (req, res, next) {
+    // TODO: IMPLEMENT
+    // cognitoIdentityProvider.adminAddUserToGroup();
+
+    let params = {
+      GroupName: req.params.role, /* required */
+      UserPoolId: CONSTANTS.poolID, /* required */
+      Username: req.params.email /* required */
+    };
+    cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+      console.log("Add user to group #2");
+      if (err) {
+        res.status(500).json(err) // an error occurred
+        return;
+      }
+      else res.status(200).json(data);           // successful response
+    });
+  }, function (req, res) {
+    // TODO: IMPLEMENT
+    // cognitoIdentityProvider.adminAddUserToGroup();
+    console.log("Done");
   });
 
 // Remove user permission
@@ -286,7 +330,7 @@ app.post('/in/users/:email/addpermission/:permission', validateAPI,
   function (req, res) {
     // TODO: Allow add user permission
   });
-app.post('/in/users/:username/setgroup/:group', validateAPI,
+app.post('/in/users/:email/setrole/:group/:scope', validateAPI,
   function (req, res) {
     cognitoIdentityProvider.adminUpdateUserAttributes({
       UserPoolId: CONSTANTS.poolID,
@@ -303,7 +347,7 @@ app.post('/in/users/:username/setgroup/:group', validateAPI,
     });
     // TODO: Allow add user permission
   });
-  app.post('/in/users/:username/setrole/:role', validateAPI,
+app.post('/in/users/:username/setrole/:role', validateAPI,
   function (req, res) {
     cognitoIdentityProvider.adminUpdateUserAttributes({
       UserPoolId: CONSTANTS.poolID,
@@ -318,9 +362,8 @@ app.post('/in/users/:username/setgroup/:group', validateAPI,
       if (err) console.log(err, err.stack); // an error occurred
       else console.log(data);           // successful response
     });
-    // TODO: Allow add user permission
   });
-  app.post('/in/users/:username/setscope/:scope', validateAPI,
+app.post('/in/users/:username/setscope/:scope', validateAPI,
   function (req, res) {
     cognitoIdentityProvider.adminUpdateUserAttributes({
       UserPoolId: CONSTANTS.poolID,
@@ -379,7 +422,7 @@ app.post('/in/users/:username/setgroup/:group', validateAPI,
 
 
 app.get('/in/users/current', validateAPI,
-  function (req, res) {   
+  function (req, res) {
     cognitoIdentityProvider.getUser({
       AccessToken: req.user.accessToken
     }, function (tErr, userData) {
@@ -410,30 +453,27 @@ app.get('/in/users/current/groups', validateAPI,
     res.status(200).json(req.user.groups);
   });
 app.get('/in/users/current/committee/', validateAPI,
-function(req, res) {
-  cognitoIdentityProvider.listUsersInGroup({
-    GroupName: req.user.groups[0], /* required */
-    UserPoolId: CONSTANTS.poolID /* required */
-  }, function(err, data) {
-    if (err) {
-      res.send(err.stack); // an error occurred
-    }
-    var users = [];
-    var i = 0;
-    for (var i = 0; data.Users.length != null && i < data.Users.length; i++){
-      var u = {};
-      var attrs = data.Users[i].Attributes;
-      for (var j = 0; j < attrs.length; j++) {
-        if (attrs[j].Name = "email") {
-          u.email = attrs[j].Value
-        }
+  function (req, res) {
+    cognitoIdentityProvider.listUsersInGroup({
+      GroupName: req.user.groups[0], /* required */
+      UserPoolId: CONSTANTS.poolID /* required */
+    }, function (err, data) {
+      if (err) {
+        res.send(err.stack); // an error occurred
+        return;
       }
-      users.push(u);
-
-    }
-    res.json(users);  // successful response
-
-  });
+      console.log(JSON.stringify(data));
+      let users = [];
+      for (let i = 0; data.Users != null && i < data.Users.length; i++) {
+        let u = {};
+        let attrs = data.Users[i].Attributes;
+        for (let j = 0; j < attrs.length; j++) {
+          if (attrs[j].Name == "email") u.email = attrs[j].Value
+        }
+        users.push(u);
+      }
+      res.json(users);  // successful response
+    });
   });
 
 
