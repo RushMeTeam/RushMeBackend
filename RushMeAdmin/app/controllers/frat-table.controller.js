@@ -4,6 +4,7 @@
  angular.module('RushMeAdminControllers').controller('FratTableCtrl', ['$scope', '$http', function ($scope, $http) {  	
   $scope.fraternities = [];
   $scope.selected = -1;
+  $scope.newFrat = {};
   
   $http.get("/in/fraternities/").then(
     function(res){
@@ -19,7 +20,10 @@
   }
   
   $scope.saveEditFrat = function(){
-    $http.post('/in/events/' + $scope.fraternities[$scope.selected].namekey, $scope.fraternities[$scope.selected]);
+    console.log($scope.newFrat);
+    $http.post('/in/fraternities/' + $scope.newFrat.namekey, $scope.newFrat);
+    $scope.fraternities.push($scope.newFrat);
+    $scope.newFrat = {};
   }
   
   
