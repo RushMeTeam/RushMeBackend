@@ -3,26 +3,47 @@
     <h2 class="rm-section-header">Events</h2>
   </div>
   <div class="col-4 text-center justify-content-center">
-    <!-- <div id="carouselExampleControls" class="carousel slide" data-interval="0">
-          <div class="carousel-inner">
-            <div class="carousel-item active carousel-lbl">
-              Tuesday October 18 2019
-            </div>
-            <div class="carousel-item carousel-lbl">
-              Wednesday October 19 2019
-            </div>
-            <div class="carousel-item carousel-lbl">
-              Thursday October 20 2019
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
-        </div> -->
+      <nav aria-label="...">
+          <ul class="pagination pt-3 justify-content-center">
+            <li class="page-item" ng-class="{'disabled' : currentPage == 1}">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+            </li>
+
+            <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li>
+
+            <li class="page-item" ng-class="{'disabled' : currentGenrePage >= totalPages}">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+          </ul>
+        </nav>
+
+    <!-- <pagination aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" >
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">Friday, April 5th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Saturday, April 6th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Sunday, April 7th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Monday, April 8th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tuesday, April 9th</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </pagination> -->
   </div>
   <div class="col-4 text-right justify-content-end">
     <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newEvent">
