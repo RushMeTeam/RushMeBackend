@@ -1,26 +1,25 @@
 /* nav {
   /* background-image: linear-gradient(220deg, #25a7df, #25a7df, #25a7df); */
 /* } */
-input[type="text"] {
+input {
   box-sizing: border-box;
   -webkit-box-sizing:border-box;
   -moz-box-sizing: border-box;
 }
-input[type="text"]:hover {
+input:hover {
   box-sizing: border-box;
   -webkit-box-sizing:border-box;
   -moz-box-sizing: border-box;
 }
-input[type="text"]:disabled {
+input:disabled {
   background: white;
   box-sizing: border-box;
   -webkit-box-sizing:border-box;
   -moz-box-sizing: border-box;
 }
-
 .no-border {
   border: 0;
-  box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+  box-shadow: none;
 }
 .rm-dropdown {
   color:white;
@@ -38,11 +37,9 @@ input[type="text"]:disabled {
   color:#8accec;
   transition: 0.3s;
   font-size: 33px;
-
 }
 .sign-in:hover .material-icons::before {
   content:"lock_open"; 
-
   color:#25a7df;
 }
 .sign-out .material-icons::before{
@@ -104,7 +101,6 @@ body {
 }
 tr {
   vertical-align: middle;
-
 }
 th {
   text-transform: uppercase;
@@ -164,4 +160,18 @@ td {
 .rm-btn:hover {
   opacity: 1;
   color: white;
+}
+.submit-btn {
+  background-color: #25a7df;
+  border: none;
+  opacity: 0.8;
+}
+.submit-btn:hover {
+  background-color: #25a7df;
+  border: none;
+  opacity: 1;
+}
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
 }

@@ -20,9 +20,6 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       } else {
         $scope.display_group = "No Group";
       }
-
-      // If the connection between the car and the grandfather
-      // could be stronger
     },
     function (err) {
       //Do something with the error here
@@ -34,62 +31,64 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       $scope.size = res.data.length;
     },
     function (err) {
-      //Do something with the error here
       console.log("ERR: " + err);
     });
-  $scope.addRow = function() {
-    if ($scope.added.length  + $scope.committee.length > 10)
-        return;
-    $scope.committee.push({});
+  $scope.addRow = function () {
+    if ($scope.added.length + $scope.committee.length > 10)
+      return;
+    $scope.added.push({ email: "", username: "" });
   }
-  $scope.setGroup = function() {
-    $http.post('/in/users/' + $scope.username + '/setgroup/IFC');
-  }
-  $scope.editUser = function(index) {
-    let isMember = index > $scope.size;
-    let user = $scope.committee[index];
-    if (isMember) {
-      console.log("Edit made on row " + (index+1) + ": " + $scope.committee[index].email + " " + $scope.committee[index].username);
-    } else {
-      $scope.added[index] = user;
-    }
+  $scope.editUser = function (index) {
+    let invalid = $scope.committee[index].email == $scope.email;
+    if (invalid) { }
   }
   $scope.saveEditCommittee = function () {
-    for (let i = $scope.size; i < $scope.committee.length; i++) {
-    // for (var m in $scope.added) {
-      let m = $scope.committee[i];
-      console.log("Adding " + m);
-      $http.post('/in/users/signup/Community/Contributor/' + m.email );
+    for (let i = 0; i < $scope.added.length; i++) {
+      let m = $scope.added[i];
+      // TODO: Specify Community and Contributor
+      $http.post('/in/users/signup/Community/Contributor/' + m.email);
     }
-  };
-  $scope.deleteUser = function(index) {
-    let user = $scope.committee[index];
-    let isMember = index < $scope.size;
-    if (!isMember) {
-      $scope.committee.pop();
-    } else if (!$scope.deleted.includes(user)) {
-      // REDO
-      $scope.deleted.splice($scope.committee[index], $scope.committee[index]);
-    } else {
-      // Delete
-      $scope.deleted.push($scope.committee[index]);
-      // $scope.committee[index].username.strike();
+    for (let i = 0; i < $scope.deleted.length; i++) {
+      let m = $scope.deleted[i];
+      $http.post('/in/users/delete/' + m.email);
     }
   }
-    /*
-    console.log("Want to delete user at row " + (index+1));
-    if (!("email" in $scope.committee[index])) {
-      $scope.committee.splice(index, 1);
-    } else if (("toDelete" in $scope.committee[index])) {
-      // REDO
-      $scope.toDelete.remove($scope.committee[index]);
-    } else {
-      // Delete
-      $scope.toDelete.push($scope.committee[index]);
-      // $scope.committee[index].username.strike();
-    } */
-
+  $scope.removeRow = function (index) {
+    $scope.added.splice(index, 1);
+  }
+  $scope.restoreUser = function (index) {
+    $scope.deleted.splice(index, 1);
+  }
+  $scope.deleteUser = function (member) {
+    $scope.deleted.push(member);
+  }
 }]);
+
+  // let isMember = index < $scope.size;
+  // if (!isMember) {
+  //   // REMOVE 
+  //   $scope.committee.splice($scope.committee[index], $scope.committee[index]);
+  // } else if (!$scope.deleted.includes(user)) {
+  //   // REDO
+  //   $scope.deleted.splice($scope.committee[index], $scope.committee[index]);
+  // } else {
+  //   // Delete
+  //   $scope.deleted.push($scope.committee[index]);
+  //   // $scope.committee[index].username.strike();
+  // }
+/*
+console.log("Want to delete user at row " + (index+1));
+if (!("email" in $scope.committee[index])) {
+  $scope.committee.splice(index, 1);
+} else if (("toDelete" in $scope.committee[index])) {
+  // REDO
+  $scope.toDelete.remove($scope.committee[index]);
+} else {
+  // Delete
+  $scope.toDelete.push($scope.committee[index]);
+  // $scope.committee[index].username.strike();
+} */
+
 
 // $(document).ready(function () {
 //   let counter = 0;
