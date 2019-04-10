@@ -128,9 +128,7 @@ td {
   background-color: let(--light);
   color: gray;
 }
-.carousel {
-  width:35%;
-}
+
 .carousel-lbl h3 {
   color:#25a7df;
   font: Helvetica;
@@ -174,4 +172,10 @@ td {
 .btn:focus,.btn:active {
   outline: none !important;
   box-shadow: none;
+}
+.btn-link-light {
+  font-weight: 100;
+}
+.page-link {
+  color: #25a7df;
 }

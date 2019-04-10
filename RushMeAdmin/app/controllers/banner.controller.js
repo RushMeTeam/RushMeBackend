@@ -25,14 +25,19 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
       //Do something with the error here
       console.log("ERR: " + err);
     });
-  $http.get("/in/users/current/committee/").then(
+  $http.get("/in/users/current/group/").then(
     function (res) {
       $scope.committee = res.data;
       $scope.size = res.data.length;
+      $scope.added = [];
+      $scope.deleted = [];
     },
     function (err) {
       console.log("ERR: " + err);
     });
+
+
+
   $scope.addRow = function () {
     if ($scope.added.length + $scope.committee.length > 10)
       return;
@@ -42,16 +47,70 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
     let invalid = $scope.committee[index].email == $scope.email;
     if (invalid) { }
   }
+
   $scope.saveEditCommittee = function () {
-    for (let i = 0; i < $scope.added.length; i++) {
-      let m = $scope.added[i];
-      // TODO: Specify Community and Contributor
-      $http.post('/in/users/signup/Community/Contributor/' + m.email);
+    // for (let i = 0; i < oldAdded.length; i++) {
+    //   let m = oldAdded[i];
+    let promises = [];
+    while ($scope.added.length > 0) {
+      // let m = ;
+      console.log("hi added " + $scope.added.length);
+      promises.push(new Promise((resolve, reject) => {
+        $http.post('/in/users/setgroup/Community/' + $scope.added.pop().email).then(
+          res => {
+            resolve();
+          },
+          msg => {
+            console.log(msg);
+            resolve();
+          })
+      }));
     }
-    for (let i = 0; i < $scope.deleted.length; i++) {
-      let m = $scope.deleted[i];
-      $http.post('/in/users/delete/' + m.email);
+    while ($scope.deleted.length > 0) {
+      // let m = ;
+      console.log("hi deleted " + $scope.deleted.length);
+      promises.push(
+        // new Promise((resolve, reject) => {
+        
+        $http.post('/in/users/removefromgroup/Community/' + $scope.deleted.pop().email)
+          .then(
+            res => { return; },
+            msg => {
+              console.log(msg);
+              return;
+            })
+      // })
+      );
     }
+    // addPromises.push(new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve("foo");
+    //   }, 100);
+    // }));
+    Promise.all(promises)
+      .then(values => {
+        console.log(values);
+      })
+      .then($http.get("/in/users/current/group/"))
+      .then(
+        function (res) {
+          console.log("Got new committee!");
+          if (!res) {
+            console.log("No res!");
+            return;
+          } else if (!res.data) {
+            console.log("No data!");
+            console.log(res);
+            return;
+          }
+          $scope.added = [];
+          $scope.deleted = [];
+          $scope.committee = res.data || [];
+          $scope.size = $scope.committee.length;
+        },
+        function (err) {
+          console.log("ERR: " + err);
+        });
   }
   $scope.removeRow = function (index) {
     $scope.added.splice(index, 1);

@@ -2,18 +2,17 @@
   <div class="col-4">
     <h2 class="rm-section-header">Events</h2>
   </div>
-  <div class="col-4 text-center justify-content-center">
-      <nav aria-label="...">
-          <ul class="pagination pt-3 justify-content-center">
+  <div class="col-4 align-bottom">
+      <!-- <nav aria-label="..."> -->
+          <ul class="pagination pt-3 align-bottom justify-content-center">
             <li class="page-item" ng-class="{'disabled' : currentPage == 1}">
                 <a class="page-link" href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
             </li>
-
-            <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li>
-
+            <!-- <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li> -->
+            <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">Fall 2018</a></li>
             <li class="page-item" ng-class="{'disabled' : currentGenrePage >= totalPages}">
                 <a class="page-link" href="#" aria-label="Previous">
                     <span aria-hidden="true">&raquo;</span>
@@ -21,7 +20,7 @@
                 </a>
             </li>
           </ul>
-        </nav>
+        <!-- </nav> -->
 
     <!-- <pagination aria-label="Page navigation example">
           <ul class="pagination justify-content-center" >
@@ -56,7 +55,7 @@
   <table id="eventTable" class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">Status</th>
+        <!-- <th scope="col">Status</th> -->
         <th scope="col">Fraternity</th>
         <th scope="col">Title</th>
         <th scope="col">Time</th>
@@ -65,8 +64,8 @@
     </thead>
     <tbody>
       <tr ng-repeat="event in events">
-        <td ng-if="event.published"><span class="badge rm-badge published">PUBLISHED</span></td>
-        <td ng-if="!event.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
+        <!-- <td ng-if="event.published"><span class="badge rm-badge published">PUBLISHED</span></td> -->
+        <!-- <td ng-if="!event.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td> -->
         <td>{{event.FraternityID}}</td>
         <td>{{event.event_name}}</td>
         <td>{{event.starts.toLocaleString()}} - {{event.ends.toLocaleTimeString()}}</td>

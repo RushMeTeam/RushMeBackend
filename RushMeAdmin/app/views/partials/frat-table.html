@@ -13,7 +13,7 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">Status</th>
+        <!-- <th scope="col">Status</th> -->
         <th scope="col">Name</th>
         <th scope="col">Code</th>
         <th scope="col">Primary Contact</th>
@@ -22,8 +22,8 @@
     </thead>
     <tbody>
       <tr ng-repeat="frat in fraternities">
-        <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td>
-        <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td>
+        <!-- <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td> -->
+        <!-- <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td> -->
         <td>{{frat.name}}</td>
         <td>{{frat.namekey}}</td>
         <td><a style="text-decoration: none;" ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
