@@ -53,50 +53,47 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
     //   let m = oldAdded[i];
     let promises = [];
     while ($scope.added.length > 0) {
-      // let m = ;
-      console.log("hi added " + $scope.added.length);
-      promises.push(new Promise((resolve, reject) => {
-        $http.post('/in/users/setgroup/Community/' + $scope.added.pop().email).then(
-          res => {
-            resolve();
-          },
-          msg => {
-            console.log(msg);
-            resolve();
-          })
-      }));
-    }
-    while ($scope.deleted.length > 0) {
-      // let m = ;
-      console.log("hi deleted " + $scope.deleted.length);
-      promises.push(
-        // new Promise((resolve, reject) => {
-        
-        $http.post('/in/users/removefromgroup/Community/' + $scope.deleted.pop().email)
-          .then(
-            res => { return; },
+      let m = $scope.added.pop();
+      if (m.email) {
+        console.log("hi added " + $scope.added.length);
+        promises.push(new Promise((resolve, reject) => {
+          $http.post('/in/users/setgroup/Community/' + m.email).then(
+            res => {
+              console.log(res);
+              resolve();
+            },
             msg => {
               console.log(msg);
-              return;
+              reject(msg);
             })
-      // })
-      );
+        }));
+      }
     }
-    // addPromises.push(new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve("foo");
-    //   }, 100);
-    // }));
+    while ($scope.deleted.length > 0) {
+      promises.push(new Promise((resolve, reject) => {
+        $http.post('/in/users/removefromgroup/Community/' + $scope.deleted.pop().email)
+          .then(
+            res => { 
+              console.log(res);
+              resolve(); 
+            },
+            msg => { 
+              console.log(msg);
+              reject(msg); 
+            }
+          )
+      }));
+    }
+
     Promise.all(promises)
-      .then(values => {
-        console.log(values);
-      })
       .then($http.get("/in/users/current/group/"))
       .then(
         function (res) {
           console.log("Got new committee!");
           if (!res) {
             console.log("No res!");
+            console.log("Added: " + $scope.added);
+            console.log("Deleted: " + $scope.deleted);
             return;
           } else if (!res.data) {
             console.log("No data!");
@@ -108,9 +105,7 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
           $scope.committee = res.data || [];
           $scope.size = $scope.committee.length;
         },
-        function (err) {
-          console.log("ERR: " + err);
-        });
+        function (err) { console.log("ERR: " + err); });
   }
   $scope.removeRow = function (index) {
     $scope.added.splice(index, 1);

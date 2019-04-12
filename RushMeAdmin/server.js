@@ -305,7 +305,6 @@ app.post('/in/users/signup/:scope/:role/:email', validateAPI,
       if (err) { // an error occurred
         console.log(err);
         res.status(500).json(err);
-
         return;
       }
       console.log(user);
@@ -314,7 +313,7 @@ app.post('/in/users/signup/:scope/:role/:email', validateAPI,
         UserPoolId: CONSTANTS.poolID, /* required */
         Username: user.User.Username /* required */
       };
-      cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+      cognitoIdentityProvider.adminAddUserToGroup(params, function (err, info) {
         console.log("Add user to group #1");
         if (err) { // an error occurred
           console.log(err);
@@ -327,15 +326,14 @@ app.post('/in/users/signup/:scope/:role/:email', validateAPI,
           UserPoolId: CONSTANTS.poolID, /* required */
           Username: user.User.Username
         };
-        cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+        cognitoIdentityProvider.adminAddUserToGroup(params, function (err, info) {
           console.log("Add user to group #2");
           if (err) {
-            console.log(JSON.stringify(err));
+            console.log(err);
             res.status(500).json(err) // an error occurred
-            return;
           } else {
             // console.log(data);
-            res.status(200).json(data);           // successful response
+            res.status(200).json(user);           // successful response
           }
         });
       });
@@ -365,28 +363,27 @@ app.post('/in/users/removefromgroup/:group/:email/', validateAPI,
           UserPoolId: CONSTANTS.poolID, /* required */
           Username: data.Users[i].Username /* required */
         };
-        cognitoIdentityProvider.adminRemoveUserFromGroup(params, function(err, data) {
+        cognitoIdentityProvider.adminRemoveUserFromGroup(params, function (err, info) {
           if (err) console.log(err, err.stack); // an error occurred
-          else    {
+          else {
             console.log("Removed user from " + req.params.group);
             // console.log(data);           // successful response
+            res.status(200).send(info);
           }
-          
         });
-    }
-    res.status(200).send("Removed " + data.Users.length + " user(s)."); 
+      }
     })
   });
-      // cognitoIdentityProvider.adminDeleteUser(params, function (err, data) {
-      //   if (err) {
-      //     console.log(err);
-      //     res.status(500).send(err);
-      //   } else {
-      //     console.log(data);
-      //     res.status(200).send(data);           // successful response
-      //   }
-      // });
-  
+// cognitoIdentityProvider.adminDeleteUser(params, function (err, data) {
+//   if (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//   } else {
+//     console.log(data);
+//     res.status(200).send(data);           // successful response
+//   }
+// });
+
 
 // // Remove user permission
 // app.post('/in/users/:email/removepermssions', validateAPI,
@@ -592,12 +589,12 @@ app.get('/in/users/current/group/', validateAPI,
       for (let i = 0; i < data.Users.length; i++) {
         let u = {};
         let attrs = data.Users[i].Attributes;
-        for (let j = 0; j < attrs.length; j++) {
-          if (attrs[j].Name == "email") u.email = attrs[j].Value
-        }
+        for (let j = 0; j < attrs.length; j++)
+            u[attrs[j].Name] = attrs[j].Value;
+        console.log(u);
         users.push(u);
       }
-      console.log("Trying to send back current group ("+ req.user.groups[0] + ") of " + data.Users.length + " successfully");
+      console.log("Trying to send back current group (" + req.user.groups[0] + ") of " + data.Users.length + " successfully");
       console.log(data.Users);
       res.status(200).json(users);  // successful response
     });
