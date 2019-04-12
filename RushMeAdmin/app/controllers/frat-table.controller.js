@@ -8,6 +8,7 @@
   
   $http.get("/in/fraternities/").then(
     function(res){
+      console.log(res);
       $scope.fraternities = res.data;
     },
     function(err){
@@ -20,6 +21,12 @@
   }
   
   $scope.saveEditFrat = function(){
+    let currentFrat = $scope.fraternities[$scope.selected];
+    $http.post('/in/fraternities/' + currentFrat.namekey, currentFrat);
+    $scope.selected = -1;
+  }
+  
+  $scope.saveNewFrat = function(){
     console.log($scope.newFrat);
     $http.post('/in/fraternities/' + $scope.newFrat.namekey, $scope.newFrat);
     $scope.fraternities.push($scope.newFrat);
