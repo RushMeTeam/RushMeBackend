@@ -1,9 +1,12 @@
 // File: event-table.controller.js	
 // Description: event-table controller that will handle all logic for the event-table.html page	
 
- angular.module('RushMeAdminControllers').controller('EventTableCtrl', ['$scope', '$http', function ($scope, $http) {  	
+ angular
+ .module('RushMeAdminControllers')
+ .controller('EventTableCtrl', 
+ ['$scope', '$http', function ($scope, $http) {  	
   $scope.events = [];
-  $scope.editting = false;
+  $scope.editing = false;
   $scope.selected = -1;
   
   $http.get("/in/events/").then(
@@ -21,7 +24,7 @@
   
   $scope.editEvent = function(index){
     $scope.selected = index;
-    $scope.editting = true;
+    $scope.editing = true;
   }
   
   $scope.saveEditEvent = function(){
