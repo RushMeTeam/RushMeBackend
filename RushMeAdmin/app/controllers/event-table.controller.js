@@ -8,6 +8,8 @@
   $scope.events = [];
   $scope.editing = false;
   $scope.selected = -1;
+  $scope.fratNames = [{label: "Phi Iota Alpha", namekey: "PIA"}, 
+                      {label: "Chi Phi", namekey: "CHP"}];
   
   $http.get("/in/events/").then(
     function(res){

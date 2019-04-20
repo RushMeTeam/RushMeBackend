@@ -3,24 +3,26 @@
     <h2 class="rm-section-header">Events</h2>
   </div>
   <div class="col-4 align-bottom">
-      <!-- <nav aria-label="..."> -->
-          <ul class="pagination pt-3 align-bottom justify-content-center">
-            <li class="page-item" ng-class="{'disabled' : currentPage == 1}">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-            </li>
-            <!-- <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li> -->
-            <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">Fall 2018</a></li>
-            <li class="page-item" ng-class="{'disabled' : currentGenrePage >= totalPages}">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-          </ul>
-        <!-- </nav> -->
+    <!-- <nav aria-label="..."> -->
+    <ul class="pagination pt-3 align-bottom justify-content-center">
+      <li class="page-item" ng-class="{'disabled' : currentPage == 1}">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <!-- <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li> -->
+      <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item"
+        ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}">
+        <a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">Fall 2018</a></li>
+      <li class="page-item" ng-class="{'disabled' : currentGenrePage >= totalPages}">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+    <!-- </nav> -->
 
     <!-- <pagination aria-label="Page navigation example">
           <ul class="pagination justify-content-center" >
@@ -81,7 +83,7 @@
 </div>
 
 <div id='eventDetail' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
-  ng-if="editting">
+  ng-if="editing">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -159,9 +161,20 @@
       <div class="modal-body">
         <form class="needs-validation was-validated">
           <div class="form-group">
+            <div class="form-row">
+              <label for="recipient-name" class="col-form-label">Organization</label>
+              <select class="form-control" ng-model="selectedOrg" ng-options="name.label for name in fratNames">
+                  <option>Select one...</option>
+              </select>
+            </div>
+            
+          </div>
+
+          <div class="form-row">
             <label for="recipient-name" class="col-form-label">Title</label>
             <input type="text" class="form-control" id="recipient-name" placeholder="IFC Meet the Greeks" required>
           </div>
+
           <div class="form-row">
             <div class="col">
               <div class="form-group">
@@ -195,7 +208,6 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Delete</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary">Save</button>
       </div>
