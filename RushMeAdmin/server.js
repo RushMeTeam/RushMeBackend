@@ -154,6 +154,7 @@ app.get('/in/tables', validateAPI, function (req, res) {
   db.listTables(function (err, data) {
     console.log(data.TableNames);
     res.status(200).send('AWS - See the console.');
+    return;
   });
 });
 
@@ -170,8 +171,11 @@ app.get('/in/fraternities', validateAPI, function (req, res) {
     } else {
       res.status(200).send(data.Items);
     }
+    
+    return;
   });
 });
+
 app.get('/in/fraternities/:namekey', validateAPI, function (req, res) {
   let params = {
     TableName: 'FraternityInfo',
@@ -187,23 +191,9 @@ app.get('/in/fraternities/:namekey', validateAPI, function (req, res) {
   });
 });
 
-//Endpoint to get all the events from the DynamoDB
-app.get('/in/events', validateAPI, function (req, res) {
-  let params = {
-    TableName: 'EventInfo'
-  };
-
-  documentClient.scan(params, function (err, data) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data.Items);
-    }
-  });
-});
-
 //Endpoint to get a fraternity from the DynamoDB
 app.post('/in/fraternities/:namekey', validateAPI, function (req, res) {
+  console.log("HERE");
   if (req.params.namekey != req.body.namekey) {
     res.status(500).send("MISMATCHED namekeys! namekey " + req.params.namekey + " != namekey " + req.body.namekey);
     return;
@@ -236,13 +226,58 @@ app.post('/in/fraternities/:namekey', validateAPI, function (req, res) {
     } else {
       res.status(200);
     }
+    
+    return;
   });
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.post('/in/events/:eventID', validateAPI, function (req, res) {
-  if (req.params.eventID != req.body.EventID) {
-    res.status(500).send("MISMATCHED EventID!");
+app.delete('/in/fraternities/:namekey', validateAPI, function (req, res) {
+  
+  // TODO: VALIDATE!!! Ensure they have the permissions.
+  let params = {
+    TableName: 'FraternityInfo',
+    Key: {
+      "namekey": req.params.namekey,
+    }
+  };
+
+  console.log("Attempting a delete...");
+  documentClient.delete(params, function (err, data) {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200);
+    }
+    
+    return;
+  });
+});
+
+//Endpoint to get all the events from the DynamoDB
+app.get('/in/events', validateAPI, function (req, res) {
+  let params = {
+    TableName: 'EventInfo'
+  };
+
+  documentClient.scan(params, function (err, data) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data.Items);
+    }
+    
+    return;
+  });
+});
+
+//Endpoint to get a fraternity from the DynamoDB
+app.post('/in/events/:fraternityID/:eventID', validateAPI, function (req, res) {
+  if (req.params.eventID != req.body.EventID ||
+    req.params.fraternityID != req.body.FraternityID) {
+    res.status(500).send("MISMATCHED PARAM AND BODY!");
+    return;
   }
 
   // TODO: VALIDATE!!! Ensure they have the permissions.
@@ -251,7 +286,7 @@ app.post('/in/events/:eventID', validateAPI, function (req, res) {
     Key: {
       "EventID": req.params.eventID,
       // CHANGE THIS TO THE FRAT FROM THE PERSONS PERMISSIONS!!!
-      "FraternityID": req.body.FraternityID
+      "FraternityID": req.params.fraternityID
     },
     UpdateExpression: "set #event_name = :en, #description = :d, #location = :l, #starts = :s, #ends = :e",
     ExpressionAttributeNames: {
@@ -276,9 +311,36 @@ app.post('/in/events/:eventID', validateAPI, function (req, res) {
     } else {
       res.status(200);
     }
+    
+    return;
   });
 });
 
+//Endpoint to get a fraternity from the DynamoDB
+app.delete('/in/events/:fraternityID/:eventID', validateAPI, function (req, res) {
+  
+  // TODO: VALIDATE!!! Ensure they have the permissions.
+  let params = {
+    TableName: 'EventInfo',
+    Key: {
+      "EventID": req.params.eventID,
+      // CHANGE THIS TO THE FRAT FROM THE PERSONS PERMISSIONS!!!
+      "FraternityID": req.params.fraternityID
+    }
+  };
+
+  console.log("Attempting a delete...");
+  documentClient.delete(params, function (err, data) {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200);
+    }
+    
+    return;
+  });
+});
 
 /*
     Cognito User Management
@@ -569,6 +631,7 @@ app.get('/in/users/current/groups', validateAPI,
     console.log(req.user);
     res.status(200).json(req.user.groups);
   });
+  
 app.get('/in/users/current/group/', validateAPI,
   function (req, res) {
     cognitoIdentityProvider.listUsersInGroup({
@@ -594,8 +657,10 @@ app.get('/in/users/current/group/', validateAPI,
         console.log(u);
         users.push(u);
       }
+      /*
       console.log("Trying to send back current group (" + req.user.groups[0] + ") of " + data.Users.length + " successfully");
       console.log(data.Users);
+      */
       res.status(200).json(users);  // successful response
     });
   });

@@ -60,7 +60,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteFrat()">Delete</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditFrat()">Save</button>
       </div>
@@ -90,7 +90,12 @@
             
             <div class="col-lg-2" >
               <label for="frat-code" class="col-form-label">3 Letter Code:</label>
-              <input type="text" pattern="[A-Z]{3}" maxlength="3" class="form-control" id="frat-code" ng-model="newFrat.namekey" placeholder="ABG" required>
+              <input type="text" maxlength="3" class="form-control" id="frat-code" ng-model="newFrat.namekey" placeholder="ABG" required>
+              <!--
+                  pattern="[A-Z]{3}" THIS NEEDS TO BE FIXED!!! When it exists if it is not valid it will just fail API call.
+                  ERROR CHECKING NEEDS TO BE FIXED EVERYWHERE! If there is an invalid field it will just leave the field empty and not
+                  relay the information to the server. Client cannot be allowed to send if something is invalid.
+              -->
               <div class="invalid-feedback">
                 Please enter a valid code.
               </div>

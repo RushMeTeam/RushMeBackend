@@ -4,12 +4,11 @@
  angular
  .module('RushMeAdminControllers')
  .controller('EventTableCtrl', 
- ['$scope', '$http', function ($scope, $http) {  	
+ ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
   $scope.events = [];
   $scope.editing = false;
   $scope.selected = -1;
-  $scope.fratNames = [{label: "Phi Iota Alpha", namekey: "PIA"}, 
-                      {label: "Chi Phi", namekey: "CHP"}];
+  $scope.newEvent = {};
   
   $http.get("/in/events/").then(
     function(res){
@@ -30,6 +29,23 @@
   }
   
   $scope.saveEditEvent = function(){
-    $http.post('/in/events/' + $scope.events[$scope.selected].EventID, $scope.events[$scope.selected]);
+    let currentEvent = $scope.events[$scope.selected];
+    $http.post('/in/events/' + currentEvent.FraternityID + '/' + currentEvent.EventID, currentEvent);
+    $scope.selected = -1;
+  }
+  
+  $scope.saveNewEvent = function(){
+    let newEvent = $scope.newEvent;
+    newEvent.EventID = newEvent.FraternityID + ":" + newEvent.event_name;
+    $http.post('/in/events/' + newEvent.FraternityID + '/' + newEvent.EventID, newEvent);
+    $scope.events.push(newEvent);
+    $scope.newEvent = {};
+  }
+  
+  $scope.deleteEvent = function(){
+    let currentEvent = $scope.events[$scope.selected];
+    $http.delete('/in/events/' + currentEvent.FraternityID + '/' + currentEvent.EventID);
+    $scope.events.splice($scope.selected, 1);
+    $scope.selected = -1;
   }
 }]);

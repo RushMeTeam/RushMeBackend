@@ -139,9 +139,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEvent();">Delete</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditEvent()">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditEvent();">Save</button>
 
       </div>
     </div>
@@ -163,7 +163,7 @@
           <div class="form-group">
             <div class="form-row">
               <label for="recipient-name" class="col-form-label">Organization</label>
-              <select class="form-control" ng-model="selectedOrg" ng-options="name.label for name in fratNames">
+              <select class="form-control" ng-model="newEvent.FraternityID" ng-options="frat.namekey as frat.name for frat in fraternities">
                   <option>Select one...</option>
               </select>
             </div>
@@ -172,32 +172,32 @@
 
           <div class="form-row">
             <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="IFC Meet the Greeks" required>
+            <input type="text" class="form-control" id="recipient-name" ng-model="newEvent.event_name" placeholder="IFC Meet the Greeks" required>
           </div>
 
           <div class="form-row">
             <div class="col">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Date</label>
-                <input type="datetime-local" class="form-control" id="recipient-name" value="" required>
+                <input type="datetime-local" class="form-control" id="recipient-name" ng-model="newEvent.starts" required>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">End Time</label>
-                <input type="time" class="form-control" id="recipient-name" required>
+                <input type="datetime-local" class="form-control" id="recipient-name" ng-model="newEvent.ends"  required>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Description</label>
-            <textarea class="form-control" id="message-text"
+            <textarea class="form-control" id="message-text" ng-model="newEvent.description" 
               placeholder="Come meet our house and see what Greek Life has to offer!"></textarea>
           </div>
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Location</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Union Horseshoe" required>
+            <input type="text" class="form-control" id="recipient-name" ng-model="newEvent.location"  placeholder="Union Horseshoe" required>
           </div>
           <!--
         <div class="form-group">
@@ -209,7 +209,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveNewEvent();">Save</button>
       </div>
     </div>
   </div>
