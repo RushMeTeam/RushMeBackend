@@ -117,12 +117,16 @@ var cognitoIdentityProvider = new AWS.CognitoIdentityServiceProvider();
 
 function validateAuth(req, res, next) {
   if (req.isAuthenticated()) {
-      cognitoIdentityProvider.getUser({
-    AccessToken: req.user.accessToken
-  }, function(err, data) {
-    if (err) return res.status(401).json(err);    // an error occurred
-    else     return next();
-  });
+    cognitoIdentityProvider.getUser({
+      AccessToken: req.user.accessToken
+    }, function(err, data) {
+      if (err){
+        req.logout();
+        res.redirect('/');
+      } else {
+        next();
+      }
+    });
   } else {
     res.redirect('/');
   }
@@ -131,13 +135,16 @@ function validateAuth(req, res, next) {
 function validateAPI(req, res, next) {
   if (req.isAuthenticated()) {
     cognitoIdentityProvider.getUser({
-  AccessToken: req.user.accessToken
-}, function(err, data) {
-  if (err) return res.status(401).json(err);    // an error occurred
-  else     return next();
-});
+      AccessToken: req.user.accessToken
+    }, function(err, data) {
+      if (err){
+        res.status(401).send({ message: "Please ensure you are logged in before trying to do that!" });
+      } else {
+        next();
+      }
+    });
   } else {
-    res.status(401).send({ message: "Please ensure you are logged in before trying to do that!" })
+    res.status(401).send({ message: "Please ensure you are logged in before trying to do that!" });
   }
 }
 
