@@ -623,6 +623,7 @@ app.get('/in/users/current', validateAPI,
       if (tErr) {
         console.log(tErr);
         res.redirect("/");
+        req.logout();
         return;
       }
       cognitoIdentityProvider.adminGetUser({
@@ -632,6 +633,7 @@ app.get('/in/users/current', validateAPI,
         if (err) {
           console.log(err);
           res.redirect("/");
+          req.logout();
           return;
         }
         
