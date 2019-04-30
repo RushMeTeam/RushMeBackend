@@ -1,71 +1,216 @@
-<!-- <div ng-include="'views/partials/bye.html'"></div> -->
-<h2 class="rm-section-header">Events</h2>
-<center>
-<div id="carouselExampleControls" class="carousel slide" data-interval="0">
-  <div class="carousel-inner">
-    <div class="carousel-item active carousel-lbl">
-      <h3>Tuesday October 18 2019</h3>
-    </div>
-    <div class="carousel-item carousel-lbl">
-      <h3>Wednesday October 19 2019</h3>
-    </div>
-    <div class="carousel-item carousel-lbl">
-      <h3>Thursday October 20 2019</h3>
-    </div>
+<div class="row py-1 align-items-end">
+  <div class="col-4">
+    <h2 class="rm-section-header">Events</h2>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <div class="col-4 align-bottom">
+    <!-- <nav aria-label="..."> -->
+    <ul class="pagination pt-3 align-bottom justify-content-center">
+      <li class="page-item" ng-class="{'disabled' : currentPage == 1}">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <!-- <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item" ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}"><a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">{{$index + 1}}</a></li> -->
+      <li ng-repeat="i in [].constructor(totalPages) track by $index" class="page-item"
+        ng-class="{'active' : currentGenrePage == $index + 1, 'notshow' :  currentGenrePage + 1 < $index || currentGenrePage - 3 > $index}">
+        <a class="page-link" href="{{postsGenreLink.hopLink+($index + 1)}}">Fall 2018</a></li>
+      <li class="page-item" ng-class="{'disabled' : currentGenrePage >= totalPages}">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+    <!-- </nav> -->
 
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  </a>
+    <!-- <pagination aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" >
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">Friday, April 5th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Saturday, April 6th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Sunday, April 7th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Monday, April 8th</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tuesday, April 9th</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </pagination> -->
+  </div>
+  <div class="col-4 text-right justify-content-end">
+    <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newEvent">
+      Add Event<i class="material-icons">add</i>
+    </button>
+  </div>
 </div>
-</center>
+
 <div class="table-responsive">
-  <table class="table table-bordered table-hover">
+  <table id="eventTable" class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <!-- <th scope="col">Status</th> -->
         <th scope="col">Fraternity</th>
-        <th scope="col">Time</th>
         <th scope="col">Title</th>
-        <th scope="col">Location</th>
-        <th scope="col"></th>
+        <th scope="col">Time</th>
+        <th scope="col">Edit</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row"></th>
-        <td><span class="badge rm-badge published">PUBLISHED</span></td>
-        <td>Tau Epsilon Phi</td>
-        <td>5:00 PM</td>
-        <td>Taco Bell Tuesday</td>
-        <td>Taco Bell near HVCC</td>
+      <tr ng-repeat="event in events">
+        <!-- <td ng-if="event.published"><span class="badge rm-badge published">PUBLISHED</span></td> -->
+        <!-- <td ng-if="!event.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td> -->
+        <td>{{event.FraternityID}}</td>
+        <td>{{event.event_name}}</td>
+        <td>{{event.starts.toLocaleString()}} - {{event.ends.toLocaleTimeString()}}</td>
         <td>
-          <button type="button" class="btn btn-secondary">Edit</button>
+          <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#eventDetail"
+            ng-click="editEvent($index);">
+            <i class="material-icons">mode_edit</i>
+          </button>
         </td>
       </tr>
-      <tr>
-        <th scope="row"></th>
-        <td><span class="badge rm-badge unpublished">PUBLISHED</span></td>
-        <td>Tau Epsilon Phi</td>
-        <td>5:00 PM</td>
-        <td>Taco Bell Tuesday</td>
-        <td>Taco Bell near HVCC</td>
-        <td>
-          <!-- <button type="button" class="btn btn-secondary">Edit</button> -->
-          <i class="material-icons">edit</i>
-        </td>
-      </tr>
-
     </tbody>
   </table>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".eventDetail">Event Detail</button>
+<div id='eventDetail' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
+  ng-if="editing">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventDetailLabel">Event Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="recipient-name" ng-model="events[selected].event_name" required>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Date</label>
+                <input type="datetime-local" class="form-control" ng-model="events[selected].starts" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">End Time</label>
+                <input type="datetime-local" class="form-control" ng-model="events[selected].ends" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Description</label>
+            <textarea class="form-control" id="message-text" ng-model="events[selected].description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Location</label>
+            <input type="text" class="form-control" id="recipient-name" ng-model="events[selected].location" required>
+          </div>
+          <!--
+           <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Address</label>
+                      <input type="text" class="form-control" id="recipient-name" placeholder="110 8th St Troy NY">
+                    </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="recipient-name" placeholder="12180">
+                    </div>
+            </div>
+          </div>
+-->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEvent();">Delete</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditEvent();">Save</button>
 
-<div class="modal fade eventDetail" tabindex="-1" role="dialog" aria-labelledby="eventDetailLabel" aria-hidden="true">
-        <div ng-include="'views/partials/event-detail.html'"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="newEvent" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventDetailLabel">New Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation was-validated">
+          <div class="form-group">
+            <div class="form-row">
+              <label for="recipient-name" class="col-form-label">Organization</label>
+              <select class="form-control" ng-model="newEvent.FraternityID" ng-options="frat.namekey as frat.name for frat in fraternities">
+                  <option>Select one...</option>
+              </select>
+            </div>
+            
+          </div>
+
+          <div class="form-row">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="recipient-name" ng-model="newEvent.event_name" placeholder="IFC Meet the Greeks" required>
+          </div>
+
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Date</label>
+                <input type="datetime-local" class="form-control" id="recipient-name" ng-model="newEvent.starts" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">End Time</label>
+                <input type="datetime-local" class="form-control" id="recipient-name" ng-model="newEvent.ends"  required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Description</label>
+            <textarea class="form-control" id="message-text" ng-model="newEvent.description" 
+              placeholder="Come meet our house and see what Greek Life has to offer!"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Location</label>
+            <input type="text" class="form-control" id="recipient-name" ng-model="newEvent.location"  placeholder="Union Horseshoe" required>
+          </div>
+          <!--
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Address</label>
+          <input type="text" class="form-control" id="recipient-name" placeholder="110 8th St Troy NY">
+        </div>
+        -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveNewEvent();">Save</button>
+      </div>
+    </div>
+  </div>
 </div>
