@@ -430,7 +430,14 @@ app.post('/in/users/removefromgroup/:group/:email/', validateAPI,
           else {
             console.log("Removed user from " + req.params.group);
             // console.log(data);           // successful response
-            res.status(200).send(info);
+            let params = {
+              "Username": data.Users[0].Username,
+              "UserPoolId": CONSTANTS.poolID
+            }
+            cognitoIdentityProvider.adminUserGlobalSignOut(params, function (err, logoutInfo) {
+              if (err) console.log(err, err.stack); // an error occurred
+              res.status(200).send(info);
+            });
           }
         });
       }
@@ -545,12 +552,22 @@ app.post('/in/users/setgroup/:group/:email', validateAPI,
           UserPoolId: CONSTANTS.poolID, /* required */
           Username: data.Users[0].Username /* required */
         };
-        cognitoIdentityProvider.adminAddUserToGroup(params, function (err, data) {
+        cognitoIdentityProvider.adminAddUserToGroup(params, function (err, _) {
           console.log("Add user to group #1");
           if (err) { // an error occurred
             console.log(JSON.stringify(err));
             res.status(500).json(err);
             return;
+          } else {
+            let params = {
+              "Username": data.Users[0].Username,
+              "UserPoolId": CONSTANTS.poolID
+            }
+            cognitoIdentityProvider.adminUserGlobalSignOut(params, function (err, logoutInfo) {
+              console.log(err);
+              console.log(logoutInfo);
+            });
+            res.status(200);
           }
         });
       }
@@ -605,7 +622,7 @@ app.get('/in/users/current', validateAPI,
     }, function (tErr, userData) {
       if (tErr) {
         console.log(tErr);
-        res.status(500).send(tErr);
+        res.redirect("/");
         return;
       }
       cognitoIdentityProvider.adminGetUser({
@@ -614,7 +631,7 @@ app.get('/in/users/current', validateAPI,
       }, function (err, data) {
         if (err) {
           console.log(err);
-          res.status(500).send(err);
+          res.redirect("/");
           return;
         }
         
