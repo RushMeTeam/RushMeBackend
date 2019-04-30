@@ -148,6 +148,15 @@ function validateAPI(req, res, next) {
   }
 }
 
+// function validateGroup(req, res, next) {
+  // The req has a namekey
+  // Is usergroup 0
+      // ---> the namekey?
+      // ---> or ADMIN?
+  // YES --> next()
+  // NO --> client side error
+// }
+
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/app/views/public.html');
 });
