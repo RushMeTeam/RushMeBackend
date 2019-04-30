@@ -15,11 +15,7 @@ angular.module('RushMeAdminControllers').controller('BannerCtrl', ['$scope', '$h
     function (res) {
       $scope.email = res.data.email;
       $scope.username = res.data.sub;
-      if ('custom:group' in res.data) {
-        $scope.display_group = res.data['custom:group'];
-      } else {
-        $scope.display_group = "No Group";
-      }
+      $scope.display_group = res.data.display_group;
     },
     function (err) {
       //Do something with the error here

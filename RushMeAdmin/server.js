@@ -617,7 +617,10 @@ app.get('/in/users/current', validateAPI,
           res.status(500).send(err);
           return;
         }
+        
         let user = {};
+        user.groups = req.user.groups;
+        user.display_group = req.user.groups[0];
         let attrs = data.UserAttributes;
         for (let i = 0; i < attrs.length; i++)
           user[attrs[i].Name] = attrs[i].Value;
