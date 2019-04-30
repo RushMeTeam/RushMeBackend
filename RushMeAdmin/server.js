@@ -113,19 +113,29 @@ app.get('/login', passport.authenticate('oauth2-cognito'));
 app.get('/in/success', passport.authenticate('oauth2-cognito'),
   (req, res) => res.redirect('/dashboard/')
 );
+var cognitoIdentityProvider = new AWS.CognitoIdentityServiceProvider();
 
 function validateAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    next();
+      cognitoIdentityProvider.getUser({
+    AccessToken: req.user.accessToken
+  }, function(err, data) {
+    if (err) return res.status(401).json(err);    // an error occurred
+    else     return next();
+  });
   } else {
     res.redirect('/');
   }
 }
-var cognitoIdentityProvider = new AWS.CognitoIdentityServiceProvider();
 
 function validateAPI(req, res, next) {
   if (req.isAuthenticated()) {
-    next();
+    cognitoIdentityProvider.getUser({
+  AccessToken: req.user.accessToken
+}, function(err, data) {
+  if (err) return res.status(401).json(err);    // an error occurred
+  else     return next();
+});
   } else {
     res.status(401).send({ message: "Please ensure you are logged in before trying to do that!" })
   }
@@ -622,8 +632,8 @@ app.get('/in/users/current', validateAPI,
     }, function (tErr, userData) {
       if (tErr) {
         console.log(tErr);
-        res.redirect("/");
         req.logout();
+        res.redirect("/");
         return;
       }
       cognitoIdentityProvider.adminGetUser({
@@ -632,8 +642,8 @@ app.get('/in/users/current', validateAPI,
       }, function (err, data) {
         if (err) {
           console.log(err);
-          res.redirect("/");
           req.logout();
+          res.redirect("/");
           return;
         }
         
