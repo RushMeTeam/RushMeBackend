@@ -104,8 +104,9 @@ passport.use(new OAuth2CognitoStrategy(CONSTANTS,
       var pem = pems[kid];
       const payload = jwt.verify(accessToken, pem);
       const groups = payload['cognito:groups'] || [];
+      const group = payload['cognito:groups'][0] || "";
 
-      done(null, { groups: groups, accessToken: accessToken }); // Keep accessToken for passing to API calls
+      done(null, {group: group, groups: groups, accessToken: accessToken }); // Keep accessToken for passing to API calls
     });
   }));
 
@@ -148,14 +149,20 @@ function validateAPI(req, res, next) {
   }
 }
 
-// function validateGroup(req, res, next) {
+function checkGroupPermissions(req, res, next) {
+  if(req.user.group == req.params.namekey || req.user.group.includes("admin")){
+    next();
+  } else {
+    res.status(401).send({ message: "You do not have permission to edit this!" });
+  }
+
   // The req has a namekey
   // Is usergroup 0
       // ---> the namekey?
       // ---> or ADMIN?
   // YES --> next()
   // NO --> client side error
-// }
+}
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/app/views/public.html');
@@ -191,14 +198,26 @@ app.get('/in/fraternities', validateAPI, function (req, res) {
     TableName: 'FraternityInfo'
   };
 
+  // MAKE THIS MORE EFFICIENT FOR COST TO A QUERY INSTEAD OF A SCAN
   documentClient.scan(params, function (err, data) {
+    let groups = [];
+    
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(data.Items);
+      if(req.user.group.includes("admin")){
+        groups = data.Items;
+      } else {
+        for(var i = 0; i < data.Items.length; i++){
+          if(data.Items[i].namekey == req.user.group){
+            groups.push(data.Items[i]);
+            break;
+          }
+        }
+      }
+      
+      res.status(200).send(groups);
     }
-    
-    return;
   });
 });
 
@@ -218,7 +237,7 @@ app.get('/in/fraternities/:namekey', validateAPI, function (req, res) {
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.post('/in/fraternities/:namekey', validateAPI, function (req, res) {
+app.post('/in/fraternities/:namekey', validateAPI, checkGroupPermissions, function (req, res) {
   console.log("HERE");
   if (req.params.namekey != req.body.namekey) {
     res.status(500).send("MISMATCHED namekeys! namekey " + req.params.namekey + " != namekey " + req.body.namekey);
@@ -258,7 +277,7 @@ app.post('/in/fraternities/:namekey', validateAPI, function (req, res) {
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.delete('/in/fraternities/:namekey', validateAPI, function (req, res) {
+app.delete('/in/fraternities/:namekey', validateAPI, checkGroupPermissions, function (req, res) {
   
   // TODO: VALIDATE!!! Ensure they have the permissions.
   let params = {
@@ -287,19 +306,30 @@ app.get('/in/events', validateAPI, function (req, res) {
     TableName: 'EventInfo'
   };
 
+  // MAKE THIS MORE EFFICIENT FOR COST TO A QUERY INSTEAD OF A SCAN
   documentClient.scan(params, function (err, data) {
+    let events = [];
+    
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(data.Items);
+      if(req.user.group.includes("admin")){
+        events = data.Items;
+      } else {
+        for(var i = 0; i < data.Items.length; i++){
+          if(data.Items[i].FraternityID == req.user.group){
+            events.push(data.Items[i]);
+          }
+        }
+      }
+      
+      res.status(200).send(events);
     }
-    
-    return;
   });
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.post('/in/events/:fraternityID/:eventID', validateAPI, function (req, res) {
+app.post('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
   if (req.params.eventID != req.body.EventID ||
     req.params.fraternityID != req.body.FraternityID) {
     res.status(500).send("MISMATCHED PARAM AND BODY!");
@@ -343,7 +373,7 @@ app.post('/in/events/:fraternityID/:eventID', validateAPI, function (req, res) {
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.delete('/in/events/:fraternityID/:eventID', validateAPI, function (req, res) {
+app.delete('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
   
   // TODO: VALIDATE!!! Ensure they have the permissions.
   let params = {
