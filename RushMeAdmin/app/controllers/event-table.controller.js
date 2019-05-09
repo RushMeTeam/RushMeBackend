@@ -80,12 +80,12 @@ angular
         let newEvent = $scope.newEvent;
         newEvent.EventID = newEvent.FraternityID + ":" + newEvent.event_name;
         $http.post('/in/events/' + newEvent.FraternityID + '/' + newEvent.EventID, newEvent);
-        let key = event.starts.toLocaleString().split(',')[0];
+        let key = newEvent.starts.toLocaleString().split(',')[0];
         if (!(key in $scope.events)) {
           $scope.events[key] = [];
           $scope.days.push(key);
         }
-        $scope.events[key].push(event);
+        $scope.events[key].push(newEvent);
         $scope.newEvent = {};
       }
 
