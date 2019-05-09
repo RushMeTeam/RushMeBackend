@@ -28,7 +28,8 @@ const CONSTANTS = {
   clientID: process.env.CLIENT_ID,
   poolID: process.env.COG_POOL_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  region: process.env.REGION
+  region: process.env.REGION,
+  aKey : process.env.A_KEY
 };
 
 const logoutRedirect = `https://auth.rushme.app/logout?response_type=token&client_id=${CONSTANTS.clientID}&redirect_uri=${process.env.LOGOUT_REDIRECT_URL}`;
@@ -150,7 +151,7 @@ function validateAPI(req, res, next) {
 }
 
 function checkGroupPermissions(req, res, next) {
-  if(req.user.group == req.params.namekey || req.user.group.includes("admin")){
+  if(req.user.group == req.params.namekey || req.user.group.includes(CONSTANTS.aKey)){
     next();
   } else {
     res.status(401).send({ message: "You do not have permission to edit this!" });
@@ -205,7 +206,7 @@ app.get('/in/fraternities', validateAPI, function (req, res) {
     if (err) {
       res.status(500).send(err);
     } else {
-      if(req.user.group.includes("admin")){
+      if(req.user.group.includes(CONSTANTS.aKey)){
         groups = data.Items;
       } else {
         for(var i = 0; i < data.Items.length; i++){
@@ -313,7 +314,7 @@ app.get('/in/events', validateAPI, function (req, res) {
     if (err) {
       res.status(500).send(err);
     } else {
-      if(req.user.group.includes("admin")){
+      if(req.user.group.includes(CONSTANTS.aKey)){
         events = data.Items;
       } else {
         for(var i = 0; i < data.Items.length; i++){
