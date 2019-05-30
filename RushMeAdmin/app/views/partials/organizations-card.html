@@ -2,14 +2,14 @@
 
 <div class="container-fluid">
     <div class="card-columns px-5">
-        <div ng-repeat="frat in fraternities">
+        <div ng-repeat="org in organizations">
             <div class="card md-3" style="display: inline-block">
             <ngui-in-view>
-                <img class="card-img-top" ng-src="https://{{rootURL}}/{{frat.namekey}}profsmall.jpg">
+                <img class="card-img-top" ng-src="https://{{rootURL}}/{{org.namekey}}profsmall.jpg">
             </ngui-in-view>
                 <div class="card-body">
-                    <h5 class="card-title">{{frat.name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{frat.address}}</h6>
+                    <h5 class="card-title">{{org.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{org.address}}</h6>
                 </div>
             </div>
         </div>

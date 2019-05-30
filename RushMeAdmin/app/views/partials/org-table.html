@@ -1,10 +1,10 @@
 <div class="row py-1 justify-content-between align-items-end">
   <div class="col-2">
-    <h2 class="rm-section-header">Fraternities</h2>
+    <h2 class="rm-section-header">Organizations</h2>
   </div>
   <div class="col-2 text-right justify-content-end">
-    <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newFrat">
-        Add Fraternity<i class="material-icons">add</i>
+    <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#newOrg">
+        Add Organization<i class="material-icons">add</i>
     </button>
   </div>
 </div>
@@ -21,15 +21,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="frat in fraternities">
-        <!-- <td ng-if="frat.published"><span class="badge rm-badge published">PUBLISHED</span></td> -->
-        <!-- <td ng-if="!frat.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td> -->
-        <td>{{frat.name}}</td>
-        <td>{{frat.namekey}}</td>
-        <td><a style="text-decoration: none;" ng-href="mailto:{{frat.contact.email}}">{{frat.contact.name}}</a></td>
+      <tr ng-repeat="org in organizations">
+        <!-- <td ng-if="org.published"><span class="badge rm-badge published">PUBLISHED</span></td> -->
+        <!-- <td ng-if="!org.published"><span class="badge rm-badge unpublished">UNPUBLISHED</span></td> -->
+        <td>{{org.name}}</td>
+        <td>{{org.namekey}}</td>
+        <td><a style="text-decoration: none;" ng-href="mailto:{{org.contact.email}}">{{org.contact.name}}</a></td>
         <td>
-          <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#fratDetail"
-            ng-click="editFrat($index);">
+          <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#orgDetail"
+            ng-click="updateSelectedIndex($index);">
             <i class="material-icons">mode_edit</i>
           </button>
         </td>
@@ -38,11 +38,11 @@
   </table>
 </div>
 
-<div id="fratDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div id="orgDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="eventDetailLabel">Fraternity Detail</h5>
+        <h5 class="modal-title" id="eventDetailLabel">Organization Detail</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,28 +51,28 @@
         <form class="needs-validation was-validated">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Name:</label>
-            <input type="text" class="form-control" id="recipient-name" required ng-model="fraternities[selected].name">
+            <input type="text" class="form-control" id="recipient-name" required ng-model="organizations[selected].name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="message-text" ng-model="fraternities[selected].description"></textarea>
+            <textarea class="form-control" id="message-text" ng-model="organizations[selected].description"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteFrat()">Delete</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteOrg()">Delete</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditFrat()">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editOrg()">Save</button>
       </div>
     </div>
   </div>
 </div>
 
-<div id="newFrat" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div id="newOrg" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="eventDetailLabel">New Fraternity</h5>
+        <h5 class="modal-title" id="eventDetailLabel">New Organization</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,15 +82,15 @@
           <div class="form-group row">
             <div class="col-lg-10">
               <label for="recipient-name" class="col-form-label">Name:</label>
-              <input type="text" pattern="[A-Z a-z]{3,40}" class="form-control" id="recipient-name" ng-model="newFrat.name" placeholder="Alpha Beta Gamma" required>
+              <input type="text" pattern="[A-Z a-z]{3,40}" class="form-control" id="recipient-name" ng-model="newOrgDetails.name" placeholder="Alpha Beta Gamma" required>
               <div class="invalid-feedback">
-                Please enter a Fraternity name.
+                Please enter a Organization name.
               </div>
             </div>
             
             <div class="col-lg-2" >
-              <label for="frat-code" class="col-form-label">3 Letter Code:</label>
-              <input type="text" maxlength="3" class="form-control" id="frat-code" ng-model="newFrat.namekey" placeholder="ABG" required>
+              <label for="org-code" class="col-form-label">3 Letter Code:</label>
+              <input type="text" maxlength="3" class="form-control" id="org-code" ng-model="newOrgDetails.namekey" placeholder="ABG" required>
               <!--
                   pattern="[A-Z]{3}" THIS NEEDS TO BE FIXED!!! When it exists if it is not valid it will just fail API call.
                   ERROR CHECKING NEEDS TO BE FIXED EVERYWHERE! If there is an invalid field it will just leave the field empty and not
@@ -106,10 +106,10 @@
             <label for="contact" class="col-form-label">Contact:</label>
             <div class="row">
               <div class="col-6">
-                <input type="text" class="form-control" id="contact-name" ng-model="newFrat.contact.name" placeholder="Name" >
+                <input type="text" class="form-control" id="contact-name" ng-model="newOrgDetails.contact.name" placeholder="Name" >
               </div>
               <div class="col-6">
-                <input type="email" class="form-control" id="contact-email" ng-model="newFrat.contact.email" placeholder="tjones@mail.com" required>
+                <input type="email" class="form-control" id="contact-email" ng-model="newOrgDetails.contact.email" placeholder="tjones@mail.com" required>
                 <div class="invalid-feedback">
                   Please enter a valid email.
                 </div>
@@ -119,16 +119,16 @@
           
           <div class="form-group">
             <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="message-text" ng-model="newFrat.description" placeholder="Come meet our house and see what our Fraternity has to offer!"></textarea>
+            <textarea class="form-control" id="message-text" ng-model="newOrgDetails.description" placeholder="Come meet our house and see what our Organization has to offer!"></textarea>
           </div>
 
           <div class="form-group">
             <label for="address" class="col-form-label">Address:</label>
-            <input type="text" class="form-control" id="address" ng-model="newFrat.address" placeholder="123 Fraternity Drive">
+            <input type="text" class="form-control" id="address" ng-model="newOrgDetails.address" placeholder="123 Organization Drive">
           </div>
 
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" ng-model="newFrat.published" id="exampleCheck1" required>
+            <input type="checkbox" class="form-check-input" ng-model="newOrgDetails.published" id="exampleCheck1" required>
             <label class="form-check-label" for="exampleCheck1">Publish</label>
             <div class="invalid-feedback">
               Check box to publish.
@@ -138,7 +138,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveNewFrat()">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newOrg()">Save</button>
       </div>
     </div>
   </div>

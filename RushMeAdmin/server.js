@@ -239,9 +239,8 @@ app.get('/in/fraternities/:namekey', validateAPI, function (req, res) {
 
 //Endpoint to get a fraternity from the DynamoDB
 app.post('/in/fraternities/:namekey', validateAPI, checkGroupPermissions, function (req, res) {
-  console.log("HERE");
   if (req.params.namekey != req.body.namekey) {
-    res.status(500).send("MISMATCHED namekeys! namekey " + req.params.namekey + " != namekey " + req.body.namekey);
+    res.status(500).send("MISMATCHED namekeys!");
     return;
   }
   // TODO: VALIDATE!!! Ensure they have the permissions.
@@ -330,20 +329,22 @@ app.get('/in/events', validateAPI, function (req, res) {
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.post('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
+app.post('/in/events/:namekey/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
   if (req.params.eventID != req.body.EventID ||
-    req.params.fraternityID != req.body.FraternityID) {
+    req.params.namekey != req.body.FraternityID) {
     res.status(500).send("MISMATCHED PARAM AND BODY!");
     return;
   }
 
+  console.log(req.params);
+  
   // TODO: VALIDATE!!! Ensure they have the permissions.
   var params = {
     TableName: 'EventInfo',
     Key: {
       "EventID": req.params.eventID,
       // CHANGE THIS TO THE FRAT FROM THE PERSONS PERMISSIONS!!!
-      "FraternityID": req.params.fraternityID
+      "FraternityID": req.params.namekey
     },
     UpdateExpression: "set #event_name = :en, #description = :d, #location = :l, #starts = :s, #ends = :e",
     ExpressionAttributeNames: {
@@ -374,7 +375,7 @@ app.post('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissions
 });
 
 //Endpoint to get a fraternity from the DynamoDB
-app.delete('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
+app.delete('/in/events/:namekey/:eventID', validateAPI, checkGroupPermissions, function (req, res) {
   
   // TODO: VALIDATE!!! Ensure they have the permissions.
   let params = {
@@ -382,7 +383,7 @@ app.delete('/in/events/:fraternityID/:eventID', validateAPI, checkGroupPermissio
     Key: {
       "EventID": req.params.eventID,
       // CHANGE THIS TO THE FRAT FROM THE PERSONS PERMISSIONS!!!
-      "FraternityID": req.params.fraternityID
+      "FraternityID": req.params.namekey
     }
   };
 

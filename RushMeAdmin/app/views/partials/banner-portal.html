@@ -1,7 +1,7 @@
 <div ng-controller="BannerCtrl" class="navbar-fixed-top fixed-top banner-portal px-5">
 	<div class="row py-1 justify-content-between ">
 		<div class="col algin-self-center">
-			<button class="btn btn-lg btn-link-light org-btn" data-toggle="modal" data-target="#orgDetail">
+			<button class="btn btn-lg btn-link-light org-btn" data-toggle="modal" data-target="#orgSettings">
 				{{display_group}}
 			</button>
 		</div>
@@ -22,7 +22,7 @@
 	</div>
 </div>
 
-<div ng-controller="BannerCtrl" id="orgDetail" class="modal fade" tabindex="-1" role="dialog"
+<div ng-controller="BannerCtrl" id="orgSettings" class="modal fade" tabindex="-1" role="dialog"
 	aria-labelledby="basicModal" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<form ng-submit="submit()" ng-controller="BannerCtrl">

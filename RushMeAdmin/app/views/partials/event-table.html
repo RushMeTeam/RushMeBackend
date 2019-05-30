@@ -25,7 +25,7 @@
     <thead>
       <tr>
         <!-- <th scope="col">Status</th> -->
-        <th scope="col">Fraternity</th>
+        <th scope="col">Organization</th>
         <th scope="col">Title</th>
         <th scope="col">Time</th>
         <th scope="col">Edit</th>
@@ -146,8 +146,8 @@
             <div class="form-row">
               <label for="recipient-name" class="col-form-label">Organization</label>
               <select class="form-control" ng-model="newEvent.FraternityID"
-                ng-options="frat.namekey as frat.name for frat in fraternities">
-                <option>Select one...</option>
+                ng-options="org.namekey as org.name for org in organizations">
+                <option value="">Select one...</option>
               </select>
             </div>
 
